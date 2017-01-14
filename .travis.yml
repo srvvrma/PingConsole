@@ -13,8 +13,8 @@ services:
 #- mvn test
 before_install:
  - chmod +x mvnw
+ - mvn -N io.takari:maven:wrapper
  - mysql -e 'CREATE DATABASE IF NOT EXISTS neoPingDataBase;'
- - sudo apt-get update
 cache:
   directories:
   - $HOME/.m2
