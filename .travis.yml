@@ -3,7 +3,3 @@ jdk:
 - oraclejdk8
 before_install:
  - chmod +x ./mvnw
-sudo: required
-cache:
-  directories:
-  - $HOME/.m2
