@@ -4,8 +4,6 @@ jdk:
 before_install:
  - chmod +x ./mvnw
 sudo: required
-install:
-- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 cache:
   directories:
   - $HOME/.m2
