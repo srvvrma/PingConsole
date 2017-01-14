@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 language: java
 jdk:
 - oraclejdk8
@@ -12,3 +14,7 @@ services:
 before_install:
  - chmod +x ./mvnw
  - mysql -e 'CREATE DATABASE IF NOT EXISTS neoPingDataBase;'
+ - sudo apt-get update
+cache:
+  directories:
+  - $HOME/.m2
