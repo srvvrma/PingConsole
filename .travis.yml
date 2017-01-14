@@ -1,17 +1,12 @@
 sudo: false
-
 language: java
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 before_cache:
-    - rm -rf $HOME/.m2/repository/com/pingconsole
-
-before_install:
- - chmod +x gradlew
- 
- 
+- rm -rf $HOME/.m2/repository/com/pingconsole
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 cache:
-    directories:
-        - $HOME/.m2
-        - $HOME/apache-maven-3.3.9
+  directories:
+  - $HOME/.m2
+  - $HOME/apache-maven-3.3.9
