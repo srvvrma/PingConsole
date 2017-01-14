@@ -12,7 +12,7 @@ services:
 #script:
 #- mvn test
 before_install:
- - chmod +x ./mvnw
+ - chmod +x mvnw
  - mysql -e 'CREATE DATABASE IF NOT EXISTS neoPingDataBase;'
  - sudo apt-get update
 cache:
