@@ -37,3 +37,4 @@ overridedb.*
 dump.rdb
 transaction-logs
 src/main/resources/application.properties
+src/main/resources/application.properties

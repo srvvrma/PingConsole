@@ -5,10 +5,10 @@ jdk:
 # obviously this only works for maven builds right now...
 services:
   - mysql
-install:
-- mvn clean install -DskipTests
-script:
-- mvn test
+#install:
+#- mvn clean install -DskipTests
+#script:
+#- mvn test
 before_install:
  - chmod +x ./mvnw
  - mysql -e 'CREATE DATABASE IF NOT EXISTS neoPingDataBase;'
