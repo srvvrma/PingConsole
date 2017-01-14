@@ -5,5 +5,7 @@ jdk:
 # obviously this only works for maven builds right now...
 install:
 - mvn clean install -DskipTests
+script:
+- mvn test
 before_install:
  - chmod +x ./mvnw
