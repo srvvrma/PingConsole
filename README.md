@@ -5,5 +5,22 @@
 [![bitHound Dev Dependencies](https://www.bithound.io/github/srv94/PingConsole/badges/devDependencies.svg)](https://www.bithound.io/github/srv94/PingConsole/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/srv94/PingConsole/badges/code.svg)](https://www.bithound.io/github/srv94/PingConsole)
 # PingConsole
-Monitor Webservics and developer environments
+  spring boot backend with bootstrap, jquery
 
+## [change log](https://github.com/srv94/PingConsole/blob/master/CHANGELOG.md)
+
+## pre-install
+
+1. install jdk8
+    - set `JAVA_HOME` environment variable
+    
+## build & run
+  
+## further reading
+  [wiki](Not Created yet...)
+
+## contribute
+  if you have any input, or contributions, please share!
+
+## license
+  [MIT](/LICENSE)
