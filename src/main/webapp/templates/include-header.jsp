@@ -23,20 +23,23 @@
 <!-- jvectormap -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-<!-- Date Picker -->
-<link rel="stylesheet"
-	href="${contextPath}/resources/plugins/datepicker/datepicker3.css">
 <!-- Daterange picker -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/daterangepicker/daterangepicker.css">
+<!-- Date Picker -->
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/datepicker/datepicker3.css">
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-	<link rel="stylesheet" href="${contextPath}/resources/dist/css/skins/_all-skins.min.css">
-  <!-- Pace style -->
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/pace/pace.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/dist/css/skins/_all-skins.min.css">
+<!-- Pace style -->
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/pace/pace.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

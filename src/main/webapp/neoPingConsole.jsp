@@ -21,8 +21,7 @@
 	
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" id="mainContentId">
-		
-		
+				
 		</div>
 		<!-- /.content-wrapper -->
 		<%@include file="templates/footer.jsp"%>

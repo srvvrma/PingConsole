@@ -37,7 +37,20 @@ function loadRoles() {
 function loadUsers(){
 	console.debug('loading All Users......');
 	$.ajax({
-		url : '/users',
+		url : '/users/loadAllUsers',
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function editUser(id){
+	console.debug('editing User id : ' + id);
+	$.ajax({
+		url : '/users/edit/'+id,
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},

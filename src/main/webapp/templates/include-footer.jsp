@@ -27,12 +27,15 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<!-- DataTables -->
+<script
+	src="${contextPath}/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script
+	src="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- daterange picker -->
 <script
 	src="${contextPath}/resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<!-- DataTables -->
-<script src="${contextPath}/resources/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- bootstrap datepicker -->
 <script
 	src="${contextPath}/resources/plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -48,7 +51,8 @@
 <!-- AdminLTE App -->
 <script src="${contextPath}/resources/dist/js/app.min.js"></script>
 
-<script src="${contextPath}/resources/js/controllers/roles.controller.js"></script>
+<script
+	src="${contextPath}/resources/js/controllers/roles.controller.js"></script>
 
 <!-- AdminLTE App -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

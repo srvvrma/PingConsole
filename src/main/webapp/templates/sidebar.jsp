@@ -38,7 +38,7 @@
 			
 			<!-- Showing Role Controller for creating and edit roles -->
 			<li class="treeview">
-				<a href="#" onclick="loadUsers();"> <i class="fa fa-dashboard"></i>
+				<a href="#" onclick="loadUsers();"> <i class="fa fa-group"></i>
 					<span>Users</span>
 				</a>
 			</li>

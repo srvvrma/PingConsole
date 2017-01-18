@@ -8,6 +8,8 @@ import java.util.Set;
 public class User {
     private Long id;
     private String username;
+    private String fullName;
+    private String email;
     private String password;
     private String passwordConfirm;
     private boolean enabled;
@@ -74,5 +76,21 @@ public class User {
 
 	public void setTokenExpired(boolean tokenExpired) {
 		this.tokenExpired = tokenExpired;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

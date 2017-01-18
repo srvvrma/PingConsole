@@ -3,6 +3,7 @@ package com.pingconsole.auth.service;
 import com.pingconsole.auth.model.User;
 import com.pingconsole.auth.repository.RoleRepository;
 import com.pingconsole.auth.repository.UserRepository;
+import com.pingconsole.dashboard.service.UserDashboardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

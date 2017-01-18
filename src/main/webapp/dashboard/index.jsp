@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		neoPing <small>Console</small>
+		PingConsole<small>v1.0.0</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
