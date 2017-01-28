@@ -13,4 +13,6 @@ public interface UserDashboardService {
 
 	public UserDTO getUserDTOByUserId(Long id);
 
+	public void saveUserDtoInUser(UserDTO userDTO);
+
 }

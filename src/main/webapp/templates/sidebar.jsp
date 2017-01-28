@@ -45,8 +45,15 @@
 			
 			<!-- Showing Role Controller for creating and edit roles -->
 			<li class="treeview">
-				<a href="#" onclick="loadRoles();"> <i class="fa fa-dashboard"></i>
+				<a href="#" onclick="loadRoles();"> <i class="fa fa-user-plus"></i>
 					<span>Roles</span>
+				</a>
+			</li>
+			
+			<!-- Showing Role Controller for creating and edit roles -->
+			<li class="treeview">
+				<a href="#" onclick="loadAuthorities();"> <i class="fa fa-user-secret"></i>
+					<span>Privileges</span>
 				</a>
 			</li>
 

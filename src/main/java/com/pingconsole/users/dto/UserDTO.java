@@ -53,7 +53,7 @@ public class UserDTO {
 	public static UserDTO getUserDto(User user) {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setId(user.getId());
-		userDTO.setUserName(user.getUsername());
+		userDTO.setUserName(user.getFullName());
 		userDTO.setUserId(user.getUsername());
 		userDTO.setEmail(user.getEmail());
 		return userDTO;

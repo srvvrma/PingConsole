@@ -22,8 +22,9 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form method="POST" modelAttribute="userDTO"
+				<form:form id="editUserForm" method="POST" action="${contextPath}/users/save" modelAttribute="userDTO"
 					class="form-signin">
+					<form:input type="hidden" path="id"></form:input>
 					<div class="box-body">
 						<spring:bind path="userName">
 							<div
@@ -35,9 +36,9 @@
 									</div>
 									<form:input type="text" path="userName"
 										class="form-control pull-righ" placeholder="Username"
-										autofocus="true"></form:input>
-									<form:errors path="userName"></form:errors>
+										autofocus="true" required="required"></form:input>
 								</div>
+								<form:errors class="help-block" path="userName"></form:errors>
 							</div>
 						</spring:bind>
 						<spring:bind path="userId">
@@ -50,9 +51,9 @@
 									</div>
 									<form:input type="text" path="userId"
 										class="form-control pull-righ" placeholder="User Id"
-										autofocus="true"></form:input>
-									<form:errors path="userId"></form:errors>
+										autofocus="true" required="required"></form:input>
 								</div>
+								<form:errors class="help-block" path="userId"></form:errors>
 							</div>
 						</spring:bind>
 						<spring:bind path="email">
@@ -65,9 +66,9 @@
 									</div>
 									<form:input type="text" path="email"
 										class="form-control pull-righ" placeholder="Username"
-										autofocus="true"></form:input>
-									<form:errors path="email"></form:errors>
+										autofocus="true" required="required"></form:input>
 								</div>
+								<form:errors class="help-block" path="email"></form:errors>
 							</div>
 						</spring:bind>
 						<spring:bind path="dob">
@@ -81,9 +82,9 @@
 									</div>
 									<form:input type="text" path="dob"
 										class="form-control pull-right" placeholder="Dob"
-										autofocus="true" id="datepicker"></form:input>
-									<form:errors path="dob"></form:errors>
+										autofocus="true" id="datepicker" required="required"></form:input>
 								</div>
+								<form:errors path="dob"></form:errors>
 								<!-- /.input group -->
 							</div>
 						</spring:bind>
@@ -91,10 +92,9 @@
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="reset" class="btn btn-default">Cancel</button>
-						<button type="button" class="btn btn-info margin">Refresh</button>
-						<button type="submit" class="btn btn-info pull-right margin">Sign
-							in</button>
+						<button type="reset" class="btn btn-default" onclick="loadUsers();">Cancel</button>
+						<button type="button" class="btn btn-info margin" onclick="editUser('${userDTO.id}')">Refresh</button>
+						<button type="submit" class="btn btn-danger pull-right margin" onclick="">Save</button>
 					</div>
 				</form:form>
 			</div>
@@ -107,5 +107,10 @@
 	//Date picker
 	$('#datepicker').datepicker({
 		autoclose : true
+	});
+	$('#editUserForm').submit(function(e) { 
+	    // this code prevents form from actually being submitted
+	    e.preventDefault();
+	    submitEditUserForm();
 	});
 </script>

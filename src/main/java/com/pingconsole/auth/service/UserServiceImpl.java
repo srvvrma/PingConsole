@@ -3,8 +3,6 @@ package com.pingconsole.auth.service;
 import com.pingconsole.auth.model.User;
 import com.pingconsole.auth.repository.RoleRepository;
 import com.pingconsole.auth.repository.UserRepository;
-import com.pingconsole.dashboard.service.UserDashboardService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,5 +29,10 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+	@Override
+	public User findById(Long id) {
+		return userRepository.findById(id);
+	}
 }
 

@@ -26,8 +26,8 @@
 						class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th><spring:message code="label.user.name" /></th>
 								<th><spring:message code="label.user.id" /></th>
+								<th><spring:message code="label.user.name" /></th>
 								<th><spring:message code="label.user.email" /></th>
 								<th><spring:message code="label.user.grade" /></th>
 								<th><spring:message code="label.user.options" /></th>

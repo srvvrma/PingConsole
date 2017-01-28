@@ -38,4 +38,13 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 		return UserDTO.getUserDto(user);
 	}
 
+	@Override
+	public void saveUserDtoInUser(UserDTO userDTO) {
+		User user = userRepository.findById(userDTO.getId());
+		user.setUsername(userDTO.getUserId());
+		user.setFullName(userDTO.getUserName());
+		user.setEmail(userDTO.getEmail());
+		userRepository.save(user);
+	}
+
 }
