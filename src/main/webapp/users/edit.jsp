@@ -80,7 +80,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<form:input type="text" path="dob"
+									<form:input type="date" path="dob"
 										class="form-control pull-right" placeholder="Dob"
 										autofocus="true" id="datepicker" required="required"></form:input>
 								</div>

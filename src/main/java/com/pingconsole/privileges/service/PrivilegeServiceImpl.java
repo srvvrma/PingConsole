@@ -13,9 +13,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
 	@Autowired
 	private PrivilageRepository privilageRepository;
-	
+
 	@Override
-	public List<Privilege> getAllAuthoritiesList() {
+	public List<Privilege> getAllPrivilegeList() {
 		List<Privilege> privileges = privilageRepository.findAll();
 		return privileges;
 	}

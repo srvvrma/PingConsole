@@ -10,7 +10,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>Alexander Pierce</p>
+				<p>${currentUser.fullName}</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
@@ -45,9 +45,15 @@
 			
 			<!-- Showing Role Controller for creating and edit roles -->
 			<li class="treeview">
-				<a href="#" onclick="loadRoles();"> <i class="fa fa-user-plus"></i>
-					<span>Roles</span>
+				<a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Roles</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+					</span>
 				</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#"><i class="fa fa-circle-o"></i> Add New Role</a></li>
+					<li><a href="#" onclick="loadRoles();"><i class="fa fa-circle-o"></i> All Roles</a></li>
+				</ul>
 			</li>
 			
 			<!-- Showing Role Controller for creating and edit roles -->

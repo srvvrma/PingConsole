@@ -1,6 +1,10 @@
 package com.pingconsole.auth.model;
 
 import javax.persistence.*;
+
+import com.pingconsole.roles.dto.RoleDTO;
+
+import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
@@ -49,5 +53,15 @@ public class Role {
 
 	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
+	}
+
+	public RoleDTO convertToDto() {
+		RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setName(this.getName());
+		roleDTO.setPrivileges(new ArrayList<>());
+		for (Privilege privilege : this.getPrivileges()) {
+			roleDTO.getPrivileges().add(privilege.getCode());
+		}
+		return roleDTO;
 	}
 }

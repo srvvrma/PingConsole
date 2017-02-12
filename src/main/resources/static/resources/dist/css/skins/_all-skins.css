@@ -137,6 +137,16 @@
 .skin-blue.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
 }
+.skin-blue .btn-skin {
+  background-color: #3c8dbc;
+  color: #ffffff;
+}
+.skin-blue .btn-skin:hover {
+  background-color: #23527c;
+}
+.skin-blue .box.box-skin {
+  border-top-color: #3c8dbc;
+}
 /*
  * Skin: Blue
  * ----------
@@ -293,6 +303,13 @@
 .skin-blue-light .main-footer {
   border-top-color: #d2d6de;
 }
+.skin-blue-light .btn-skin {
+  background-color: #3c8dbc;
+  color: #ffffff;
+}
+.skin-blue-light .btn-skin:hover {
+  background-color: #23527c;
+}
 .skin-blue.layout-top-nav .main-header > .logo {
   background-color: #3c8dbc;
   color: #ffffff;
@@ -300,6 +317,9 @@
 }
 .skin-blue.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
+}
+.skin-blue-light .box.box-skin {
+  border-top-color: #3c8dbc;
 }
 /*
  * Skin: Black
@@ -458,6 +478,16 @@
 .skin-black .pace .pace-activity {
   border-top-color: #222;
   border-left-color: #222;
+}
+.skin-black .btn-skin {
+  background-color: #ffffff;
+  color: #000000;
+}
+.skin-black .btn-skin:hover {
+  background-color: #eee;
+}
+.skin-black .box.box-skin {
+  border-top-color: #fff;
 }
 /*
  * Skin: Black
@@ -632,6 +662,9 @@
     border-left: 1px solid #d2d6de;
   }
 }
+.skin-black-light .box.box-skin {
+  border-top-color: #fff;
+}
 /*
  * Skin: Green
  * -----------
@@ -762,6 +795,16 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.skin-green .btn-skin {
+  background-color: #00a65a;
+  color: #ffffff;
+}
+.skin-green .btn-skin:hover {
+  background-color: #008749;
+}
+.skin-green .box.box-skin {
+  border-top-color: #00a65a;
 }
 /*
  * Skin: Green
@@ -911,6 +954,16 @@
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
 }
+.skin-green-light .btn-skin {
+  background-color: #00a65a;
+  color: #ffffff;
+}
+.skin-green-light .btn-skin:hover {
+  background-color: #008749;
+}
+.skin-green-light .box.box-skin {
+  border-top-color: #00a65a;
+}
 @media (min-width: 768px) {
   .skin-green-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
     border-left: 1px solid #d2d6de;
@@ -1046,6 +1099,17 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.skin-red .btn-skin {
+  background-color: #dd4b39;
+  color: #ffffff;
+}
+.skin-red .btn-skin:hover {
+  background: #d33724;
+  border-left-color: #dd4b39;
+}
+.skin-red .box.box-skin {
+  border-top-color: #d33724;
 }
 /*
  * Skin: Red
@@ -1200,6 +1264,17 @@
     border-left: 1px solid #d2d6de;
   }
 }
+.skin-red-light .btn-skin {
+  background-color: #dd4b39;
+  color: #ffffff;
+}
+.skin-red-light .btn-skin:hover {
+  background: #d33724;
+  border-left-color: #dd4b39;
+}
+.skin-red-light .box.box-skin {
+  border-top-color: #d33724;
+}
 /*
  * Skin: Yellow
  * ------------
@@ -1330,6 +1405,17 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.skin-yellow .btn-skin {
+  background-color: #f39c12;
+  color: #ffffff;
+}
+.skin-yellow .btn-skin:hover {
+  background: #db8b0b;
+  border-left-color: #f39c12;
+}
+.skin-yellow .box.box-skin {
+  border-top-color: #db8b0b;
 }
 /*
  * Skin: Yellow
@@ -1479,6 +1565,17 @@
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
 }
+.skin-yellow-light .btn-skin {
+  background-color: #f39c12;
+  color: #ffffff;
+}
+.skin-yellow-light .btn-skin:hover {
+  background: #db8b0b;
+  border-left-color: #f39c12;
+}
+.skin-yellow-light .box.box-skin {
+  border-top-color: #db8b0b;
+}
 @media (min-width: 768px) {
   .skin-yellow-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
     border-left: 1px solid #d2d6de;
@@ -1614,6 +1711,17 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.skin-purple .btn-skin {
+  background-color: #605ca8;
+  color: #ffffff;
+}
+.skin-purple .btn-skin:hover {
+  background: #555299;
+  border-left-color: #605ca8;
+}
+.skin-purple .box.box-skin {
+  border-top-color: #555299;
 }
 /*
  * Skin: Purple
@@ -1763,6 +1871,18 @@
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
 }
+.skin-purple-light .btn-skin {
+  background-color: #605ca8;
+  color: #ffffff;
+}
+.skin-purple-light .btn-skin:hover {
+  background: #555299;
+  border-left-color: #605ca8;
+}
+.skin-purple-light .box.box-skin {
+  border-top-color: #555299;
+}
+
 @media (min-width: 768px) {
   .skin-purple-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
     border-left: 1px solid #d2d6de;

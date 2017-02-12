@@ -13,9 +13,12 @@
 <section id="main-container" class="content">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box">
+			<div class="box box-skin">
 				<div class="box-header">
 					<h3 class="box-title">Roles Data Table</h3>
+					<!-- <a class="btn btn-skin btn-sm btn-social pull-right">
+                		<i class="fa fa-user-plus"></i> Add New Role
+              		</a> -->
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

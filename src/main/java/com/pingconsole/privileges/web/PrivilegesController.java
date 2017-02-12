@@ -20,7 +20,7 @@ public class PrivilegesController {
 
 	@RequestMapping("/loadAllAuthorities")
 	public String renderAllAuthoritieIndexPage(Model model){
-		model.addAttribute(ALL_AUTHORITIES_LIST, privilegeService.getAllAuthoritiesList());
+		model.addAttribute(ALL_AUTHORITIES_LIST, privilegeService.getAllPrivilegeList());
 		return AUTHORITIES_INDEX_PAGE;
 	}
 

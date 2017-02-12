@@ -2,9 +2,16 @@ $(document).ajaxStart(function() { Pace.restart(); });
 $(document).ready(function() {	
 	console.debug('Document Ready is working now.');
 	loadDashboard();
-	$(".treeview").click(function() {
+	$(".sidebar-menu .treeview").click(function() {
 		$(".treeview").removeClass("active");
+		$(".sidebar-menu .treeview .treeview-menu").css("display","none");
 		$(this).addClass("active");
+	});
+	
+	$(".sidebar-menu .treeview .treeview-menu li").click(function(event) {
+		$(".sidebar-menu .treeview .treeview-menu li").removeClass("active");
+		$(this).addClass("active");
+		event.stopPropagation();
 	});
 });
 function loadDashboard() {

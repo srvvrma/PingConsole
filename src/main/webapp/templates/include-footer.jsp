@@ -52,7 +52,7 @@
 <script src="${contextPath}/resources/dist/js/app.min.js"></script>
 
 <script
-	src="${contextPath}/resources/js/controllers/roles.controller.js"></script>
+	src="${contextPath}/resources/js/controllers/roles.controller.js?d=dasdadasdasd"></script>
 
 <!-- AdminLTE App -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

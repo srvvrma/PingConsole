@@ -6,6 +6,6 @@ import com.pingconsole.auth.model.Privilege;
 
 public interface PrivilegeService {
 
-	public List<Privilege> getAllAuthoritiesList();
+	public List<Privilege> getAllPrivilegeList();
 
 }

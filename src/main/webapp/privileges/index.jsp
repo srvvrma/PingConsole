@@ -13,7 +13,7 @@
 <section id="main-container" class="content">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box">
+			<div class="box box-skin">
 				<div class="box-header">
 					<h3 class="box-title">Authorities Data Table</h3>
 				</div>
