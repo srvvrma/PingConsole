@@ -98,3 +98,57 @@ function submitEditUserForm(){
 		}
 	});
 }
+
+function whoIsLookup(){
+	$.ajax({
+		url : '/whoislookup/search',
+		type : "get",
+		success: function(result) {
+				$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function searchWhoisDomain(){
+	$.ajax({
+		url : '/whoislookup/search',
+		type : "post",
+		data : $('#whoisDomainForm').serialize(),
+		success: function(result) {
+			$('#whoisResult').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#whoisResult').html(xhr.responseText);
+		}
+	});
+}
+
+function dnsLookup(){
+	$.ajax({
+		url : '/dnsLookup/search',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function dnsLookupForDomain(){
+	$.ajax({
+		url : '/dnsLookup/search',
+		type : "post",
+		data : $('#dnsLookupForm').serialize(),
+		success: function(result) {
+			$('#dnsLookupResult').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#dnsLookupResult').html(xhr.responseText);
+		}
+	});
+}

@@ -36,7 +36,7 @@
 				</a>
 			</li>
 			
-			<!-- Showing Role Controller for creating and edit roles -->
+			<!-- Showing Ures Details-->
 			<li class="treeview">
 				<a href="#" onclick="loadUsers();"> <i class="fa fa-group"></i>
 					<span>Users</span>
@@ -56,13 +56,26 @@
 				</ul>
 			</li>
 			
-			<!-- Showing Role Controller for creating and edit roles -->
+			<!-- Showing Authorities Controller for creating and edit roles -->
 			<li class="treeview">
 				<a href="#" onclick="loadAuthorities();"> <i class="fa fa-user-secret"></i>
 					<span>Privileges</span>
 				</a>
 			</li>
-
+			<!-- Showing Netwok Tools -->
+			<li class="treeview">
+				<a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Network Tools</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li><a href="#" onclick="whoIsLookup();"><i class="fa fa-circle-o"></i> WhoIs Lookup</a></li>
+					<li><a href="#" onclick="dnsLookup();"><i class="fa fa-circle-o"></i> DNS Lookup</a></li>
+				</ul>
+			</li>
+			
+			
 			<li class="header">LABELS</li>
 			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
