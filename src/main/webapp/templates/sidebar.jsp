@@ -55,11 +55,23 @@
 					<li><a href="#" onclick="loadRoles();"><i class="fa fa-circle-o"></i> All Roles</a></li>
 				</ul>
 			</li>
+			<!-- Showing Groups Details-->
+			<li class="treeview">
+				<a href="#" onclick="loadGroups();"> <i class="fa fa-group"></i>
+					<span>Groups</span>
+				</a>
+			</li>
 			
 			<!-- Showing Authorities Controller for creating and edit roles -->
 			<li class="treeview">
 				<a href="#" onclick="loadAuthorities();"> <i class="fa fa-user-secret"></i>
 					<span>Privileges</span>
+				</a>
+			</li>
+			<!-- Showing Authorities Controller for creating and edit roles -->
+			<li class="treeview">
+				<a href="#" onclick="chat();"> <i class="fa fa-user-secret"></i>
+					<span>Chat</span>
 				</a>
 			</li>
 			<!-- Showing Netwok Tools -->

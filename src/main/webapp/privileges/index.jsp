@@ -12,12 +12,10 @@
 <section class="content">
 
 	<div class="row">
-<<<<<<< Updated upstream
 		<div class="col-xs-12">
 			<div class="box box-skin">
 				<div class="box-header">
 					<h3 class="box-title">Authorities Data Table</h3>
-=======
 		<div class="col-md-3">
 			<ul class="list-group">
 				<li class="list-group-item">First item</li>
@@ -43,7 +41,6 @@
 							</button>
 						</div>
 					</div>
->>>>>>> Stashed changes
 				</div>
 				<div class="slimScrollDiv"
 					style="position: relative; overflow: hidden; width: auto; height: 250px;">

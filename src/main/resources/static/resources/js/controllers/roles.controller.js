@@ -139,6 +139,19 @@ function dnsLookup(){
 	});
 }
 
+function chat(){
+	$.ajax({
+		url : '/chat',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
 function dnsLookupForDomain(){
 	$.ajax({
 		url : '/dnsLookup/search',
@@ -149,6 +162,31 @@ function dnsLookupForDomain(){
 		},
 		error : function(xhr, status, error){
 			$('#dnsLookupResult').html(xhr.responseText);
+		}
+	});
+}
+
+function getLoggedInUsers(){
+	$.ajax({
+		url : '/getLoggedInUsers',
+		type : "get",
+		success: function(result) {
+			console.log(result);
+		},
+		error : function(xhr, status, error){
+			console.log('error while getting list.');
+		}
+	});
+}
+function loadGroups(){
+	$.ajax({
+		url : '/group/showAll',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }

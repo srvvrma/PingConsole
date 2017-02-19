@@ -20,6 +20,7 @@ public class DashboardController {
   public String getMainPage(Model model) {
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("currentUser", userRepository.findByUsername(user.getUsername()));
+    model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
     return "pingConsole";
   }
 
