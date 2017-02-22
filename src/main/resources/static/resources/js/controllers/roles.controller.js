@@ -190,3 +190,16 @@ function loadGroups(){
 		}
 	});
 }
+
+function createNewEnvironment(){
+	$.ajax({
+		url : '/environment/create',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
