@@ -25,7 +25,7 @@ public class Environment {
 	@JsonProperty("key")
 	@Column(name="environment_id") 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Column
 	private String keyId;
@@ -111,7 +111,7 @@ public class Environment {
 		this.dbPass = dbPass;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -119,7 +119,7 @@ public class Environment {
 		return keyId;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

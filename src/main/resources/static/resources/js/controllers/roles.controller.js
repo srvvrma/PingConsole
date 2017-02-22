@@ -204,6 +204,7 @@ function loadGroups(){
 	});
 }
 
+
 function openGroupInEditMode(id){
 	$('#createGroupForm #id').val(id);
 	$('#createGroupForm #name').val($('#group_'+id+'_name').text());
@@ -258,6 +259,19 @@ function deleteGroup(id){
 			    title: 'Error',
 			    message: 'Illegal operation',
 			});
+		}
+	});
+}
+			
+function createNewEnvironment(){
+	$.ajax({
+		url : '/environment/create',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }

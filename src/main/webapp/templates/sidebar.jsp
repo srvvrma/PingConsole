@@ -68,6 +68,18 @@
 					<span>Privileges</span>
 				</a>
 			</li>
+			<!-- Showing Environment, Create a new or edit old one -->
+			<li class="treeview">
+				<a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Environment</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#" onclick="createNewEnvironment()"><i class="fa fa-circle-o"></i> Add New</a></li>
+					<li><a href="#" onclick="loadAllEnvironment();"><i class="fa fa-circle-o"></i> All Roles</a></li>
+				</ul>
+			</li>
 			<!-- Showing Authorities Controller for creating and edit roles -->
 			<li class="treeview">
 				<a href="#" onclick="chat();"> <i class="fa fa-user-secret"></i>
