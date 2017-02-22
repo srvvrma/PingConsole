@@ -38,14 +38,14 @@
 						<tbody>
 							<c:forEach items="${groups}" var="group">
 								<tr>
-									<td>${group.name}</td>
-									<td>${group.code}</td>
+									<td id="group_${group.id}_name">${group.name}</td>
+									<td id="group_${group.id}_code">${group.code}</td>
 									<td><div class="btn-group">
 											<button type="button" class="btn btn-default btn-sm"
-												onclick="editUser('${group.id}')">
+												onclick="openGroupInEditMode('${group.id}')">
 												<i class="fa fa-edit"></i>
 											</button>
-											<button type="button" class="btn btn-default btn-sm">
+											<button type="button" class="btn btn-default btn-sm" onclick="deleteGroup('${group.id}')">
 												<i class="fa  fa-trash-o"></i>
 											</button>
 										</div></td>
@@ -80,6 +80,8 @@
 				<div class="modal-body">
 					<form:form id="createGroupForm" method="POST" action="${contextPath}/group/create" modelAttribute="group"
 					class="form-signin">
+					<input type="hidden" id="_csrf" value="${_csrf.token}"/>
+					<input type="hidden" name="id" value="" id="id"/>
 						<spring:bind path="name">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
@@ -88,7 +90,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
-									<form:input type="text" path="name"
+									<form:input type="text" id="name" path="name"
 										class="form-control pull-righ" placeholder="Group Name"
 										autofocus="true" required="required"></form:input>
 								</div>
@@ -103,7 +105,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
-									<form:input type="text" path="code"
+									<form:input type="text" id="code" path="code"
 										class="form-control pull-righ" placeholder="Group Code"
 										autofocus="true" required="required"></form:input>
 								</div>
@@ -115,7 +117,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-skin">Save changes</button>
+					<button type="button" class="btn btn-skin" onclick="crateEditGroup()">Save changes</button>
 				</div>
 			</div>
 		</div>

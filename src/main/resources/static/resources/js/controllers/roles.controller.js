@@ -13,6 +13,19 @@ $(document).ready(function() {
 		$(this).addClass("active");
 		event.stopPropagation();
 	});
+	iziToast.settings({
+	    timeout: 10000,
+	    resetOnHover: true,
+	    icon: 'material-icons',
+	    transitionIn: 'flipInX',
+	    transitionOut: 'flipOutX',
+	    onOpen: function(){
+	        console.log('callback abriu!');
+	    },
+	    onClose: function(){
+	        console.log("callback fechou!");
+	    }
+	});
 });
 function loadDashboard() {
 	console.debug('loading Console Main Page......');
@@ -187,6 +200,64 @@ function loadGroups(){
 		},
 		error : function(xhr, status, error){
 			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function openGroupInEditMode(id){
+	$('#createGroupForm #id').val(id);
+	$('#createGroupForm #name').val($('#group_'+id+'_name').text());
+	$('#createGroupForm #code').val($('#group_'+id+'_code').text());
+	$('#createGroup').modal('show'); 
+}
+
+function crateEditGroup(){
+	$.ajax({
+		url : '/group/createEdit',
+		type : "post",
+		data : $('#createGroupForm').serialize(),
+		success: function(result) {
+			$('#createGroup').modal('hide');
+			iziToast.success({
+			    title: 'OK',
+			    message: 'Successfully Group created!',
+			    onClose: function(instance, toast, closedBy){
+			    	loadGroups();
+			    }
+			});
+		},
+		error : function(xhr, status, error){
+			iziToast.error({
+			    title: 'Error',
+			    message: 'Illegal operation',
+			});
+		}
+	});
+}
+
+function deleteGroup(id){
+	$.ajax({
+		url : '/group/remove',
+		type : "post",
+		data : {
+			id : id,
+			_csrf : $('#_csrf').val()
+		},
+		success: function(result) {
+			$('#createGroup').modal('hide');
+			iziToast.success({
+			    title: 'OK',
+			    message: 'Group Successfully removed !',
+			    onClose: function(instance, toast, closedBy){
+			    	loadGroups();
+			    }
+			});
+		},
+		error : function(xhr, status, error){
+			iziToast.error({
+			    title: 'Error',
+			    message: 'Illegal operation',
+			});
 		}
 	});
 }

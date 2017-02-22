@@ -11,38 +11,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class PingGroup {
-	
-	@Id
-	@JsonProperty("key")
-	@Column(name="group_id") 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
-	@Column
-	private String name;
-	
-	@Column
-	private String code;
 
-	public int getId() {
-		return id;
-	}
+  public static final int CODE_EXIST = 1;
+  public static final int NAME_EXIST = 2;
+  public static final int NO_ERROR = 0;
 
-	public String getName() {
-		return name;
-	}
+  @Id
+  @JsonProperty("key")
+  @Column(name = "group_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  @Column
+  private String name;
 
-	public String getCode() {
-		return code;
-	}
+  @Column
+  private String code;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+  public Long getId() {
+    return id;
+  }
+  
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
 
 
 

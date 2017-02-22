@@ -48,6 +48,8 @@
 	src="${contextPath}/resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="${contextPath}/resources/plugins/fastclick/fastclick.js"></script>
+<!-- iziToast Notification -->
+<script src="${contextPath}/resources/plugins/iziToast/iziToast.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${contextPath}/resources/dist/js/app.min.js"></script>
 
