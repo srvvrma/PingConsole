@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.pingconsole.group.domain.PingGroup;
 
-public class EnvironementDTO {
+public class EnvironmentDTO {
 
 	private Long id;
 	private String keyId;
@@ -132,26 +132,26 @@ public class EnvironementDTO {
 	public void setSyncUrl(String syncUrl) {
 		this.syncUrl = syncUrl;
 	}
-	public static EnvironementDTO parse(Environment environement) {
-		EnvironementDTO environementDTO = new EnvironementDTO();
-		environementDTO.setId(environement.getId());
-		environementDTO.setKeyId(environement.getKeyId());
-		environementDTO.setGroupList(null);
-		environementDTO.setEnvironmentType(environement.getEnvironmentType());
-		environementDTO.setEnvName(environement.getEnvName());
-		environementDTO.setEnvUrl(environement.getEnvUrl());
-		environementDTO.setRevisionNumber(environement.getRevisionNumber());
-		environementDTO.setEnvLogUrl(environement.getEnvLogUrl());
-		environementDTO.setEnvLog(environement.getEnvLog());
-		environementDTO.setEnvLogUser(environement.getEnvLogUser());
-		environementDTO.setEnvLogPass(environement.getEnvLogPass());
-		environementDTO.setEnvWar(environement.getEnvWar());
-		environementDTO.setEnvServerLog(environement.getEnvServerLog());
-		environementDTO.setDbUrl(environement.getDbUrl());
-		environementDTO.setDbUser(environement.getDbUser());
-		environementDTO.setDbPass(environement.getDbPass());
-		environementDTO.setDbSchema(environement.getDbSchema());
-		return environementDTO;
+	public static EnvironmentDTO parse(Environment environement) {
+		EnvironmentDTO environmentDTO = new EnvironmentDTO();
+		environmentDTO.setId(environement.getId());
+		environmentDTO.setKeyId(environement.getKeyId());
+		environmentDTO.setGroupList(null);
+		environmentDTO.setEnvironmentType(environement.getEnvironmentType());
+		environmentDTO.setEnvName(environement.getEnvName());
+		environmentDTO.setEnvUrl(environement.getEnvUrl());
+		environmentDTO.setRevisionNumber(environement.getRevisionNumber());
+		environmentDTO.setEnvLogUrl(environement.getEnvLogUrl());
+		environmentDTO.setEnvLog(environement.getEnvLog());
+		environmentDTO.setEnvLogUser(environement.getEnvLogUser());
+		environmentDTO.setEnvLogPass(environement.getEnvLogPass());
+		environmentDTO.setEnvWar(environement.getEnvWar());
+		environmentDTO.setEnvServerLog(environement.getEnvServerLog());
+		environmentDTO.setDbUrl(environement.getDbUrl());
+		environmentDTO.setDbUser(environement.getDbUser());
+		environmentDTO.setDbPass(environement.getDbPass());
+		environmentDTO.setDbSchema(environement.getDbSchema());
+		return environmentDTO;
 	}
 	
 	

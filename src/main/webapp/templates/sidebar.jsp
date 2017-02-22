@@ -77,7 +77,7 @@
 				</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li class=""><a href="#" onclick="createNewEnvironment()"><i class="fa fa-circle-o"></i> Add New</a></li>
-					<li><a href="#" onclick="loadAllEnvironment();"><i class="fa fa-circle-o"></i> All Roles</a></li>
+					<li><a href="#" onclick="loadAllEnvironment();"><i class="fa fa-circle-o"></i> All Environments</a></li>
 				</ul>
 			</li>
 			<!-- Showing Authorities Controller for creating and edit roles -->

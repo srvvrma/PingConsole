@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pingconsole.environment.domain.EnvironementDTO;
 import com.pingconsole.environment.domain.Environment;
+import com.pingconsole.environment.domain.EnvironmentDTO;
 import com.pingconsole.environment.repository.EnvironmentRepository;
 
 @Service
@@ -21,15 +21,15 @@ public class EnvironmentServiceImpl implements EnvironmentService{
 	private EnvironmentRepository environmentRepository;
 	
 	@Override
-	public List<EnvironementDTO> getAllEnvironment() {
+	public List<EnvironmentDTO> getAllEnvironment() {
 		List<Environment> environments = environmentRepository.findAll();
-		List<EnvironementDTO> environementDTOs = new ArrayList<>();
-		EnvironementDTO environementDTO =null;
-		for (Environment environement : environments) {
-			environementDTO = EnvironementDTO.parse(environement);
-			environementDTOs.add(environementDTO);
+		List<EnvironmentDTO> environmentDTOs = new ArrayList<>();
+		EnvironmentDTO environmentDTO =null;
+		for (Environment environment : environments) {
+			environmentDTO = EnvironmentDTO.parse(environment);
+			environmentDTOs.add(environmentDTO);
 		}
-		return environementDTOs;
+		return environmentDTOs;
 	}
 
 }
