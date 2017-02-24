@@ -275,3 +275,29 @@ function createNewEnvironment(){
 		}
 	});
 }
+
+function loadJSONFormatter(){
+	$.ajax({
+		url : '/formatter/json',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function loadUserProfile(){
+	$.ajax({
+		url : '/settings/profile/showProfile',
+		type : "get",
+		success: function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error){
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}

@@ -220,7 +220,7 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">Profile</a>
+								<a href="#" class="btn btn-default btn-flat" onclick="loadUserProfile();">Profile</a>
 							</div>
 							<div class="pull-right">
 								<a href="${contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>

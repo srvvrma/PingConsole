@@ -109,6 +109,17 @@
 					<li><a href="#" onclick="loadJSONFormatter();"><i class="fa fa-circle-o"></i> JSON</a></li>
 				</ul>
 			</li>
+			<!-- Settings Tools -->
+			<li class="treeview">
+				<a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Settings</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li><a href="#" onclick="loadUserProfile();"><i class="fa fa-circle-o"></i> Profile</a></li>
+				</ul>
+			</li>
 			
 			
 			<li class="header">LABELS</li>
