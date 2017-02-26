@@ -20,4 +20,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		return privileges;
 	}
 
+  @Override
+  public void createUpdate(Privilege privilege) {
+    privilageRepository.save(privilege);
+  }
+
 }

@@ -52,6 +52,8 @@
 <script src="${contextPath}/resources/plugins/iziToast/iziToast.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${contextPath}/resources/dist/js/app.min.js"></script>
+<!-- Select2 js -->
+<script src="${contextPath}/resources/plugins/select2/select2.min.js"></script>
 
 <script
 	src="${contextPath}/resources/js/controllers/roles.controller.js?d=dasdadasdasd"></script>

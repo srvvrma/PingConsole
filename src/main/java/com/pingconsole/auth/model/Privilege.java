@@ -15,6 +15,7 @@ public class Privilege {
  
     private String name;
     private String code;
+    private String description;
  
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
@@ -44,4 +45,12 @@ public class Privilege {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 }

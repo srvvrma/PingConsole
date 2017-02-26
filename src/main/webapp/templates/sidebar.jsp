@@ -51,21 +51,21 @@
 					</span>
 				</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li class=""><a href="#"><i class="fa fa-circle-o"></i> Add New Role</a></li>
+					<li class=""><a href="#" onclick="createOrUpdate('');"><i class="fa fa-circle-o"></i> Add New Role</a></li>
 					<li><a href="#" onclick="loadRoles();"><i class="fa fa-circle-o"></i> All Roles</a></li>
 				</ul>
+			</li>
+			
+			<!-- Showing Authorities Controller for creating and edit roles -->
+			<li class="treeview">
+				<a href="#" onclick="loadPrivileges();"> <i class="fa fa-user-secret"></i>
+					<span>Privileges</span>
+				</a>
 			</li>
 			<!-- Showing Groups Details-->
 			<li class="treeview">
 				<a href="#" onclick="loadGroups();"> <i class="fa fa-group"></i>
 					<span>Groups</span>
-				</a>
-			</li>
-			
-			<!-- Showing Authorities Controller for creating and edit roles -->
-			<li class="treeview">
-				<a href="#" onclick="loadAuthorities();"> <i class="fa fa-user-secret"></i>
-					<span>Privileges</span>
 				</a>
 			</li>
 			<!-- Showing Environment, Create a new or edit old one -->
@@ -76,7 +76,7 @@
 					</span>
 				</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li class=""><a href="#" onclick="createNewEnvironment()"><i class="fa fa-circle-o"></i> Add New</a></li>
+					<li class=""><a href="#" onclick="createOrEditEnvironment('')"><i class="fa fa-circle-o"></i> Add New</a></li>
 					<li><a href="#" onclick="loadAllEnvironment();"><i class="fa fa-circle-o"></i> All Environments</a></li>
 				</ul>
 			</li>

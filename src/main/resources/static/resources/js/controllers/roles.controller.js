@@ -1,30 +1,32 @@
-$(document).ajaxStart(function() { Pace.restart(); });
-$(document).ready(function() {	
+$(document).ajaxStart(function() {
+	Pace.restart();
+});
+$(document).ready(function() {
 	console.debug('Document Ready is working now.');
 	loadDashboard();
 	$(".sidebar-menu .treeview").click(function() {
 		$(".treeview").removeClass("active");
-		$(".sidebar-menu .treeview .treeview-menu").css("display","none");
+		$(".sidebar-menu .treeview .treeview-menu").css("display", "none");
 		$(this).addClass("active");
 	});
-	
+
 	$(".sidebar-menu .treeview .treeview-menu li").click(function(event) {
 		$(".sidebar-menu .treeview .treeview-menu li").removeClass("active");
 		$(this).addClass("active");
 		event.stopPropagation();
 	});
 	iziToast.settings({
-	    timeout: 10000,
-	    resetOnHover: true,
-	    icon: 'material-icons',
-	    transitionIn: 'flipInX',
-	    transitionOut: 'flipOutX',
-	    onOpen: function(){
-	        console.log('callback abriu!');
-	    },
-	    onClose: function(){
-	        console.log("callback fechou!");
-	    }
+		timeout : 10000,
+		resetOnHover : true,
+		icon : 'material-icons',
+		transitionIn : 'flipInX',
+		transitionOut : 'flipOutX',
+		onOpen : function() {
+			console.log('callback abriu!');
+		},
+		onClose : function() {
+			console.log("callback fechou!");
+		}
 	});
 });
 function loadDashboard() {
@@ -34,7 +36,7 @@ function loadDashboard() {
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
@@ -47,196 +49,266 @@ function loadRoles() {
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function loadUsers(){
+function submitRoleForm(){
+	$.ajax({
+		url : '/roles/createUpdate',
+		type : "post",
+		data : $("#roleForm").serialize(),
+		success : function(result) {
+			console.log('result ' + result);
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadAllEnvironment();
+				iziToast.success({
+					title : 'OK',
+					message : 'Role Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function createOrUpdate(id) {
+	$.ajax({
+		url : '/roles/createOrUpdate?id=' + id,
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function loadUsers() {
 	console.debug('loading All Users......');
 	$.ajax({
 		url : '/users/loadAllUsers',
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function loadAuthorities(){
+function loadPrivileges() {
 	console.debug('loading All Privileges......');
 	$.ajax({
-		url : '/privileges/loadAllPrivileges',
+		url : '/privileges/loadAllPrivilages',
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+function createUpdatePrivilege() {
+	$.ajax({
+		url : '/privileges/createUpdate',
+		type : "post",
+		data : $("#createUpdatePrivilageForm").serialize(),
+		success : function(result) {
+			console.log('result ' + result);
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				$('#createPrivilageModal').modal('hide');
+				iziToast.success({
+					title : 'OK',
+					message : 'Privilege Successfully Added !',
+					onClose : function(instance, toast, closedBy) {
+						loadPrivileges();
+					}
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function editUser(id){
+function editPrivilage(id) {
+	$('#createUpdatePrivilageForm #privilegeId').val(id);
+	$('#createUpdatePrivilageForm #name').val($('#name_' + id).text());
+	$('#createUpdatePrivilageForm #code').val($('#code_' + id).text());
+	$('#createUpdatePrivilageForm #description').val(
+			$('#description_' + id).text());
+	$('#createPrivilageModal').modal('show');
+}
+
+function editUser(id) {
 	console.debug('editing User id : ' + id);
 	$.ajax({
-		url : '/users/edit/'+id,
+		url : '/users/edit/' + id,
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function submitEditUserForm(){
+function submitEditUserForm() {
 	$.ajax({
 		url : '/users/save',
 		type : "post",
 		data : $("#editUserForm").serialize(),
-		success: function(result) {
+		success : function(result) {
 			console.log('result ' + result);
-			if(result != ''){
+			if (result != '') {
 				$('#mainContentId').html(result);
-			}else{
+			} else {
 				loadUsers();
 			}
 			e.preventDefault();
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function whoIsLookup(){
+function whoIsLookup() {
 	$.ajax({
 		url : '/whoislookup/search',
 		type : "get",
-		success: function(result) {
-				$('#mainContentId').html(result);
+		success : function(result) {
+			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function searchWhoisDomain(){
+function searchWhoisDomain() {
 	$.ajax({
 		url : '/whoislookup/search',
 		type : "post",
 		data : $('#whoisDomainForm').serialize(),
-		success: function(result) {
+		success : function(result) {
 			$('#whoisResult').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#whoisResult').html(xhr.responseText);
 		}
 	});
 }
 
-function dnsLookup(){
+function dnsLookup() {
 	$.ajax({
 		url : '/dnsLookup/search',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function chat(){
+function chat() {
 	$.ajax({
 		url : '/chat',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function dnsLookupForDomain(){
+function dnsLookupForDomain() {
 	$.ajax({
 		url : '/dnsLookup/search',
 		type : "post",
 		data : $('#dnsLookupForm').serialize(),
-		success: function(result) {
+		success : function(result) {
 			$('#dnsLookupResult').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#dnsLookupResult').html(xhr.responseText);
 		}
 	});
 }
 
-function getLoggedInUsers(){
+function getLoggedInUsers() {
 	$.ajax({
 		url : '/getLoggedInUsers',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			console.log(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			console.log('error while getting list.');
 		}
 	});
 }
-function loadGroups(){
+function loadGroups() {
 	$.ajax({
 		url : '/group/showAll',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-
-function openGroupInEditMode(id){
+function openGroupInEditMode(id) {
 	$('#createGroupForm #id').val(id);
-	$('#createGroupForm #name').val($('#group_'+id+'_name').text());
-	$('#createGroupForm #code').val($('#group_'+id+'_code').text());
-	$('#createGroup').modal('show'); 
+	$('#createGroupForm #name').val($('#group_' + id + '_name').text());
+	$('#createGroupForm #code').val($('#group_' + id + '_code').text());
+	$('#createGroup').modal('show');
 }
 
-function crateEditGroup(){
+function crateEditGroup() {
 	$.ajax({
 		url : '/group/createEdit',
 		type : "post",
 		data : $('#createGroupForm').serialize(),
-		success: function(result) {
+		success : function(result) {
 			$('#createGroup').modal('hide');
 			iziToast.success({
-			    title: 'OK',
-			    message: 'Successfully Group created!',
-			    onClose: function(instance, toast, closedBy){
-			    	loadGroups();
-			    }
+				title : 'OK',
+				message : 'Successfully Group created!',
+				onClose : function(instance, toast, closedBy) {
+					loadGroups();
+				}
 			});
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			iziToast.error({
-			    title: 'Error',
-			    message: 'Illegal operation',
+				title : 'Error',
+				message : 'Illegal operation',
 			});
 		}
 	});
 }
 
-function deleteGroup(id){
+function deleteGroup(id) {
 	$.ajax({
 		url : '/group/remove',
 		type : "post",
@@ -244,59 +316,94 @@ function deleteGroup(id){
 			id : id,
 			_csrf : $('#_csrf').val()
 		},
-		success: function(result) {
+		success : function(result) {
 			$('#createGroup').modal('hide');
 			iziToast.success({
-			    title: 'OK',
-			    message: 'Group Successfully removed !',
-			    onClose: function(instance, toast, closedBy){
-			    	loadGroups();
-			    }
+				title : 'OK',
+				message : 'Group Successfully removed !',
+				onClose : function(instance, toast, closedBy) {
+					loadGroups();
+				}
 			});
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			iziToast.error({
-			    title: 'Error',
-			    message: 'Illegal operation',
+				title : 'Error',
+				message : 'Illegal operation',
 			});
 		}
 	});
 }
-			
-function createNewEnvironment(){
+
+function createOrEditEnvironment(id) {
 	$.ajax({
-		url : '/environment/create',
+		url : '/environment/create?id=' + id,
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function loadJSONFormatter(){
+function loadJSONFormatter() {
 	$.ajax({
 		url : '/formatter/json',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});
 }
 
-function loadUserProfile(){
+function loadUserProfile() {
 	$.ajax({
 		url : '/settings/profile/showProfile',
 		type : "get",
-		success: function(result) {
+		success : function(result) {
 			$('#mainContentId').html(result);
 		},
-		error : function(xhr, status, error){
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+function loadAllEnvironment() {
+	$.ajax({
+		url : '/environment/showAll',
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+function submitEnvironmentForm() {
+	$.ajax({
+		url : '/environment/save',
+		type : "post",
+		data : $("#environmentForm").serialize(),
+		success : function(result) {
+			console.log('result ' + result);
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadAllEnvironment();
+				iziToast.success({
+					title : 'OK',
+					message : 'New Environment Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
 		}
 	});

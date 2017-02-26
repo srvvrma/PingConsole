@@ -8,4 +8,6 @@ public interface PrivilegeService {
 
 	public List<Privilege> getAllPrivilegeList();
 
+  public void createUpdate(Privilege privilege);
+
 }

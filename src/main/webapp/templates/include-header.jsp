@@ -40,6 +40,11 @@
 	href="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.css">
 <!-- iziToast Notification -->
 <link rel="stylesheet" href="${contextPath}/resources/plugins/iziToast/iziToast.min.css">
+<!--Select 2 for multiselect  -->
+<link rel="stylesheet" href="${contextPath}/resources/plugins/select2/select2.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

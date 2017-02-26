@@ -9,7 +9,7 @@
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li>Environment</li>
-		<li class="active">create</li>
+		<li class="active">create-update</li>
 	</ol>
 </section>
 <section class="content">
@@ -27,14 +27,21 @@
 					modelAttribute="environmentDTO" class="form-signin">
 					<form:input type="hidden" path="id"></form:input>
 					<div class="box-body">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 						<div class="form-group">
-								<label> <form:radiobutton path="environmentType" value="CAS" required="required"/> CAS
-								</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label> <form:radiobutton path="environmentType" value="LMS" required="required"/> LMS
-								</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label> <form:radiobutton path="environmentType" value="INTEGRATION" required="required"/> INTEGRATION
-								</label>
+							<label> <form:radiobutton path="environmentType"
+									value="CAS" required="required" /> CAS
+							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label> <form:radiobutton path="environmentType"
+									value="LMS" required="required" /> LMS
+							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label> <form:radiobutton path="environmentType"
+									value="INTEGRATION" required="required" /> INTEGRATION
+							</label>
 						</div>
+						<input type="hidden" path="id"
+							value="${environmentDTO.id}" />
 						<spring:bind path="envName">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
@@ -255,6 +262,6 @@
 	$('#environmentForm').submit(function(e) {
 		// this code prevents form from actually being submitted
 		e.preventDefault();
-		submitEditUserForm();
+		submitEnvironmentForm();
 	});
 </script>

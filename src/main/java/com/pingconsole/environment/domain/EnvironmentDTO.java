@@ -153,6 +153,27 @@ public class EnvironmentDTO {
 		environmentDTO.setDbSchema(environement.getDbSchema());
 		return environmentDTO;
 	}
+  public static Environment parse(EnvironmentDTO environmentDTO) {
+    Environment environment = new Environment();
+    environment.setId(environmentDTO.getId());
+    environment.setKeyId(environmentDTO.getKeyId());
+    //environment.setGroupList(null);
+    environment.setEnvironmentType(environmentDTO.getEnvironmentType());
+    environment.setEnvName(environmentDTO.getEnvName());
+    environment.setEnvUrl(environmentDTO.getEnvUrl());
+    environment.setRevisionNumber(environmentDTO.getRevisionNumber());
+    environment.setEnvLogUrl(environmentDTO.getEnvLogUrl());
+    environment.setEnvLog(environmentDTO.getEnvLog());
+    environment.setEnvLogUser(environmentDTO.getEnvLogUser());
+    environment.setEnvLogPass(environmentDTO.getEnvLogPass());
+    environment.setEnvWar(environmentDTO.getEnvWar());
+    environment.setEnvServerLog(environmentDTO.getEnvServerLog());
+    environment.setDbUrl(environmentDTO.getDbUrl());
+    environment.setDbUser(environmentDTO.getDbUser());
+    environment.setDbPass(environmentDTO.getDbPass());
+    environment.setDbSchema(environmentDTO.getDbSchema());
+    return environment;
+  }
 	
 	
 
