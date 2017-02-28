@@ -8,4 +8,8 @@ public interface RoleService {
 	
 	public List<RoleDTO> getAllRoles();
 
+	public void createUpdate(RoleDTO roleDTO);
+
+	public RoleDTO findRoleById(Long id);
+
 }

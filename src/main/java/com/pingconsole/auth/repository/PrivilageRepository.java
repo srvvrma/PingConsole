@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.pingconsole.auth.model.Privilege;
 
 public interface PrivilageRepository extends JpaRepository<Privilege, Long>{
+
+	public Privilege findById(Long id);
 }
 

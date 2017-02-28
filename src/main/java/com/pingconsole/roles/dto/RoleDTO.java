@@ -1,13 +1,11 @@
 package com.pingconsole.roles.dto;
 
-import java.util.List;
-
 public class RoleDTO {
 
   private String name;
   private Long id;
   private String code;
-  private List<String> privileges;
+  private String privileges;
 
   public String getName() {
     return name;
@@ -18,14 +16,10 @@ public class RoleDTO {
   }
 
   public String getPrivileges() {
-    return privileges.toString();
-  }
-  
-  public List<String> getPrivilegeList() {
     return privileges;
   }
 
-  public void setPrivileges(List<String> privileges) {
+  public void setPrivileges(String privileges) {
     this.privileges = privileges;
   }
 

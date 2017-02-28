@@ -40,8 +40,19 @@
 								<tr>
 									<td>${roleDTO.name }</td>
 									<td>${roleDTO.code }</td>
-									<td>${roleDTO.description }</td>
-									<td>X</td>
+									<td>${roleDTO.name }</td>
+									<td><div class="btn-group">
+											<button type="button" class="btn btn-default btn-sm"
+												onclick="createOrUpdate('${roleDTO.id}')">
+												<i class="fa fa-edit"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm">
+												<i class="fa fa-unlock-alt"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm">
+												<i class="fa  fa-trash-o"></i>
+											</button>
+										</div></td>
 								</tr>
 							</c:forEach>
 						</tbody>

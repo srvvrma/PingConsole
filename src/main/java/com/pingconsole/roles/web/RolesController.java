@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,16 +42,17 @@ public class RolesController {
     if (id == null) {
       roleDTO = new RoleDTO();
     } else {
-      // environmentDTO = environmentService.getEnvironmentById(id);
+      roleDTO = roleService.findRoleById(id);
     }
     model.addAttribute("roleDTO", roleDTO);
     return "roles/createUpdate";
   }
 
   @RequestMapping(value = "/roles/createUpdate", method = RequestMethod.POST)
-  public String crateUpdateEnvironment(Model model, @RequestParam Long id) {
+  public String crateUpdateEnvironment(Model model,@ModelAttribute RoleDTO roleDTO) {
+	  roleService.createUpdate(roleDTO);
     
-    return "roles/createUpdate";
+    return "blank";
   }
 
 }

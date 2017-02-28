@@ -60,7 +60,7 @@
 								<form:errors class="help-block" path="code"></form:errors>
 							</div>
 						</spring:bind>
-						<spring:bind path="code">
+						<spring:bind path="privileges">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
 								<label for="privileges">Role Code</label>
@@ -68,9 +68,9 @@
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
-									<form:select path="code" multiple="true" items="${privileges}" itemLabel="code" itemValue="name" id="privileges" class="form-control select2 pull-righ"/>
+									<form:select path="privileges" multiple="true" items="${privileges}" itemLabel="code" itemValue="idAsString" id="privileges" class="form-control select2 pull-righ"/>
 								</div>
-								<form:errors class="help-block" path="code"></form:errors>
+								<form:errors class="help-block" path="privileges"></form:errors>
 							</div>
 						</spring:bind>
 						
@@ -79,7 +79,7 @@
 
 					<div class="box-footer">
 						<button type="reset" class="btn btn-default"
-							onclick="loadAllEnvironment();">Cancel</button>
+							onclick="loadRoles();">Cancel</button>
 						<button type="button" class="btn btn-info margin" onclick="">Refresh</button>
 						<button type="submit" class="btn btn-skin pull-right margin"
 							onclick="">Save</button>

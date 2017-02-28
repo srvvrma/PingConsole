@@ -12,6 +12,7 @@ import java.util.Set;
 public class Role {
   private Long id;
   private String name;
+  private String code;
   private String description;
   private Set<User> users;
   private Set<Privilege> privileges;
@@ -57,11 +58,15 @@ public class Role {
 
   public RoleDTO convertToDto() {
     RoleDTO roleDTO = new RoleDTO();
+    roleDTO.setId(this.getId());
     roleDTO.setName(this.getName());
-    roleDTO.setPrivileges(new ArrayList<>());
+    roleDTO.setCode(this.getCode());
+    StringBuilder privilegeList = new StringBuilder();
     for (Privilege privilege : this.getPrivileges()) {
-      roleDTO.getPrivilegeList().add(privilege.getCode());
+    	privilegeList.append(privilege.getId().toString());
+    	privilegeList.append(",");
     }
+    roleDTO.setPrivileges((privilegeList.length() > 0 ? privilegeList.substring(0, privilegeList.length() - 1): ""));
     return roleDTO;
   }
 
@@ -72,4 +77,12 @@ public class Role {
   public void setDescription(String description) {
     this.description = description;
   }
+
+public String getCode() {
+	return code;
+}
+
+public void setCode(String code) {
+	this.code = code;
+}
 }

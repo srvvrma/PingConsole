@@ -61,11 +61,10 @@ function submitRoleForm(){
 		type : "post",
 		data : $("#roleForm").serialize(),
 		success : function(result) {
-			console.log('result ' + result);
 			if (result != '') {
 				$('#mainContentId').html(result);
 			} else {
-				loadAllEnvironment();
+				loadRoles();
 				iziToast.success({
 					title : 'OK',
 					message : 'Role Successfully Added !',
@@ -81,7 +80,7 @@ function submitRoleForm(){
 
 function createOrUpdate(id) {
 	$.ajax({
-		url : '/roles/createOrUpdate?id=' + id,
+		url : '/roles/createUpdate?id=' + id,
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
