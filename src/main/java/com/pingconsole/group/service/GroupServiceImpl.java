@@ -48,4 +48,9 @@ public class GroupServiceImpl implements GroupService{
     groupRepository.delete(id);
   }
 
+@Override
+public PingGroup findById(Long id) {
+	return groupRepository.findById(id);
+}
+
 }

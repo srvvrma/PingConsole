@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.pingconsole.dashboard.service.UserDashboardService;
+import com.pingconsole.group.service.GroupService;
 import com.pingconsole.roles.services.RoleService;
 import com.pingconsole.users.dto.UserDTO;
 import com.pingconsole.users.validator.UserDtoValidator;
@@ -36,6 +37,9 @@ public class UsersController {
   
   @Autowired
   private RoleService roleService;
+  
+  @Autowired
+  private GroupService groupService;
 
   @RequestMapping("/loadAllUsers")
   public String renderAllUserIndexPage(Model model) {
@@ -46,6 +50,7 @@ public class UsersController {
   @RequestMapping(value = "/edit/{id}")
   public String editUserDetails(Model model, @PathVariable Long id) {
     model.addAttribute("rolesList", roleService.getAllRoles());
+    model.addAttribute("groupList", groupService.getAllGroup());
     model.addAttribute("userDTO", userDashboardService.getUserDTOByUserId(id));
     return USER_EDIT_PAGE;
   }
@@ -55,6 +60,7 @@ public class UsersController {
       BindingResult bindingResult) {
     userDtoValidator.validate(userDTO, bindingResult);
     model.addAttribute("rolesList", roleService.getAllRoles());
+    model.addAttribute("groupList", groupService.getAllGroup());
     if (bindingResult.hasErrors()) {
       return USER_EDIT_PAGE;
     } else {

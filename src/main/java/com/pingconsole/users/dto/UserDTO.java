@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.model.User;
+import com.pingconsole.group.domain.PingGroup;
 
 public class UserDTO {
 	
@@ -15,6 +16,7 @@ public class UserDTO {
 	private String email;
 	private Date   dob;
 	private List<Long> roles;
+	private List<Long> groups;
 	
 	public String getUserName() {
 		return userName;
@@ -64,7 +66,18 @@ public class UserDTO {
 		  rolesIds.add(role.getId());
 		}
 		userDTO.setRoles(rolesIds);
+		List<Long> groupIds = new ArrayList<>();
+		for(PingGroup group : user.getGroups()){
+			groupIds.add(group.getId());
+		}
+		userDTO.setGroups(groupIds);
 		return userDTO;
+	}
+	public List<Long> getGroups() {
+		return groups;
+	}
+	public void setGroups(List<Long> groups) {
+		this.groups = groups;
 	}
 
 }

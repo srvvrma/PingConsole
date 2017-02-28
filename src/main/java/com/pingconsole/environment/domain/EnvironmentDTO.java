@@ -178,8 +178,6 @@ public class EnvironmentDTO {
   }
   public void setGroupId(List<Long> groupId) {
     this.groupId = groupId;
-  }
-	
-	
+  }	
 
 }

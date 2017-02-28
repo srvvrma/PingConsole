@@ -104,6 +104,21 @@
 								<form:errors class="help-block" path="roles"></form:errors>
 							</div>
 						</spring:bind>
+						<spring:bind path="groups">
+							<div
+								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+								<label for="groups">Group Code</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<form:select path="groups" multiple="true" items="${groupList}"
+										itemLabel="code" itemValue="id" id="groups"
+										class="form-control select2 pull-righ" />
+								</div>
+								<form:errors class="help-block" path="groups"></form:errors>
+							</div>
+						</spring:bind>
 					</div>
 					<!-- /.box-body -->
 
@@ -125,6 +140,7 @@
 <script>
 	$(document).ready(function() {
 		$('#roles').select2();
+		$('#groups').select2();
 	});
 	//Date picker
 	$('#datepicker').datepicker({
