@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.pingconsole.environment.domain.EnvironmentDTO;
 import com.pingconsole.environment.service.EnvironmentService;
 import com.pingconsole.environment.validator.EnvironmentValidator;
+import com.pingconsole.group.service.GroupService;
 
 @Controller
 @RequestMapping("/environment")
@@ -25,6 +26,9 @@ public class EnvironmentController {
   @Autowired
   private EnvironmentValidator environmentValidator;
 
+  @Autowired
+  private GroupService groupSerive;
+
   @RequestMapping("/showAll")
   public String showAllEnvironment(Model model) {
     List<EnvironmentDTO> environementDTOs = environmentService.getAllEnvironment();
@@ -33,11 +37,12 @@ public class EnvironmentController {
   }
 
   @RequestMapping("/create")
-  public String showCreateEnvironment(Model model,@RequestParam Long id) {
+  public String showCreateEnvironment(Model model, @RequestParam Long id) {
+    model.addAttribute("groups", groupSerive.getAllGroup());
     EnvironmentDTO environmentDTO = null;
-    if(id == null){
+    if (id == null) {
       environmentDTO = new EnvironmentDTO();
-    }else{
+    } else {
       environmentDTO = environmentService.getEnvironmentById(id);
     }
     model.addAttribute("environmentDTO", environmentDTO);
@@ -48,6 +53,7 @@ public class EnvironmentController {
   public String showAllEnvironment(Model model,
       @ModelAttribute("environmentDTO") EnvironmentDTO environmentDTO,
       BindingResult bindingResult) {
+    model.addAttribute("groups", groupSerive.getAllGroup());
     environmentValidator.validate(environmentDTO, bindingResult);
 
     if (bindingResult.hasErrors()) {

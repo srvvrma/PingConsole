@@ -1,11 +1,19 @@
 package com.pingconsole.auth.model;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import com.pingconsole.roles.dto.RoleDTO;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -61,12 +69,11 @@ public class Role {
     roleDTO.setId(this.getId());
     roleDTO.setName(this.getName());
     roleDTO.setCode(this.getCode());
-    StringBuilder privilegeList = new StringBuilder();
+    List<Long> privileges = new ArrayList<>();
     for (Privilege privilege : this.getPrivileges()) {
-    	privilegeList.append(privilege.getId().toString());
-    	privilegeList.append(",");
+      privileges.add(privilege.getId());
     }
-    roleDTO.setPrivileges((privilegeList.length() > 0 ? privilegeList.substring(0, privilegeList.length() - 1): ""));
+    roleDTO.setPrivileges(privileges);
     return roleDTO;
   }
 

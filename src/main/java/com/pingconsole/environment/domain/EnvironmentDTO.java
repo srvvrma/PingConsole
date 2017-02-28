@@ -1,5 +1,6 @@
 package com.pingconsole.environment.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pingconsole.group.domain.PingGroup;
@@ -8,7 +9,6 @@ public class EnvironmentDTO {
 
 	private Long id;
 	private String keyId;
-	private List<PingGroup> groupList;
 	private String environmentType;
 	private String envName;
 	private String envUrl;
@@ -24,6 +24,7 @@ public class EnvironmentDTO {
 	private String dbPass;
 	private String dbSchema;
 	private String syncUrl;
+	private List<Long> groupId;
 	public Long getId() {
 		return id;
 	}
@@ -35,12 +36,6 @@ public class EnvironmentDTO {
 	}
 	public void setKeyId(String keyId) {
 		this.keyId = keyId;
-	}
-	public List<PingGroup> getGroupList() {
-		return groupList;
-	}
-	public void setGroupList(List<PingGroup> groupList) {
-		this.groupList = groupList;
 	}
 	public String getEnvironmentType() {
 		return environmentType;
@@ -136,7 +131,6 @@ public class EnvironmentDTO {
 		EnvironmentDTO environmentDTO = new EnvironmentDTO();
 		environmentDTO.setId(environement.getId());
 		environmentDTO.setKeyId(environement.getKeyId());
-		environmentDTO.setGroupList(null);
 		environmentDTO.setEnvironmentType(environement.getEnvironmentType());
 		environmentDTO.setEnvName(environement.getEnvName());
 		environmentDTO.setEnvUrl(environement.getEnvUrl());
@@ -151,6 +145,11 @@ public class EnvironmentDTO {
 		environmentDTO.setDbUser(environement.getDbUser());
 		environmentDTO.setDbPass(environement.getDbPass());
 		environmentDTO.setDbSchema(environement.getDbSchema());
+		List<Long> list = new ArrayList<>();
+		for(PingGroup group : environement.getGroupList()){
+		  list.add(group.getId());
+		}
+		environmentDTO.setGroupId(list);
 		return environmentDTO;
 	}
   public static Environment parse(EnvironmentDTO environmentDTO) {
@@ -173,6 +172,12 @@ public class EnvironmentDTO {
     environment.setDbPass(environmentDTO.getDbPass());
     environment.setDbSchema(environmentDTO.getDbSchema());
     return environment;
+  }
+  public List<Long> getGroupId() {
+    return groupId;
+  }
+  public void setGroupId(List<Long> groupId) {
+    this.groupId = groupId;
   }
 	
 	

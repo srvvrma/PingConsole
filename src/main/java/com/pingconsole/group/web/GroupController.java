@@ -41,7 +41,7 @@ public class GroupController {
   @ResponseBody
   public String createGroup(Model model, @ModelAttribute("userForm") PingGroupVO pingGroupVO) {
     String result = null;
-    if (pingGroupVO.getId() != null) {
+    if (pingGroupVO.getId() == null) {
       switch (groupService.isGroupExist(pingGroupVO)) {
         case PingGroup.CODE_EXIST:
           result = ERROR + CODE_ERROR;
@@ -67,6 +67,7 @@ public class GroupController {
   @RequestMapping(value = "/remove", method = RequestMethod.POST)
   @ResponseBody
   public String removeGroup(Model model, @RequestParam("id") Long id) {
+    groupService.removeGroup(id);
     return SUCCESS;
   }
 }

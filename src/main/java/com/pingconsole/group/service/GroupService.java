@@ -15,4 +15,6 @@ public interface GroupService {
 
   public void editGroup(PingGroupVO pingGroupVO);
 
+  public void removeGroup(Long id);
+
 }

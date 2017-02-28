@@ -40,8 +40,22 @@
 									value="INTEGRATION" required="required" /> INTEGRATION
 							</label>
 						</div>
-						<input type="hidden" path="id"
-							value="${environmentDTO.id}" />
+						<input type="hidden" path="id" value="${environmentDTO.id}" />
+						<spring:bind path="groupId">
+							<div
+								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+								<label for="roles">Groups</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<form:select path="groupId" multiple="true" items="${groups}"
+										itemLabel="code" itemValue="id" id="groupId"
+										class="form-control select2 pull-righ" />
+								</div>
+								<form:errors class="help-block" path="groupId"></form:errors>
+							</div>
+						</spring:bind>
 						<spring:bind path="envName">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
@@ -259,6 +273,9 @@
 	</div>
 </section>
 <script>
+	$(document).ready(function() {
+		$('#groupId').select2();
+	});
 	$('#environmentForm').submit(function(e) {
 		// this code prevents form from actually being submitted
 		e.preventDefault();

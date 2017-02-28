@@ -1,8 +1,10 @@
 package com.pingconsole.users.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.model.User;
 
 public class UserDTO {
@@ -12,7 +14,7 @@ public class UserDTO {
 	private String userId;
 	private String email;
 	private Date   dob;
-	private List<String> roles;
+	private List<Long> roles;
 	
 	public String getUserName() {
 		return userName;
@@ -32,10 +34,10 @@ public class UserDTO {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public List<String> getRoles() {
+	public List<Long> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<String> roles) {
+	public void setRoles(List<Long> roles) {
 		this.roles = roles;
 	}
 	public Long getId() {
@@ -57,6 +59,11 @@ public class UserDTO {
 		userDTO.setUserId(user.getUsername());
 		userDTO.setEmail(user.getEmail());
 		userDTO.setDob(user.getDob());
+		List<Long> rolesIds = new ArrayList<>();
+		for(Role role : user.getRoles()){
+		  rolesIds.add(role.getId());
+		}
+		userDTO.setRoles(rolesIds);
 		return userDTO;
 	}
 

@@ -1,12 +1,16 @@
 package com.pingconsole.dashboard.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.model.User;
+import com.pingconsole.auth.repository.RoleRepository;
 import com.pingconsole.auth.repository.UserRepository;
 import com.pingconsole.users.dto.UserDTO;
 
@@ -15,6 +19,9 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 
   @Autowired
   private UserRepository userRepository;
+  
+  @Autowired
+  private RoleRepository roleRepository;
 
   @Override
   public List<UserDTO> getAllUserList() {
@@ -45,6 +52,11 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 		user.setFullName(userDTO.getUserName());
 		user.setEmail(userDTO.getEmail());
 		user.setDob(userDTO.getDob());
+		Set<Role> roles = new HashSet<>();
+		for(Long id : userDTO.getRoles()){
+		  roles.add(roleRepository.findById(id));
+		}
+		user.setRoles(roles);
 		userRepository.save(user);
 	}
 

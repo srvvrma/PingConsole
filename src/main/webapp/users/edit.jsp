@@ -22,7 +22,8 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form id="editUserForm" method="POST" action="${contextPath}/users/save" modelAttribute="userDTO"
+				<form:form id="editUserForm" method="POST"
+					action="${contextPath}/users/save" modelAttribute="userDTO"
 					class="form-signin">
 					<form:input type="hidden" path="id"></form:input>
 					<div class="box-body">
@@ -88,13 +89,31 @@
 								<!-- /.input group -->
 							</div>
 						</spring:bind>
+						<spring:bind path="roles">
+							<div
+								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+								<label for="roles">Role Code</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<form:select path="roles" multiple="true" items="${rolesList}"
+										itemLabel="code" itemValue="id" id="roles"
+										class="form-control select2 pull-righ" />
+								</div>
+								<form:errors class="help-block" path="roles"></form:errors>
+							</div>
+						</spring:bind>
 					</div>
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="reset" class="btn btn-default" onclick="loadUsers();">Cancel</button>
-						<button type="button" class="btn btn-info margin" onclick="editUser('${userDTO.id}')">Refresh</button>
-						<button type="submit" class="btn btn-danger pull-right margin" onclick="">Save</button>
+						<button type="reset" class="btn btn-default"
+							onclick="loadUsers();">Cancel</button>
+						<button type="button" class="btn btn-info margin"
+							onclick="editUser('${userDTO.id}')">Refresh</button>
+						<button type="submit" class="btn btn-skin pull-right margin"
+							onclick="">Save</button>
 					</div>
 				</form:form>
 			</div>
@@ -104,13 +123,17 @@
 	</div>
 </section>
 <script>
+	$(document).ready(function() {
+		$('#roles').select2();
+	});
 	//Date picker
 	$('#datepicker').datepicker({
 		autoclose : true
 	});
-	$('#editUserForm').submit(function(e) { 
-	    // this code prevents form from actually being submitted
-	    e.preventDefault();
-	    submitEditUserForm();
+
+	$('#editUserForm').submit(function(e) {
+		// this code prevents form from actually being submitted
+		e.preventDefault();
+		submitEditUserForm();
 	});
 </script>

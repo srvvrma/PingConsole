@@ -316,14 +316,12 @@ function deleteGroup(id) {
 			_csrf : $('#_csrf').val()
 		},
 		success : function(result) {
-			$('#createGroup').modal('hide');
 			iziToast.success({
 				title : 'OK',
 				message : 'Group Successfully removed !',
-				onClose : function(instance, toast, closedBy) {
-					loadGroups();
-				}
+				
 			});
+			loadGroups();
 		},
 		error : function(xhr, status, error) {
 			iziToast.error({

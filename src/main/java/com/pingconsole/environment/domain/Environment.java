@@ -21,230 +21,240 @@ import com.pingconsole.group.domain.PingGroup;
 @Table(name = "ENVIRONMENT")
 public class Environment {
 
-	@Id
-	@JsonProperty("key")
-	@Column(name="environment_id") 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+  @Id
+  @JsonProperty("key")
+  @Column(name = "environment_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-	@Column
-	private String keyId;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "environment_group", joinColumns = { @JoinColumn(name = "environment_id") }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
-	private List<PingGroup> groupList;
-	
-	@JsonProperty("environmentType")
-	@Column
-	private String environmentType;
-	@JsonProperty("envName")
-	@Column
-	private String envName;
-	@JsonProperty("envUrl")
-	@Column
-	private String envUrl;
-	@JsonProperty("revisionNumber")
-	@Column
-	private String revisionNumber;
-	@JsonProperty("envLogUrl")
-	@Column
-	private String envLogUrl;
-	@JsonProperty("envLogUser")
-	@Column
-	private String envLogUser;
-	@JsonProperty("envLogPass")
-	@Column
-	private String envLogPass;
-	@JsonProperty("envLog")
-	@Column
-	private String envLog;
-	@JsonProperty("envWar")
-	@Column
-	private String envWar;
-	@JsonProperty("envServerLog")
-	@Column
-	private String envServerLog;
-	@JsonProperty("dbUrl")
-	@Column
-	private String dbUrl;
-	@JsonProperty("dbUser")
-	@Column
-	private String dbUser;
-	@JsonProperty("dbPass")
-	@Column
-	private String dbPass;
-	@JsonProperty("dbSchema")
-	@Column
-	private String dbSchema;
-	@JsonProperty("syncUrl")
-	@Column
-	private String syncUrl;
+  @Column
+  private String keyId;
 
-	public String getSyncUrl() {
-		return syncUrl;
-	}
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinTable(name = "environment_group", joinColumns = {@JoinColumn(name = "environment_id")},
+      inverseJoinColumns = {@JoinColumn(name = "group_id")})
+  private List<PingGroup> groupList;
 
-	public void setSyncUrl(String syncUrl) {
-		this.syncUrl = syncUrl;
-	}
+  @JsonProperty("environmentType")
+  @Column
+  private String environmentType;
+  @JsonProperty("envName")
+  @Column
+  private String envName;
+  @JsonProperty("envUrl")
+  @Column
+  private String envUrl;
+  @JsonProperty("revisionNumber")
+  @Column
+  private String revisionNumber;
+  @JsonProperty("envLogUrl")
+  @Column
+  private String envLogUrl;
+  @JsonProperty("envLogUser")
+  @Column
+  private String envLogUser;
+  @JsonProperty("envLogPass")
+  @Column
+  private String envLogPass;
+  @JsonProperty("envLog")
+  @Column
+  private String envLog;
+  @JsonProperty("envWar")
+  @Column
+  private String envWar;
+  @JsonProperty("envServerLog")
+  @Column
+  private String envServerLog;
+  @JsonProperty("dbUrl")
+  @Column
+  private String dbUrl;
+  @JsonProperty("dbUser")
+  @Column
+  private String dbUser;
+  @JsonProperty("dbPass")
+  @Column
+  private String dbPass;
+  @JsonProperty("dbSchema")
+  @Column
+  private String dbSchema;
+  @JsonProperty("syncUrl")
+  @Column
+  private String syncUrl;
 
-	public Environment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  public String getSyncUrl() {
+    return syncUrl;
+  }
 
-	public Environment(String keyId, String envName, String envUrl, String envLogUrl, String envLogUser,
-			String envLogPass, String envLog, String envWar, String envServerLog, String dbUrl, String dbUser,
-			String dbPass) {
-		super();
-		this.keyId = keyId;
-		this.envName = envName;
-		this.envUrl = envUrl;
-		this.envLogUrl = envLogUrl;
-		this.envLogUser = envLogUser;
-		this.envLogPass = envLogPass;
-		this.envLog = envLog;
-		this.envWar = envWar;
-		this.envServerLog = envServerLog;
-		this.dbUrl = dbUrl;
-		this.dbUser = dbUser;
-		this.dbPass = dbPass;
-	}
+  public void setSyncUrl(String syncUrl) {
+    this.syncUrl = syncUrl;
+  }
 
-	public Long getId() {
-		return id;
-	}
+  public Environment() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	public String getKeyId() {
-		return keyId;
-	}
+  public Environment(String keyId, String envName, String envUrl, String envLogUrl,
+      String envLogUser, String envLogPass, String envLog, String envWar, String envServerLog,
+      String dbUrl, String dbUser, String dbPass) {
+    super();
+    this.keyId = keyId;
+    this.envName = envName;
+    this.envUrl = envUrl;
+    this.envLogUrl = envLogUrl;
+    this.envLogUser = envLogUser;
+    this.envLogPass = envLogPass;
+    this.envLog = envLog;
+    this.envWar = envWar;
+    this.envServerLog = envServerLog;
+    this.dbUrl = dbUrl;
+    this.dbUser = dbUser;
+    this.dbPass = dbPass;
+  }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setKeyId(String keyId) {
-		this.keyId = keyId;
-	}
+  public String getKeyId() {
+    return keyId;
+  }
 
-	public String getEnvName() {
-		return envName;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public void setEnvName(String envName) {
-		this.envName = envName;
-	}
+  public void setKeyId(String keyId) {
+    this.keyId = keyId;
+  }
 
-	public String getEnvUrl() {
-		return envUrl;
-	}
+  public String getEnvName() {
+    return envName;
+  }
 
-	public void setEnvUrl(String envUrl) {
-		this.envUrl = envUrl;
-	}
+  public void setEnvName(String envName) {
+    this.envName = envName;
+  }
 
-	public String getEnvLogUrl() {
-		return envLogUrl;
-	}
+  public String getEnvUrl() {
+    return envUrl;
+  }
 
-	public void setEnvLogUrl(String envLogUrl) {
-		this.envLogUrl = envLogUrl;
-	}
+  public void setEnvUrl(String envUrl) {
+    this.envUrl = envUrl;
+  }
 
-	public String getEnvLogUser() {
-		return envLogUser;
-	}
+  public String getEnvLogUrl() {
+    return envLogUrl;
+  }
 
-	public void setEnvLogUser(String envLogUser) {
-		this.envLogUser = envLogUser;
-	}
+  public void setEnvLogUrl(String envLogUrl) {
+    this.envLogUrl = envLogUrl;
+  }
 
-	public String getEnvLogPass() {
-		return envLogPass;
-	}
+  public String getEnvLogUser() {
+    return envLogUser;
+  }
 
-	public void setEnvLogPass(String envLogPass) {
-		this.envLogPass = envLogPass;
-	}
+  public void setEnvLogUser(String envLogUser) {
+    this.envLogUser = envLogUser;
+  }
 
-	public String getEnvLog() {
-		return envLog;
-	}
+  public String getEnvLogPass() {
+    return envLogPass;
+  }
 
-	public void setEnvLog(String envLog) {
-		this.envLog = envLog;
-	}
+  public void setEnvLogPass(String envLogPass) {
+    this.envLogPass = envLogPass;
+  }
 
-	public String getEnvWar() {
-		return envWar;
-	}
+  public String getEnvLog() {
+    return envLog;
+  }
 
-	public void setEnvWar(String envWar) {
-		this.envWar = envWar;
-	}
+  public void setEnvLog(String envLog) {
+    this.envLog = envLog;
+  }
 
-	public String getEnvServerLog() {
-		return envServerLog;
-	}
+  public String getEnvWar() {
+    return envWar;
+  }
 
-	public void setEnvServerLog(String envServerLog) {
-		this.envServerLog = envServerLog;
-	}
+  public void setEnvWar(String envWar) {
+    this.envWar = envWar;
+  }
 
-	public String getDbUrl() {
-		return dbUrl;
-	}
+  public String getEnvServerLog() {
+    return envServerLog;
+  }
 
-	public void setDbUrl(String dbUrl) {
-		this.dbUrl = dbUrl;
-	}
+  public void setEnvServerLog(String envServerLog) {
+    this.envServerLog = envServerLog;
+  }
 
-	public String getDbUser() {
-		return dbUser;
-	}
+  public String getDbUrl() {
+    return dbUrl;
+  }
 
-	public void setDbUser(String dbUser) {
-		this.dbUser = dbUser;
-	}
+  public void setDbUrl(String dbUrl) {
+    this.dbUrl = dbUrl;
+  }
 
-	public String getDbPass() {
-		return dbPass;
-	}
+  public String getDbUser() {
+    return dbUser;
+  }
 
-	public void setDbPass(String dbPass) {
-		this.dbPass = dbPass;
-	}
+  public void setDbUser(String dbUser) {
+    this.dbUser = dbUser;
+  }
 
-	public String getRevisionNumber() {
-		return revisionNumber;
-	}
+  public String getDbPass() {
+    return dbPass;
+  }
 
-	public void setRevisionNumber(String revisionNumber) {
-		this.revisionNumber = revisionNumber;
-	}
+  public void setDbPass(String dbPass) {
+    this.dbPass = dbPass;
+  }
 
-	public String getDbSchema() {
-		return dbSchema;
-	}
+  public String getRevisionNumber() {
+    return revisionNumber;
+  }
 
-	public void setDbSchema(String dbSchema) {
-		this.dbSchema = dbSchema;
-	}
+  public void setRevisionNumber(String revisionNumber) {
+    this.revisionNumber = revisionNumber;
+  }
 
-	public String getEnvironmentType() {
-		return environmentType;
-	}
+  public String getDbSchema() {
+    return dbSchema;
+  }
 
-	public void setEnvironmentType(String environmentType) {
-		this.environmentType = environmentType;
-	}
+  public void setDbSchema(String dbSchema) {
+    this.dbSchema = dbSchema;
+  }
 
-	@Override
-	public String toString() {
-		return "EnvironmentDTO [id=" + id + ", keyId=" + keyId + ", environmentType=" + environmentType + ", envName="
-				+ envName + ", envUrl=" + envUrl + ", revisionNumber=" + revisionNumber + ", envLogUrl=" + envLogUrl
-				+ ", envLogUser=" + envLogUser + ", envLogPass=" + envLogPass + ", envLog=" + envLog + ", envWar="
-				+ envWar + ", envServerLog=" + envServerLog + ", dbUrl=" + dbUrl + ", dbUser=" + dbUser + ", dbPass="
-				+ dbPass + ", dbSchema=" + dbSchema + ", syncUrl=" + syncUrl + "]";
-	}
+  public String getEnvironmentType() {
+    return environmentType;
+  }
+
+  public void setEnvironmentType(String environmentType) {
+    this.environmentType = environmentType;
+  }
+
+  public List<PingGroup> getGroupList() {
+    return groupList;
+  }
+
+  public void setGroupList(List<PingGroup> groupList) {
+    this.groupList = groupList;
+  }
+
+  @Override
+  public String toString() {
+    return "EnvironmentDTO [id=" + id + ", keyId=" + keyId + ", environmentType=" + environmentType
+        + ", envName=" + envName + ", envUrl=" + envUrl + ", revisionNumber=" + revisionNumber
+        + ", envLogUrl=" + envLogUrl + ", envLogUser=" + envLogUser + ", envLogPass=" + envLogPass
+        + ", envLog=" + envLog + ", envWar=" + envWar + ", envServerLog=" + envServerLog
+        + ", dbUrl=" + dbUrl + ", dbUser=" + dbUser + ", dbPass=" + dbPass + ", dbSchema="
+        + dbSchema + ", syncUrl=" + syncUrl + "]";
+  }
 }

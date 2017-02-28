@@ -68,7 +68,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
-									<form:select path="privileges" multiple="true" items="${privileges}" itemLabel="code" itemValue="idAsString" id="privileges" class="form-control select2 pull-righ"/>
+									<form:select path="privileges" multiple="true" items="${privileges}" itemLabel="code" itemValue="id" id="privileges" class="form-control select2 pull-righ"/>
 								</div>
 								<form:errors class="help-block" path="privileges"></form:errors>
 							</div>

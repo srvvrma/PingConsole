@@ -17,53 +17,53 @@ import com.pingconsole.roles.dto.RoleDTO;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-	@Autowired
-	private RoleRepository roleRepository;
+  @Autowired
+  private RoleRepository roleRepository;
 
-	@Autowired
-	private PrivilageRepository privilageRepository;
+  @Autowired
+  private PrivilageRepository privilageRepository;
 
-	@Override
-	public List<RoleDTO> getAllRoles() {
-		List<Role> roles = roleRepository.findAll();
-		List<RoleDTO> roleDTOs = new ArrayList<>();
-		for (Role role : roles) {
-			roleDTOs.add(role.convertToDto());
-		}
-		return roleDTOs;
-	}
+  @Override
+  public List<RoleDTO> getAllRoles() {
+    List<Role> roles = roleRepository.findAll();
+    List<RoleDTO> roleDTOs = new ArrayList<>();
+    for (Role role : roles) {
+      roleDTOs.add(role.convertToDto());
+    }
+    return roleDTOs;
+  }
 
-	@Override
-	public void createUpdate(RoleDTO roleDTO) {
-		Role role = null;
-		if (roleDTO.getId() == null) {
-			role = new Role();
-			role.setName(roleDTO.getName());
-			role.setCode(roleDTO.getCode());
-			Set<Privilege> privileges = new HashSet<>();
-			for (String privilegeId : roleDTO.getPrivileges().split(",")) {
-				privileges.add(privilageRepository.findById(Long.valueOf(privilegeId)));
-			}
-			role.setPrivileges(privileges);
-		} else {
-			role = roleRepository.findById(roleDTO.getId());
-			role.setName(roleDTO.getName());
-			role.setCode(roleDTO.getCode());
-			Set<Privilege> privileges = new HashSet<>();
-			for (String privilegeId : roleDTO.getPrivileges().split(",")) {
-				privileges.add(privilageRepository.findById(Long.valueOf(privilegeId)));
-			}
-			role.setPrivileges(privileges);
+  @Override
+  public void createUpdate(RoleDTO roleDTO) {
+    Role role = null;
+    if (roleDTO.getId() == null) {
+      role = new Role();
+      role.setName(roleDTO.getName());
+      role.setCode(roleDTO.getCode());
+      Set<Privilege> privileges = new HashSet<>();
+      for (Long privilegeId : roleDTO.getPrivileges()) {
+        privileges.add(privilageRepository.findById(privilegeId));
+      }
+      role.setPrivileges(privileges);
+    } else {
+      role = roleRepository.findById(roleDTO.getId());
+      role.setName(roleDTO.getName());
+      role.setCode(roleDTO.getCode());
+      Set<Privilege> privileges = new HashSet<>();
+      for (Long privilegeId : roleDTO.getPrivileges()) {
+        privileges.add(privilageRepository.findById(privilegeId));
+      }
+      role.setPrivileges(privileges);
 
-		}
-		roleRepository.save(role);
+    }
+    roleRepository.save(role);
 
-	}
+  }
 
-	@Override
-	public RoleDTO findRoleById(Long id) {
-		RoleDTO roleDTO = roleRepository.findById(id).convertToDto();
-		return roleDTO;
-	}
+  @Override
+  public RoleDTO findRoleById(Long id) {
+    RoleDTO roleDTO = roleRepository.findById(id).convertToDto();
+    return roleDTO;
+  }
 
 }
