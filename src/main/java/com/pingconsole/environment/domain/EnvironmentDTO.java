@@ -24,6 +24,7 @@ public class EnvironmentDTO {
 	private String dbPass;
 	private String dbSchema;
 	private String syncUrl;
+	private String pingUrl;
 	private List<Long> groupId;
 	public Long getId() {
 		return id;
@@ -145,6 +146,7 @@ public class EnvironmentDTO {
 		environmentDTO.setDbUser(environement.getDbUser());
 		environmentDTO.setDbPass(environement.getDbPass());
 		environmentDTO.setDbSchema(environement.getDbSchema());
+		environmentDTO.setPingUrl(environement.getPingUrl());
 		List<Long> list = new ArrayList<>();
 		for(PingGroup group : environement.getGroupList()){
 		  list.add(group.getId());
@@ -171,6 +173,7 @@ public class EnvironmentDTO {
     environment.setDbUser(environmentDTO.getDbUser());
     environment.setDbPass(environmentDTO.getDbPass());
     environment.setDbSchema(environmentDTO.getDbSchema());
+    environment.setPingUrl(environmentDTO.getPingUrl());
     return environment;
   }
   public List<Long> getGroupId() {
@@ -178,6 +181,12 @@ public class EnvironmentDTO {
   }
   public void setGroupId(List<Long> groupId) {
     this.groupId = groupId;
+  }
+  public String getPingUrl() {
+    return pingUrl;
+  }
+  public void setPingUrl(String pingUrl) {
+    this.pingUrl = pingUrl;
   }	
 
 }

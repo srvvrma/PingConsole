@@ -22,12 +22,13 @@ public class JsonFormatterController {
 	
 	@RequestMapping(value = "/json", method = RequestMethod.POST)
 	@ResponseBody
-	public String showAllEnvironment(Model model, @RequestParam String rawJson) {
+	public String formatJSON(Model model, @RequestParam("rawJson") String rawJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		Object json;
 		try {
 			json = mapper.readValue(rawJson, Object.class);
-			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+			String data =  mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+			return data;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

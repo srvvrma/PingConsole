@@ -223,7 +223,7 @@
                 </div>
               </div>
             </div>
-            <div class="box-body chat" id="chat-box" style="height: 500px;overflow-y: auto;">
+            <div class="box-body chat" id="chat-box" style="max-height: 350px;overflow-y: auto;">
           
               
             </div>

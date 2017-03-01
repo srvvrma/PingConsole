@@ -43,7 +43,7 @@
 									<td>${environment.environmentType}</td>
 									<td>${environment.envName}</td>
 									<td>${environment.envUrl}</td>
-									<td>${environment.revisionNumber}</td>
+									<td><span class="label label-success">Running</span></td>
 									<td>${environment.revisionNumber}</td>
 									<td><div class="btn-group">
 											<button type="button" class="btn btn-default btn-sm"
@@ -52,7 +52,7 @@
 											</button>
 											<button type="button" class="btn btn-default btn-sm"
 												onclick="showEnvironmentDetails('${environment.id}')">
-												<i class="fa fa-rocket"></i>
+												<i class="fa fa-binoculars"></i>
 											</button>
 											<button type="button" class="btn btn-default btn-sm"
 												onclick="showEnvironmentSettings('${environment.id}')">
@@ -65,6 +65,9 @@
 											<button type="button" class="btn btn-default btn-sm" onclick="deleteEnvironment('${environment.id}')">
 												<i class="fa  fa-trash-o"></i>
 											</button>
+											<button type="button" class="btn btn-default btn-sm" onclick="window.open('${environment.envUrl }')">
+																<i class="fa  fa-external-link"></i>&nbsp;&nbsp;Open
+															</button>
 										</div></td>
 								</tr>
 							</c:forEach>

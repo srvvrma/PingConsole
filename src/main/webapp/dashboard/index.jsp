@@ -92,7 +92,7 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box">
+			<div class="box box-skin">
 				<div class="box-header with-border">
 					<h3 class="box-title">Monthly Recap Report</h3>
 
@@ -288,6 +288,7 @@
 												<th>Role Name</th>
 												<th>Role Code</th>
 												<th>Description</th>
+												<th>Status</th>
 												<th>Options</th>
 											</tr>
 										</thead>
@@ -297,16 +298,20 @@
 													<td>${environment.envName }</td>
 													<td>${environment.id }</td>
 													<td>${environment.envName }</td>
+													<td><span class="label label-success">Running</span></td>
 													<td><div class="btn-group">
 															<button type="button" class="btn btn-default btn-sm"
-																onclick="createOrUpdate('${environment.id}')">
+																onclick="createOrEditEnvironment('${environment.id}')">
 																<i class="fa fa-edit"></i>
 															</button>
-															<button type="button" class="btn btn-default btn-sm">
-																<i class="fa fa-unlock-alt"></i>
+															<button type="button" class="btn btn-default btn-sm" onclick="showEnvironmentDetails('${environment.id}');">
+																<i class="fa fa-binoculars"></i>
 															</button>
 															<button type="button" class="btn btn-default btn-sm">
-																<i class="fa  fa-trash-o"></i>
+																<i class="fa fa-share-alt"></i>
+															</button>
+															<button type="button" class="btn btn-default btn-sm" onclick="window.open('${environment.envUrl }')">
+																<i class="fa  fa-external-link"></i>&nbsp;&nbsp;Open
 															</button>
 														</div></td>
 												</tr>
@@ -317,6 +322,7 @@
 												<th>Role Name</th>
 												<th>Role Code</th>
 												<th>Description</th>
+												<th>Status</th>
 												<th>Options</th>
 											</tr>
 										</tfoot>

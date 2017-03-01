@@ -86,6 +86,21 @@
 								<form:errors class="help-block" path="envUrl"></form:errors>
 							</div>
 						</spring:bind>
+						<spring:bind path="pingUrl">
+							<div
+								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+								<label for="pingUrl">Ping Url</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<form:input type="text" path="pingUrl"
+										class="form-control pull-righ" placeholder="Ping Url"
+										autofocus="true" required="required"></form:input>
+								</div>
+								<form:errors class="help-block" path="pingUrl"></form:errors>
+							</div>
+						</spring:bind>`
 						<spring:bind path="revisionNumber">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">

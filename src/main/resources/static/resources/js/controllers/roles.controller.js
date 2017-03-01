@@ -345,12 +345,40 @@ function createOrEditEnvironment(id) {
 	});
 }
 
+function showEnvironmentDetails(id) {
+	$.ajax({
+		url : '/environment/showDetails/' + id,
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+
 function loadJSONFormatter() {
 	$.ajax({
 		url : '/formatter/json',
 		type : "get",
 		success : function(result) {
 			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function formatJSON() {
+	$.ajax({
+		url : '/formatter/json',
+		type : "post",
+		data : $("#jsonForm").serialize(),
+		success : function(result) {
+			$('#jsondataOutput').val(result);
 		},
 		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);

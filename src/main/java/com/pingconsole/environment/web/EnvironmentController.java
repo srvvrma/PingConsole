@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,13 @@ public class EnvironmentController {
     List<EnvironmentDTO> environementDTOs = environmentService.getAllEnvironment();
     model.addAttribute("environments", environementDTOs);
     return "environment/index";
+  }
+  
+  @RequestMapping("/showDetails/{id}")
+  public String showEnvironmentDetail(Model model,@PathVariable("id") long id) {
+    EnvironmentDTO environementDTO = environmentService.getEnvironmentById(id);
+    model.addAttribute("environment", environementDTO);
+    return "environment/detail";
   }
 
   @RequestMapping("/create")
