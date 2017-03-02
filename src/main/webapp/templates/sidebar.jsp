@@ -86,6 +86,12 @@
 					<span>Chat</span>
 				</a>
 			</li>
+			<!-- Patch Tool-->
+			<li class="treeview">
+				<a href="#" onclick="loadPatchView();"> <i class="fa fa-group"></i>
+					<span>Patch</span>
+				</a>
+			</li>
 			<!-- Showing Netwok Tools -->
 			<li class="treeview">
 				<a href="#"> <i class="fa fa-user-plus"></i>

@@ -433,3 +433,16 @@ function submitEnvironmentForm() {
 		}
 	});
 }
+
+function loadPatchView(){
+	$.ajax({
+		url : '/patch/create',
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
