@@ -1,4 +1,6 @@
 
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -30,98 +32,87 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
-			<li class="active treeview">
-				<a href="#" onclick="loadDashboard();"> <i class="fa fa-dashboard"></i>
-					<span>Dashboard</span>
-				</a>
-			</li>
-			
-			<!-- Showing Ures Details-->
-			<li class="treeview">
-				<a href="#" onclick="loadUsers();"> <i class="fa fa-group"></i>
-					<span>Users</span>
-				</a>
-			</li>
-			
-			<!-- Showing Role Controller for creating and edit roles -->
-			<li class="treeview">
-				<a href="#"> <i class="fa fa-user-plus"></i>
-					<span>Roles</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
+			<li class="active treeview"><a href="#"
+				onclick="loadDashboard();"> <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+			</a></li>
+			<sec:authorize access="hasAuthority('ADMIN')">
+				<!-- Showing Ures Details-->
+				<li class="treeview"><a href="#" onclick="loadUsers();"> <i
+						class="fa fa-group"></i> <span>Users</span>
+				</a></li>
+				<!-- Showing Role Controller for creating and edit roles -->
+				<li class="treeview"><a href="#"> <i
+						class="fa fa-user-plus"></i> <span>Roles</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
-				<ul class="treeview-menu" style="display: none;">
-					<li class=""><a href="#" onclick="createOrUpdate('');"><i class="fa fa-circle-o"></i> Add New Role</a></li>
-					<li><a href="#" onclick="loadRoles();"><i class="fa fa-circle-o"></i> All Roles</a></li>
-				</ul>
-			</li>
-			
-			<!-- Showing Authorities Controller for creating and edit roles -->
-			<li class="treeview">
-				<a href="#" onclick="loadPrivileges();"> <i class="fa fa-user-secret"></i>
-					<span>Privileges</span>
-				</a>
-			</li>
-			<!-- Showing Groups Details-->
-			<li class="treeview">
-				<a href="#" onclick="loadGroups();"> <i class="fa fa-group"></i>
-					<span>Groups</span>
-				</a>
-			</li>
+					<ul class="treeview-menu" style="display: none;">
+						<li class=""><a href="#" onclick="createOrUpdate('');"><i
+								class="fa fa-circle-o"></i> Add New Role</a></li>
+						<li><a href="#" onclick="loadRoles();"><i
+								class="fa fa-circle-o"></i> All Roles</a></li>
+					</ul></li>
+
+				<!-- Showing Authorities Controller for creating and edit roles -->
+				<li class="treeview"><a href="#" onclick="loadPrivileges();">
+						<i class="fa fa-user-secret"></i> <span>Privileges</span>
+				</a></li>
+				<!-- Showing Groups Details-->
+				<li class="treeview"><a href="#" onclick="loadGroups();"> <i
+						class="fa fa-group"></i> <span>Groups</span>
+				</a></li>
+			</sec:authorize>
 			<!-- Showing Environment, Create a new or edit old one -->
-			<li class="treeview">
-				<a href="#"> <i class="fa fa-user-plus"></i>
-					<span>Environment</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Environment</span> <span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li class=""><a href="#" onclick="createOrEditEnvironment('')"><i class="fa fa-circle-o"></i> Add New</a></li>
-					<li><a href="#" onclick="loadAllEnvironment();"><i class="fa fa-circle-o"></i> All Environments</a></li>
-				</ul>
-			</li>
+					<li class=""><a href="#" onclick="createOrEditEnvironment('')"><i
+							class="fa fa-circle-o"></i> Add New</a></li>
+					<li><a href="#" onclick="loadAllEnvironment();"><i
+							class="fa fa-circle-o"></i> All Environments</a></li>
+				</ul></li>
 			<!-- Showing Authorities Controller for creating and edit roles -->
-			<li class="treeview">
-				<a href="#" onclick="chat();"> <i class="fa fa-user-secret"></i>
-					<span>Chat</span>
-				</a>
-			</li>
+			<li class="treeview"><a href="#" onclick="chat();"> <i
+					class="fa fa-user-secret"></i> <span>Chat</span>
+			</a></li>
 			<!-- Showing Netwok Tools -->
-			<li class="treeview">
-				<a href="#"> <i class="fa fa-user-plus"></i>
-					<span>Network Tools</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span>Network Tools</span> <span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li><a href="#" onclick="whoIsLookup();"><i class="fa fa-circle-o"></i> WhoIs Lookup</a></li>
-					<li><a href="#" onclick="dnsLookup();"><i class="fa fa-circle-o"></i> DNS Lookup</a></li>
-				</ul>
-			</li>
+					<li><a href="#" onclick="whoIsLookup();"><i
+							class="fa fa-circle-o"></i> WhoIs Lookup</a></li>
+					<li><a href="#" onclick="dnsLookup();"><i
+							class="fa fa-circle-o"></i> DNS Lookup</a></li>
+				</ul></li>
 			<!-- Formatter Tools -->
-			<li class="treeview">
-				<a href="#"> <i class="fa fa-user-plus"></i>
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
 					<span>Formatter</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
+				</span>
+			</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li><a href="#" onclick="loadJSONFormatter();"><i class="fa fa-circle-o"></i> JSON</a></li>
-				</ul>
-			</li>
+					<li><a href="#" onclick="loadJSONFormatter();"><i
+							class="fa fa-circle-o"></i> JSON</a></li>
+				</ul></li>
 			<!-- Settings Tools -->
-			<li class="treeview">
-				<a href="#"> <i class="fa fa-user-plus"></i>
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
 					<span>Settings</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
+				</span>
+			</a>
 				<ul class="treeview-menu" style="display: none;">
-					<li><a href="#" onclick="loadUserProfile();"><i class="fa fa-circle-o"></i> Profile</a></li>
-				</ul>
-			</li>
-			
-			
+					<li><a href="#" onclick="loadUserProfile();"><i
+							class="fa fa-circle-o"></i> Profile</a></li>
+				</ul></li>
+
+
 			<li class="header">LABELS</li>
 			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

