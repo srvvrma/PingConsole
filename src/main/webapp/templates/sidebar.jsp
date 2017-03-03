@@ -76,9 +76,17 @@
 							class="fa fa-circle-o"></i> All Environments</a></li>
 				</ul></li>
 			<!-- Showing Authorities Controller for creating and edit roles -->
-			<li class="treeview"><a href="#" onclick="chat();"> <i
-					class="fa fa-user-secret"></i> <span>Chat</span>
-			</a></li>
+			<li class="treeview">
+				<a href="#" onclick="chat();"> <i class="fa fa-user-secret"></i>
+					<span>Chat</span>
+				</a>
+			</li>
+			<!-- Patch Tool-->
+			<li class="treeview">
+				<a href="#" onclick="loadPatchView();"> <i class="fa fa-group"></i>
+					<span>Patch</span>
+				</a>
+			</li>
 			<!-- Showing Netwok Tools -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
 					<span>Network Tools</span> <span class="pull-right-container">
