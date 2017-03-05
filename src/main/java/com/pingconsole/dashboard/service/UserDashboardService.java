@@ -15,4 +15,6 @@ public interface UserDashboardService {
 
 	public void saveUserDtoInUser(UserDTO userDTO);
 
+	public User getUserByUserName(String username);
+
 }

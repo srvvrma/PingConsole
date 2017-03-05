@@ -4,12 +4,12 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		Ping <small>Console</small>
+		<spring:message code="label.application.name" /> <small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li>Role</li>
-		<li class="active">create-update</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li><spring:message code="label.role" /></li>
+		<li class="active"><spring:message code="label.role.create.update" /></li>
 	</ol>
 </section>
 <section class="content">
@@ -18,7 +18,7 @@
 			<!-- Horizontal Form -->
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Role Form :</h3>
+					<h3 class="box-title"><spring:message code="label.role.form" />:</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -33,13 +33,13 @@
 						<spring:bind path="name">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">Role Name</label>
+								<label for="roleName"><spring:message code="label.role.form.name" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
 									<form:input type="text" path="name"
-										class="form-control pull-righ" placeholder="Role Name"
+										class="form-control pull-righ" placeholder="Enter Role Name"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="name"></form:errors>
@@ -48,13 +48,13 @@
 						<spring:bind path="code">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">Role Code</label>
+								<label for="roleCode"><spring:message code="label.role.form.code" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
 									<form:input type="text" path="code"
-										class="form-control pull-righ" placeholder="Role Code"
+										class="form-control pull-righ" placeholder="Enter Role Code"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="code"></form:errors>
@@ -63,7 +63,7 @@
 						<spring:bind path="privileges">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="privileges">Role Code</label>
+								<label for="privileges"><spring:message code="label.role.form.privilege" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -79,10 +79,10 @@
 
 					<div class="box-footer">
 						<button type="reset" class="btn btn-default"
-							onclick="loadRoles();">Cancel</button>
-						<button type="button" class="btn btn-info margin" onclick="">Refresh</button>
+							onclick="loadRoles();"><spring:message code="label.cancel" /></button>
+						<button type="button" class="btn btn-info margin" onclick=""><spring:message code="label.refresh" /></button>
 						<button type="submit" class="btn btn-skin pull-right margin"
-							onclick="">Save</button>
+							onclick=""><spring:message code="label.save" /></button>
 					</div>
 				</form:form>
 			</div>

@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		PingConsole<small>v1.0.0</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Console</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i><spring:message code="label.home" /></a></li>
+		<li class="active"><spring:message code="label.menu.dashboard" /></li>
 	</ol>
 </section>
 
@@ -285,20 +285,20 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th>Role Name</th>
-												<th>Role Code</th>
-												<th>Description</th>
-												<th>Status</th>
-												<th>Options</th>
+												<th><spring:message code="label.environment.name" /></th>
+												<th><spring:message code="label.environment.type" /></th>
+												<th><spring:message code="label.environment.revision.number" /></th>
+												<th><spring:message code="label.environment.status" /></th>
+												<th><spring:message code="label.environment.options" /></th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach items="${group.environmentList}" var="environment">
-												<tr>
+												<tr>	
 													<td>${environment.envName }</td>
-													<td>${environment.id }</td>
+													<td>${environment.environmentType }</td>
 													<td>${environment.envName }</td>
-													<td><span class="label label-success">Running</span></td>
+													<td><span id="environment_status_${environment.id}"class="label label-success">Running</span></td>
 													<td><div class="btn-group">
 															<button type="button" class="btn btn-default btn-sm"
 																onclick="createOrEditEnvironment('${environment.id}')">
@@ -319,11 +319,11 @@
 										</tbody>
 										<tfoot>
 											<tr>
-												<th>Role Name</th>
-												<th>Role Code</th>
-												<th>Description</th>
-												<th>Status</th>
-												<th>Options</th>
+												<th><spring:message code="label.environment.name" /></th>
+												<th><spring:message code="label.environment.type" /></th>
+												<th><spring:message code="label.environment.revision.number" /></th>
+												<th><spring:message code="label.environment.status" /></th>
+												<th><spring:message code="label.environment.options" /></th>
 											</tr>
 										</tfoot>
 									</table>

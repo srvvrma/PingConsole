@@ -4,12 +4,12 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		Ping <small>Console</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li>Users</li>
-		<li class="active">edit</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li><spring:message code="label.menu.users" /></li>
+		<li class="active"><spring:message code="label.menu.users.edit" /></li>
 	</ol>
 </section>
 <section class="content">
@@ -18,7 +18,7 @@
 			<!-- Horizontal Form -->
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Edit User Form</h3>
+					<h3 class="box-title"><spring:message code="label.users.edit.form.header" /></h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -30,13 +30,13 @@
 						<spring:bind path="userName">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">User Full Name</label>
+								<label for="userFullName"><spring:message code="label.users.edit.form.user.full.name" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
 									<form:input type="text" path="userName"
-										class="form-control pull-righ" placeholder="Username"
+										class="form-control pull-righ" placeholder="User Full Name"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="userName"></form:errors>
@@ -45,13 +45,13 @@
 						<spring:bind path="userId">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">User Id</label>
+								<label for="userId"><spring:message code="label.users.edit.form.user.id" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
 									<form:input type="text" path="userId"
-										class="form-control pull-righ" placeholder="User Id"
+										class="form-control pull-righ" placeholder="Enter User Id"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="userId"></form:errors>
@@ -60,13 +60,13 @@
 						<spring:bind path="email">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">Email address</label>
+								<label for="exampleInputEmail1"><spring:message code="label.users.edit.form.email" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
 									</div>
 									<form:input type="text" path="email"
-										class="form-control pull-righ" placeholder="Username"
+										class="form-control pull-righ" placeholder="Enter User Email"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="email"></form:errors>
@@ -75,14 +75,14 @@
 						<spring:bind path="dob">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label>Date:</label>
+								<label><spring:message code="label.users.edit.form.dob" /></label>
 
 								<div class="input-group date">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
 									<form:input type="date" path="dob"
-										class="form-control pull-right" placeholder="Dob"
+										class="form-control pull-right" placeholder="Enter Date of Birth"
 										autofocus="true" id="datepicker" required="required"></form:input>
 								</div>
 								<form:errors path="dob"></form:errors>
@@ -92,7 +92,7 @@
 						<spring:bind path="roles">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="roles">Role Code</label>
+								<label for="roles"><spring:message code="label.users.edit.form.role" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -107,7 +107,7 @@
 						<spring:bind path="groups">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="groups">Group Code</label>
+								<label for="groups"><spring:message code="label.users.edit.form.group" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -124,11 +124,11 @@
 
 					<div class="box-footer">
 						<button type="reset" class="btn btn-default"
-							onclick="loadUsers();">Cancel</button>
+							onclick="loadUsers();"><spring:message code="label.cancel" /></button>
 						<button type="button" class="btn btn-info margin"
-							onclick="editUser('${userDTO.id}')">Refresh</button>
+							onclick="editUser('${userDTO.id}')"><spring:message code="label.refresh" /></button>
 						<button type="submit" class="btn btn-skin pull-right margin"
-							onclick="">Save</button>
+							onclick=""><spring:message code="label.save" /></button>
 					</div>
 				</form:form>
 			</div>
@@ -150,6 +150,6 @@
 	$('#editUserForm').submit(function(e) {
 		// this code prevents form from actually being submitted
 		e.preventDefault();
-		submitEditUserForm();
+		submitEditUserForm(true);
 	});
 </script>

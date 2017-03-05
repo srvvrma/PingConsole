@@ -70,4 +70,9 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 		userRepository.save(user);
 	}
 
+	@Override
+	public User getUserByUserName(String username) {
+		return userRepository.findByUsername(username);
+	}
+
 }

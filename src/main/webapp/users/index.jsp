@@ -4,11 +4,11 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		PingConsole<small>v1.0.0</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Users</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i><spring:message code="label.home" /></a></li>
+		<li class="active"><spring:message code="label.menu.users" /></li>
 	</ol>
 </section>
 
@@ -18,7 +18,7 @@
 		<div class="col-xs-12">
 			<div class="box box-skin">
 				<div class="box-header">
-					<h3 class="box-title">Users Data Table</h3>
+					<h3 class="box-title"><spring:message code="label.user.table.header" /></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

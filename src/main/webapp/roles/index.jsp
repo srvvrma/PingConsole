@@ -4,11 +4,11 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		PingConsole<small>v1.0.0</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Roles</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li class="active"><spring:message code="label.role" /></li>
 	</ol>
 </section>
 
@@ -18,7 +18,7 @@
 		<div class="col-xs-12">
 			<div class="box box-skin">
 				<div class="box-header">
-					<h3 class="box-title">Roles Data Table</h3>
+					<h3 class="box-title"><spring:message code="label.role.table.header" /></h3>
 					<!-- <a class="btn btn-skin btn-sm btn-social pull-right">
                 		<i class="fa fa-user-plus"></i> Add New Role
               		</a> -->
@@ -29,10 +29,10 @@
 						class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Role Name</th>
-								<th>Role Code</th>
-								<th>Description</th>
-								<th>Options</th>
+								<th><spring:message code="label.role.name" /></th>
+								<th><spring:message code="label.role.code" /></th>
+								<th><spring:message code="label.role.description" /></th>
+								<th><spring:message code="label.role.options" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -58,10 +58,10 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>Role Name</th>
-								<th>Role Code</th>
-								<th>Description</th>
-								<th>Options</th>
+								<th><spring:message code="label.role.name" /></th>
+								<th><spring:message code="label.role.code" /></th>
+								<th><spring:message code="label.role.description" /></th>
+								<th><spring:message code="label.role.options" /></th>
 							</tr>
 						</tfoot>
 					</table>

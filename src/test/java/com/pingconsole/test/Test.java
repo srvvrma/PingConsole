@@ -1,4 +1,4 @@
-package com.neo.test;
+package com.pingconsole.test;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

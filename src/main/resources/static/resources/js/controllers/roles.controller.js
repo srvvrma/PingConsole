@@ -55,7 +55,7 @@ function loadRoles() {
 	});
 }
 
-function submitRoleForm(){
+function submitRoleForm() {
 	$.ajax({
 		url : '/roles/createUpdate',
 		type : "post",
@@ -164,7 +164,7 @@ function editUser(id) {
 	});
 }
 
-function submitEditUserForm() {
+function submitEditUserForm(redirect) {
 	$.ajax({
 		url : '/users/save',
 		type : "post",
@@ -174,7 +174,9 @@ function submitEditUserForm() {
 			if (result != '') {
 				$('#mainContentId').html(result);
 			} else {
-				loadUsers();
+				if(redirect){
+					loadUsers();
+				}
 			}
 			e.preventDefault();
 		},
@@ -319,7 +321,7 @@ function deleteGroup(id) {
 			iziToast.success({
 				title : 'OK',
 				message : 'Group Successfully removed !',
-				
+
 			});
 			loadGroups();
 		},
@@ -357,7 +359,6 @@ function showEnvironmentDetails(id) {
 		}
 	});
 }
-
 
 function loadJSONFormatter() {
 	$.ajax({
@@ -434,7 +435,7 @@ function submitEnvironmentForm() {
 	});
 }
 
-function loadPatchView(){
+function loadPatchView() {
 	$.ajax({
 		url : '/patch/create',
 		type : "get",
@@ -443,6 +444,41 @@ function loadPatchView(){
 		},
 		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+function getEnvironmentStatus() {
+	$.ajax({
+		url : '/environment/getStatus',
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+function printData(jiraId, author, date) {
+	iziToast.success({
+		title : 'Author : ' + author + ' Data : ' + date,
+		message : jiraId,
+
+	});
+}
+
+function fetchDataFromSVN() {
+	console.log();
+	var revNumber = $('#revisionNumber').val();
+	$.ajax({
+		url : "/patch/getDataByRevNo?revNumbers=" + revNumber,
+		cache : false,
+		success : function(data) {
+			printData(data['jiraId'], data['author'], data['date']);
+			var jiraId = data['jiraId'];
+			jiraId = jiraId.substring(0, jiraId.indexOf('-ReviewedBy'));
+			$('#jiraId').val(jiraId);
+			$('#patchPath').val(data['path'].join('\r\n'));
 		}
 	});
 }
