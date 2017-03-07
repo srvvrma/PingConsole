@@ -2,10 +2,10 @@ package com.pingconsole.patch.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pingconsole.patch.dto.PingResultDTO;
+import com.pingconsole.patch.dto.PingResult;
 
-public interface PingResultRepository extends JpaRepository<PingResultDTO, Long>{
+public interface PingResultRepository  extends JpaRepository<PingResult, Long>{
   
-  public PingResultDTO findById(Long id);
+  public PingResult findByKeyId(Long keyId);
 
 }

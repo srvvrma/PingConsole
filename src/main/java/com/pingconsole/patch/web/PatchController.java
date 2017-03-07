@@ -52,6 +52,12 @@ public class PatchController {
       return CREATE_PATCH_PAGE;
   }
   
+  @RequestMapping(value = "/generate", method = RequestMethod.GET)
+  @ResponseBody public long createMapForPAtch(ModelMap map) throws IOException {
+
+      return fileDirectoryService.Start();
+  }
+  
   
   @RequestMapping(value = "/generatePatch", method = RequestMethod.POST)
   public void export(HttpServletResponse response,

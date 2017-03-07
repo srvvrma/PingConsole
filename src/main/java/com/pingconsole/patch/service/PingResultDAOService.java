@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pingconsole.patch.dto.PingResult;
 import com.pingconsole.patch.dto.PingResultDTO;
+import com.pingconsole.patch.repository.PingResultDTORepository;
 import com.pingconsole.patch.repository.PingResultRepository;
 
 
@@ -21,11 +22,15 @@ public class PingResultDAOService implements PingResultDAO{
     @Autowired
     private SessionFactory sessionFactory;
     
-    @Autowired PingResultRepository pingResultRepository;
+    @Autowired 
+    private PingResultDTORepository pingResultDTORepository;
+    
+    @Autowired
+    private PingResultRepository pingResultRepository;
     
     @Override
     public PingResultDTO getById(Long id) {
-        return pingResultRepository.findById(id);
+        return pingResultDTORepository.findById(id);
     }
 
     @SuppressWarnings("unchecked")
@@ -39,43 +44,40 @@ public class PingResultDAOService implements PingResultDAO{
     @SuppressWarnings("unchecked")
     @Override
     public List<PingResultDTO> getAllResults() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PingResultDTO.class);
-        return criteria.list();
+        return pingResultDTORepository.findAll();
     }
 
     @Override
     public int saveResult(PingResultDTO pingResultDTO) {
-        pingResultRepository.save(pingResultDTO);
-    	sessionFactory.getCurrentSession().save(new PingResult(pingResultDTO.getKeyid(),pingResultDTO.getResult(),pingResultDTO.getTimestamp(),pingResultDTO.getEnvType()));
-        return 1;
+      pingResultDTORepository.save(pingResultDTO);
+      pingResultRepository.save(new PingResult(pingResultDTO.getKeyid(),pingResultDTO.getResult(),pingResultDTO.getTimestamp(),pingResultDTO.getEnvType()));
+      return 1;
     }
 
     @Override
     public void updateResult(PingResultDTO pingResultDTO) {
-        sessionFactory.getCurrentSession().merge(pingResultDTO);
-        
+      pingResultDTORepository.save(pingResultDTO);
     }
 
     @Override
     public void deleteResult(Long id) {
-        pingResultRepository.delete(id);
+      pingResultDTORepository.delete(id);
     }
     
     @Override
     public void deleteOldResult() {
-    	sessionFactory.getCurrentSession().createQuery("delete from PingResult").executeUpdate();
+      pingResultDTORepository.deleteAll();
     }
     
     @SuppressWarnings("unchecked")
     @Override
     public List<PingResult> getAllStatus() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PingResult.class);
-        return criteria.list();
+        return pingResultRepository.findAll();
     }
 
 	@Override
 	public PingResult getAllStatusById(Long id) {
-		return (PingResult) sessionFactory.getCurrentSession().get(PingResult.class, id);
+		return pingResultRepository.findByKeyId(id);
 	}
     
 
