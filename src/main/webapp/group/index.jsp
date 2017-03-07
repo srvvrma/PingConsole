@@ -4,11 +4,11 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		PingConsole<small>v1.0.0</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Groups</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li class="active"><spring:message code="label.group" /></li>
 	</ol>
 </section>
 
@@ -18,10 +18,10 @@
 		<div class="col-xs-12">
 			<div class="box box-skin">
 				<div class="box-header">
-					<h3 class="box-title">Group Data Table</h3>
+					<h3 class="box-title"><spring:message code="label.group.form.header" /></h3>
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-skin pull-right" data-toggle="modal"
-						data-target="#createGroup">Create New Group</button>
+						data-target="#createGroup"><spring:message code="label.group.form.create" /></button>
 					<div class="clearfix"></div>
 				</div>
 				<!-- /.box-header -->
@@ -70,7 +70,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header btn-skin">
-					<h5 class="modal-title pull-left" id="exampleModalLabel">Create New Group </h5>
+					<h5 class="modal-title pull-left" id="exampleModalLabel"><spring:message code="label.group.form.create" /></h5>
 					<button type="button" class="close pull-right" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -85,7 +85,7 @@
 						<spring:bind path="name">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="groupName">Group Name</label>
+								<label for="groupName"><spring:message code="label.group.name" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -100,7 +100,7 @@
 						<spring:bind path="code">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="groupCode">Group Code</label>
+								<label for="groupCode"><spring:message code="label.group.code" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -117,7 +117,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-skin" onclick="crateEditGroup()">Save changes</button>
+					<button type="button" class="btn btn-skin" onclick="crateEditGroup()"><spring:message code="label.save" /></button>
 				</div>
 			</div>
 		</div>

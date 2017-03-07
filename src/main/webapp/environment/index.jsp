@@ -4,11 +4,11 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		PingConsole<small>v1.0.0</small>
+		<spring:message code="label.application.name" /><small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Roles</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li class="active"><spring:message code="label.environment" /></li>
 	</ol>
 </section>
 
@@ -18,7 +18,7 @@
 		<div class="col-xs-12">
 			<div class="box box-skin">
 				<div class="box-header">
-					<h3 class="box-title">Roles Data Table</h3>
+					<h3 class="box-title"><spring:message code="label.environment.index.header" /></h3>
 					<!-- <a class="btn btn-skin btn-sm btn-social pull-right">
                 		<i class="fa fa-user-plus"></i> Add New Role
               		</a> -->
@@ -29,12 +29,11 @@
 						class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Type</th>
-								<th>Environment Name</th>
-								<th>Url</th>
-								<th>Revision No.</th>
-								<th>Status</th>
-								<th>Option</th>
+								<th><spring:message code="label.environment.type" /></th>
+								<th><spring:message code="label.environment.name" /></th>
+								<th><spring:message code="label.environment.revision.number" /></th>
+								<th><spring:message code="label.environment.status" /></th>
+								<th><spring:message code="label.environment.options" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -42,9 +41,8 @@
 								<tr>
 									<td>${environment.environmentType}</td>
 									<td>${environment.envName}</td>
-									<td>${environment.envUrl}</td>
-									<td><span class="label label-success">Running</span></td>
 									<td>${environment.revisionNumber}</td>
+									<td><span class="label label-success">Running</span></td>
 									<td><div class="btn-group">
 											<button type="button" class="btn btn-default btn-sm"
 												onclick="createOrEditEnvironment('${environment.id}')">
@@ -66,7 +64,7 @@
 												<i class="fa  fa-trash-o"></i>
 											</button>
 											<button type="button" class="btn btn-default btn-sm" onclick="window.open('${environment.envUrl }')">
-																<i class="fa  fa-external-link"></i>&nbsp;&nbsp;Open
+																<i class="fa  fa-external-link"></i>&nbsp;&nbsp;<spring:message code="label.open" />
 															</button>
 										</div></td>
 								</tr>
@@ -74,12 +72,11 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>Type</th>
-								<th>Environment Name</th>
-								<th>Url</th>
-								<th>Revision No.</th>
-								<th>Status</th>
-								<th>Option</th>
+								<th><spring:message code="label.environment.type" /></th>
+								<th><spring:message code="label.environment.name" /></th>
+								<th><spring:message code="label.environment.revision.number" /></th>
+								<th><spring:message code="label.environment.status" /></th>
+								<th><spring:message code="label.environment.options" /></th>
 							</tr>
 						</tfoot>
 					</table>

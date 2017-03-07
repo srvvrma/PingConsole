@@ -108,6 +108,8 @@
 							class="pull-right">${environment.envUrl }</a></li>
 						<li class="list-group-item"><b>Revision Number</b> <a
 							class="pull-right">${environment.revisionNumber}</a></li>
+						<li class="list-group-item"><b>Status</b> <a
+							class="pull-right"><span class="label label-success">Running</span></a></li>
 					</ul>
 					<a href="#" class="btn btn-skin btn-block"
 						onclick="showEnvironmentDetails('${environment.id}')"><b>Refresh</b></a>

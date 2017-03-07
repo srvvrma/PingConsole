@@ -4,12 +4,12 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		Ping <small>Console</small>
+		<spring:message code="label.application.name" /> <small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li>Environment</li>
-		<li class="active">create-update</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li><spring:message code="label.environment" /></li>
+		<li class="active"><spring:message code="label.environment.create.update" /></li>
 	</ol>
 </section>
 <section class="content">
@@ -18,7 +18,7 @@
 			<!-- Horizontal Form -->
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Environment Form :</h3>
+					<h3 class="box-title"><spring:message code="label.environment.form.header" />:</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -31,20 +31,20 @@
 							value="${_csrf.token}" />
 						<div class="form-group">
 							<label> <form:radiobutton path="environmentType"
-									value="CAS" required="required" /> CAS
+									value="CAS" required="required" /> <spring:message code="label.environment.cas" />
 							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label> <form:radiobutton path="environmentType"
-									value="LMS" required="required" /> LMS
+									value="LMS" required="required" /> <spring:message code="label.environment.lms" />
 							</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label> <form:radiobutton path="environmentType"
-									value="INTEGRATION" required="required" /> INTEGRATION
+									value="INTEGRATION" required="required" /> <spring:message code="label.environment.integration" />
 							</label>
 						</div>
 						<input type="hidden" path="id" value="${environmentDTO.id}" />
 						<spring:bind path="groupId">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="roles">Groups</label>
+								<label for="groups"><spring:message code="label.environment.form.groups" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -59,13 +59,13 @@
 						<spring:bind path="envName">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">Environment Name</label>
+								<label for="environmentName"><spring:message code="label.environment.form.name" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
 									<form:input type="text" path="envName"
-										class="form-control pull-righ" placeholder="Environment Name"
+										class="form-control pull-righ" placeholder="Enter Environment Name"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="envName"></form:errors>
@@ -74,7 +74,7 @@
 						<spring:bind path="envUrl">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="exampleInputEmail1">Environment Url</label>
+								<label for="environmentUrl"><spring:message code="label.environment.form.url" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -89,7 +89,7 @@
 						<spring:bind path="pingUrl">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="pingUrl">Ping Url</label>
+								<label for="pingUrl"><spring:message code="label.environment.form.pingurl" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
@@ -100,17 +100,17 @@
 								</div>
 								<form:errors class="help-block" path="pingUrl"></form:errors>
 							</div>
-						</spring:bind>`
+						</spring:bind>
 						<spring:bind path="revisionNumber">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="revisionNumber">Revision Number</label>
+								<label for="revisionNumber"><spring:message code="label.environment.form.revision.number" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
 									</div>
 									<form:input type="text" path="revisionNumber"
-										class="form-control pull-righ" placeholder="Revision Number"
+										class="form-control pull-righ" placeholder="Enter Revision Number"
 										autofocus="true" required="required"></form:input>
 								</div>
 								<form:errors class="help-block" path="revisionNumber"></form:errors>
@@ -119,7 +119,7 @@
 						<spring:bind path="envLogUrl">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envLogUrl">Logs Location</label>
+								<label for="envLogUrl"><spring:message code="label.environment.form.log.location" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -135,7 +135,7 @@
 						<spring:bind path="envLogUser">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envLogUser">WinScp User Name</label>
+								<label for="envLogUser"><spring:message code="label.environment.form.log.user" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -150,7 +150,7 @@
 						<spring:bind path="envLogPass">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envLogPass">WinScp User Name</label>
+								<label for="envLogPass"><spring:message code="label.environment.form.log.password" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -165,7 +165,7 @@
 						<spring:bind path="envLog">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envLog">Logs Location</label>
+								<label for="envLogPath"><spring:message code="label.environment.form.application.log.path" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -181,7 +181,7 @@
 						<spring:bind path="envWar">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envLogPass">WAR Location</label>
+								<label for="envLogPass"><spring:message code="label.environment.form.war.path" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -196,7 +196,7 @@
 						<spring:bind path="envServerLog">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="envServerLog">Server Logs Location</label>
+								<label for="envServerLog"><spring:message code="label.environment.form.server.log.path" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -212,7 +212,7 @@
 						<spring:bind path="dbUrl">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="dbUrl">DB Location</label>
+								<label for="dbLocation"><spring:message code="label.environment.form.database.location" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -228,7 +228,7 @@
 						<spring:bind path="dbUser">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="dbUser">DB Location</label>
+								<label for="dbUser"><spring:message code="label.environment.form.database.user" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -243,7 +243,7 @@
 						<spring:bind path="dbPass">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="dbPass">DB Location</label>
+								<label for="dbPass"><spring:message code="label.environment.form.database.password" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -258,7 +258,7 @@
 						<spring:bind path="dbSchema">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="dbSchema">DB Location</label>
+								<label for="dbSchema"><spring:message code="label.environment.form.database.schema" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
@@ -275,10 +275,10 @@
 
 					<div class="box-footer">
 						<button type="reset" class="btn btn-default"
-							onclick="loadAllEnvironment();">Cancel</button>
-						<button type="button" class="btn btn-info margin" onclick="">Refresh</button>
+							onclick="loadAllEnvironment();"><spring:message code="label.cancel" /></button>
+						<button type="button" class="btn btn-info margin" onclick=""><spring:message code="label.refresh" /></button>
 						<button type="submit" class="btn btn-skin pull-right margin"
-							onclick="">Save</button>
+							onclick=""><spring:message code="label.save" /></button>
 					</div>
 				</form:form>
 			</div>
