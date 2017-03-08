@@ -109,7 +109,7 @@
 						<li class="list-group-item"><b>Revision Number</b> <a
 							class="pull-right">${environment.revisionNumber}</a></li>
 						<li class="list-group-item"><b>Status</b> <a
-							class="pull-right"><span class="label label-success">Running</span></a></li>
+							class="pull-right"><span class="label label-success" id="environment_status_${environment.id}">Running</span></a></li>
 					</ul>
 					<a href="#" class="btn btn-skin btn-block"
 						onclick="showEnvironmentDetails('${environment.id}')"><b>Refresh</b></a>
@@ -186,7 +186,7 @@
 			<!-- About Me Box -->
 			<div class="box box-skin">
 				<div class="box-header with-border">
-					<h3 class="box-title">Other Details</h3>
+					<h3 class="box-title">Integration Details</h3>
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool"
 							data-widget="collapse">
@@ -200,43 +200,73 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<strong><i class="fa fa-map-marker margin-r-5"></i>
-						Machine Url</strong>
-
-					<p class="text-muted">B.S. in Computer Science from the
-						University of Tennessee at Knoxville</p>
-
-					<hr>
-
-					<strong><i class="fa fa-map-marker margin-r-5"></i>
-						Location</strong>
-
-					<p class="text-muted">Malibu, California</p>
-
-					<hr>
-
-					<strong><i class="fa fa-pencil margin-r-5"></i> Groups</strong>
-
-					<p>
-						<span class="label label-danger">UI Design</span> <span
-							class="label label-success">Coding</span> <span
-							class="label label-info">Javascript</span> <span
-							class="label label-warning">PHP</span> <span
-							class="label label-primary">Node.js</span>
-					</p>
-
-					<hr>
-
-					<strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Etiam fermentum enim neque.</p>
-				</div>
+					<table id="integrationEnvironmentDataTable"
+						class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th><spring:message code="label.environment.type" /></th>
+								<th><spring:message code="label.environment.name" /></th>
+								<th><spring:message code="label.environment.revision.number" /></th>
+								<th><spring:message code="label.environment.status" /></th>
+								<th><spring:message code="label.environment.options" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${environment.integrationEnvironments}" var="integrationEnvironments">
+								<tr>
+									<td>${integrationEnvironments.environmentType}</td>
+									<td>${integrationEnvironments.envName}</td>
+									<td>${integrationEnvironments.revisionNumber}</td>
+									<td><span class="label label-success" id="environment_status_${integrationEnvironments.id}">Running</span></td>
+									<td><div class="btn-group">
+											<button type="button" class="btn btn-default btn-sm"
+												onclick="createOrEditEnvironment('${integrationEnvironments.id}')">
+												<i class="fa fa-edit"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm"
+												onclick="showEnvironmentDetails('${integrationEnvironments.id}')">
+												<i class="fa fa-binoculars"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm"
+												onclick="showEnvironmentSettings('${integrationEnvironments.id}')">
+												<i class="fa fa-gear"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm"
+												onclick="shareEnvironmentDetails('${integrationEnvironments.id}')">
+												<i class="fa  fa-share-alt"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm" onclick="deleteEnvironment('${integrationEnvironments.id}')">
+												<i class="fa  fa-trash-o"></i>
+											</button>
+											<button type="button" class="btn btn-default btn-sm" onclick="window.open('${integrationEnvironments.envUrl }')">
+																<i class="fa  fa-external-link"></i>&nbsp;&nbsp;<spring:message code="label.open" />
+															</button>
+										</div></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th><spring:message code="label.environment.type" /></th>
+								<th><spring:message code="label.environment.name" /></th>
+								<th><spring:message code="label.environment.revision.number" /></th>
+								<th><spring:message code="label.environment.status" /></th>
+								<th><spring:message code="label.environment.options" /></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>	
 				<!-- /.box-body -->
 			</div>
 			<!-- /.box -->
 		</div>
 	</div>
-
-
 </section>
+<script>
+	console.debug('Dashboard page loaded.');
+	$(document).ready(function() {
+		$('#integrationEnvironmentDataTable').DataTable();
+		FetchData();
+		setInterval(FetchData, 60000);
+	});
+</script>

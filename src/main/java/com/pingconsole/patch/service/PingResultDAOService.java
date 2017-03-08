@@ -69,7 +69,6 @@ public class PingResultDAOService implements PingResultDAO{
       pingResultDTORepository.deleteAll();
     }
     
-    @SuppressWarnings("unchecked")
     @Override
     public List<PingResult> getAllStatus() {
         return pingResultRepository.findAll();

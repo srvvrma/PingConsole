@@ -174,7 +174,7 @@ function submitEditUserForm(redirect) {
 			if (result != '') {
 				$('#mainContentId').html(result);
 			} else {
-				if(redirect){
+				if (redirect) {
 					loadUsers();
 				}
 			}
@@ -479,6 +479,25 @@ function fetchDataFromSVN() {
 			jiraId = jiraId.substring(0, jiraId.indexOf('-ReviewedBy'));
 			$('#jiraId').val(jiraId);
 			$('#patchPath').val(data['path'].join('\r\n'));
+		}
+	});
+}
+function FetchData() {
+	$.ajax({
+		url : '/environment/getStatus',
+		type : "get",
+		cache : false,
+		success : function(result) {
+			$.each(result, function(k, v) {
+			    // key and value pair
+				if(v == true){
+					$('[id="environment_status_'+ k +'"]').html("Running").removeAttr('class').addClass("label label-success");
+				}else{
+					$('[id="environment_status_'+ k +'"]').html("Down").removeAttr('class').addClass("label label-danger");
+				}
+			});
+		},
+		error : function(xhr, status, error) {
 		}
 	});
 }

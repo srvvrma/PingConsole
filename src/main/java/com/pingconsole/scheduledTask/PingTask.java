@@ -35,7 +35,7 @@ public class PingTask {
             if(environmentDTO.getEnvironmentType().equalsIgnoreCase(EnvironmentDTO.INT)){
             	resultDTO.setResult(PingUtil.isWebserviceAvailable(environmentDTO.getPingUrl()+".wsdl?"+String.valueOf(Math.random() * ( 1000000 - 50000 ))));
             }else{
-            	resultDTO.setResult(PingUtil.checkUrl("http://"+environmentDTO.getPingUrl()+"?"+String.valueOf(Math.random() * ( 1000000 - 50000 ))));
+            	resultDTO.setResult(PingUtil.checkUrl(environmentDTO.getPingUrl()+"?"+String.valueOf(Math.random() * ( 1000000 - 50000 ))));
             }
             pingResultDao.saveResult(resultDTO);
         }

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.social.security.SocialUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -29,11 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/**", "/register").permitAll().anyRequest().authenticated()
+		http.authorizeRequests().antMatchers("/resources/**", "/register").permitAll().antMatchers("/auth/**").permitAll().anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").permitAll().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 		http.sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry());
 	}
 	
+	@Bean
+    public SocialUserDetailsService socialUsersDetailService() {
+        return new SimpleSocialUsersDetailService(userDetailsService());
+    }
 	@Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();

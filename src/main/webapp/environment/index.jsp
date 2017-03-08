@@ -42,7 +42,7 @@
 									<td>${environment.environmentType}</td>
 									<td>${environment.envName}</td>
 									<td>${environment.revisionNumber}</td>
-									<td><span class="label label-success">Running</span></td>
+									<td><span class="label label-success" id="environment_status_${environment.id}">Running</span></td>
 									<td><div class="btn-group">
 											<button type="button" class="btn btn-default btn-sm"
 												onclick="createOrEditEnvironment('${environment.id}')">
@@ -90,6 +90,8 @@
 	console.debug('Environment page loaded.');
 	$(document).ready(function() {
 		$('#environmentDataTable').DataTable();
+		FetchData();
+		setInterval(FetchData, 60000);
 	});
 </script>
 

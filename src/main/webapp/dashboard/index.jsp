@@ -352,5 +352,7 @@
 			$('#envDataTable_${group.id}').DataTable();
 		</c:forEach>
 		$('#groupEnvTab a:first').tab('show');
+		FetchData();
+		setInterval(FetchData, 60000);
 	});
 </script>

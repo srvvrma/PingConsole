@@ -270,6 +270,21 @@
 								<form:errors class="help-block" path="dbSchema"></form:errors>
 							</div>
 						</spring:bind>
+						<spring:bind path="intergrationEnvironmentDTOs">
+							<div
+								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+								<label for="roles"><spring:message code="label.users.edit.form.role" /></label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<form:select path="intergrationEnvironmentDTOs" multiple="true" items="${INT_ENV}"
+										itemLabel="envName" itemValue="id" id="intergrationEnvironmentDTOs"
+										class="form-control select2 pull-righ" />
+								</div>
+								<form:errors class="help-block" path="intergrationEnvironmentDTOs"></form:errors>
+							</div>
+						</spring:bind>
 					</div>
 					<!-- /.box-body -->
 
@@ -290,6 +305,7 @@
 <script>
 	$(document).ready(function() {
 		$('#groupId').select2();
+		$('#intergrationEnvironmentDTOs').select2();
 	});
 	$('#environmentForm').submit(function(e) {
 		// this code prevents form from actually being submitted
