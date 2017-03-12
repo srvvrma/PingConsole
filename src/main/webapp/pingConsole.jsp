@@ -14,6 +14,10 @@
 <%@include file="templates/include-header.jsp"%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<script type="text/javascript">
+
+var contextPath = '${contextPath}';
+</script>
 	<div class="wrapper">
 		<%@include file="templates/main-header.jsp"%>
 

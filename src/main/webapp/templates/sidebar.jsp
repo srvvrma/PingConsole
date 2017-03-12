@@ -35,91 +35,120 @@
 		<ul class="sidebar-menu">
 			<li class="header"><spring:message code="label.menu.header" /></li>
 			<li class="active treeview"><a href="#"
-				onclick="loadDashboard();"> <i class="fa fa-dashboard"></i> <span><spring:message code="label.menu.dashboard" /></span>
+				onclick="loadDashboard();"> <i class="fa fa-dashboard"></i> <span><spring:message
+							code="label.menu.dashboard" /></span>
 			</a></li>
 			<sec:authorize access="hasAuthority('ADMIN')">
 				<!-- Showing Ures Details-->
 				<li class="treeview"><a href="#" onclick="loadUsers();"> <i
-						class="fa fa-group"></i> <span><spring:message code="label.menu.users" /></span>
+						class="fa fa-group"></i> <span><spring:message
+								code="label.menu.users" /></span>
 				</a></li>
 				<!-- Showing Role Controller for creating and edit roles -->
 				<li class="treeview"><a href="#"> <i
-						class="fa fa-user-plus"></i> <span><spring:message code="label.menu.role" /></span> <span
-						class="pull-right-container"> <i
-							class="fa fa-angle-left pull-right"></i>
+						class="fa fa-user-plus"></i> <span><spring:message
+								code="label.menu.role" /></span> <span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
 					<ul class="treeview-menu" style="display: none;">
 						<li class=""><a href="#" onclick="createOrUpdate('');"><i
-								class="fa fa-circle-o"></i> <spring:message code="label.menu.roles.add" /></a></li>
+								class="fa fa-circle-o"></i> <spring:message
+									code="label.menu.roles.add" /></a></li>
 						<li><a href="#" onclick="loadRoles();"><i
-								class="fa fa-circle-o"></i> <spring:message code="label.menu.roles.all" /></a></li>
+								class="fa fa-circle-o"></i> <spring:message
+									code="label.menu.roles.all" /></a></li>
 					</ul></li>
 
 				<!-- Showing Authorities Controller for creating and edit roles -->
 				<li class="treeview"><a href="#" onclick="loadPrivileges();">
-						<i class="fa fa-user-secret"></i> <span><spring:message code="label.menu.privileges" /></span>
+						<i class="fa fa-user-secret"></i> <span><spring:message
+								code="label.menu.privileges" /></span>
 				</a></li>
 				<!-- Showing Groups Details-->
 				<li class="treeview"><a href="#" onclick="loadGroups();"> <i
-						class="fa fa-group"></i> <span><spring:message code="label.menu.groups" /></span>
+						class="fa fa-group"></i> <span><spring:message
+								code="label.menu.groups" /></span>
 				</a></li>
 			</sec:authorize>
 			<!-- Showing Environment, Create a new or edit old one -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
-					<span><spring:message code="label.menu.environment" /></span> <span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
+					<span><spring:message code="label.menu.environment" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li class=""><a href="#" onclick="createOrEditEnvironment('')"><i
-							class="fa fa-circle-o"></i> <spring:message code="label.menu.environment.add" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.environment.add" /></a></li>
 					<li><a href="#" onclick="loadAllEnvironment();"><i
-							class="fa fa-circle-o"></i> <spring:message code="label.menu.environment.all" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.environment.all" /></a></li>
 				</ul></li>
 			<!-- Showing Authorities Controller for creating and edit roles -->
-			<li class="treeview">
-				<a href="#" onclick="chat();"> <i class="fa fa-user-secret"></i>
-					<span><spring:message code="label.menu.chat" /></span>
-				</a>
-			</li>
+			<li class="treeview"><a href="#" onclick="chat();"> <i
+					class="fa fa-user-secret"></i> <span><spring:message
+							code="label.menu.chat" /></span>
+			</a></li>
 			<!-- Patch Tool-->
-			<li class="treeview">
-				<a href="#" onclick="loadPatchView();"> <i class="fa fa-group"></i>
-					<span><spring:message code="label.menu.patch" /></span>
-				</a>
-			</li>
+			<li class="treeview"><a href="#" onclick="loadPatchView();">
+					<i class="fa fa-group"></i> <span><spring:message
+							code="label.menu.patch" /></span>
+			</a></li>
 			<!-- Showing Netwok Tools -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
-					<span><spring:message code="label.menu.network.tools" /></span> <span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
+					<span><spring:message code="label.menu.rest" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li><a href="#" onclick="loadRestTestView();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.rest.create" /></a></li>
+					<li><a href="#" onclick="loadRestTestCollectionView();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.rest.history" /></a></li>
+				</ul></li>
+			<!-- Showing Netwok Tools -->
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span><spring:message code="label.menu.network.tools" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li><a href="#" onclick="whoIsLookup();"><i
-							class="fa fa-circle-o"></i> <spring:message code="label.menu.network.tools.whois" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.network.tools.whois" /></a></li>
 					<li><a href="#" onclick="dnsLookup();"><i
-							class="fa fa-circle-o"></i> <spring:message code="label.menu.network.tools.dns" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.network.tools.dns" /></a></li>
 				</ul></li>
 			<!-- Formatter Tools -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
-					<span><spring:message code="label.menu.formatter" /></span> <span class="pull-right-container"> <i
+					<span><spring:message code="label.menu.formatter" /></span> <span
+					class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li><a href="#" onclick="loadJSONFormatter();"><i
-							class="fa fa-circle-o"></i> <spring:message code="label.menu.formatter.json" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.formatter.json" /></a></li>
 				</ul></li>
 			<!-- Settings Tools -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
-					<span><spring:message code="label.menu.setting" /></span> <span class="pull-right-container"> <i
+					<span><spring:message code="label.menu.setting" /></span> <span
+					class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li><a href="#" onclick="loadUserProfile();"><i
-							class="fa fa-circle-o"></i><spring:message code="label.menu.setting.profile" /></a></li>
+							class="fa fa-circle-o"></i>
+						<spring:message code="label.menu.setting.profile" /></a></li>
 				</ul></li>
 
 

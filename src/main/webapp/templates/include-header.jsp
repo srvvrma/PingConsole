@@ -7,9 +7,6 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet"
-	href="${contextPath}/resources/dist/css/AdminLTE.css">
 <!-- iCheck -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/iCheck/flat/blue.css">
@@ -42,8 +39,11 @@
 <link rel="stylesheet" href="${contextPath}/resources/plugins/iziToast/iziToast.min.css">
 <!--Select 2 for multiselect  -->
 <link rel="stylesheet" href="${contextPath}/resources/plugins/select2/select2.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<!-- Theme style -->
+<link rel="stylesheet"
+	href="${contextPath}/resources/dist/css/AdminLTE.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

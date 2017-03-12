@@ -5,12 +5,12 @@
 <!-- Content Header (Role index Page header) -->
 <section class="content-header" id="main-breadcrumb">
 	<h1>
-		Ping <small>Console</small>
+		<spring:message code="label.application.name" /> <small><spring:message code="label.application.version" /></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li>Patch</li>
-		<li class="active">Create</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="label.home" /></a></li>
+		<li><spring:message code="label.patch" /></li>
+		<li class="active"><spring:message code="label.patch.create" /></li>
 	</ol>
 </section>
 <section class="content">
@@ -19,12 +19,11 @@
 			<div class="box box-skin">
 				<div class="box-header">
 					<div class="pull-left">
-						<h3 class="box-title">DNS Lookup</h3>
+						<h3 class="box-title"><spring:message code="label.patch.create" /></h3>
 					</div>
 					<div class="pull-right">
 						<button onclick="getBuildDetails();" id="getEnvDetails"
-							class="btn btn-skin btn-block" type="button">Create
-							Patch</button>
+							class="btn btn-skin btn-block" type="button"><spring:message code="label.patch.create" /></button>
 					</div>
 				</div>
 				<!-- /.box-header -->
@@ -45,8 +44,7 @@
 							</div>
 							<div class="col-sm-4">
 								<button onclick="fetchDataFromSVN();" id="fetchData"
-									class="btn btn-skin btn-block" type="button">Fetch
-									Data</button>
+									class="btn btn-skin btn-block" type="button"><spring:message code="label.patch.fetch" /></button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -60,11 +58,9 @@
 							<label class="col-sm-0"></label>
 							<div class="col-sm-12">
 								<button id="addButton"
-									class="btn btn-skin btn-block" type="submit">Create
-									Patch</button>
+									class="btn btn-skin btn-block" type="submit"><spring:message code="label.patch.create" /></button>
 							</div>
 						</div>
-
 					</form>
 				</div>
 			</div>

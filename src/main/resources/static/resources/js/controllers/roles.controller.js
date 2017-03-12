@@ -501,3 +501,98 @@ function FetchData() {
 		}
 	});
 }
+function loadRestTestView() {
+	$.ajax({
+		url : '/rest/index',
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+//chat js
+var stompClient = null;
+
+function connect() {
+	var socket = new SockJS('/newMessage');
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame) {
+		stompClient.subscribe('/topic/newMessage', function(message) {
+			refreshMessages(JSON.parse(JSON.parse(message.body).content));
+		});
+	});
+}
+
+function disconnect() {
+	if (stompClient != null) {
+		stompClient.disconnect();
+	}
+}
+
+function refreshMessages(messages) {
+	$
+			.each(
+					messages.reverse(),
+					function(i, message) {
+						var curr_date = new Date();
+						var msg_date = new Date(message.createDate);
+
+						var hours_diff = Math.abs(msg_date.getHours()
+								- curr_date.getHours());
+						var minutes_diff = Math.abs(msg_date.getHours()
+								* 60 + msg_date.getMinutes()
+								- curr_date.getHours() * 60
+								- curr_date.getMinutes());
+						var time_string
+						if (hours_diff > 0) {
+							time_string = hours_diff + " hours ago";
+						} else {
+							time_string = minutes_diff + " minutes ago"
+						}
+						console.log("xxx has updated " + hours_diff
+								+ " hours ago");
+						console.log("xxx has updated " + minutes_diff
+								+ " minutes ago");
+
+						$("#chat-box")
+								.append(
+										'<div class="item">'
+												+ '<img src="'
+												+ contextPath
+												+'/resources/dist/img/user3-128x128.jpg" alt="user image" class="offline">'
+												+ '<p class="message">'
+												+ '<a href="#" class="name">'
+												+ '<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '
+												+ time_string + '</small>'
+												+ message.author + '</a>'
+												+ message.text + '</p>'
+												+ '</div>');
+
+						/* $(".media-list").append('<li class="media"><div class="media-body"><div class="media"><div class="media-body">'
+						+ message.text + '<br/><small class="text-muted">' + message.author + ' | ' + new Date(message.createDate) + '</small><hr/></div></div></div></li>'); */
+					});
+	$container = $('#chat-box');
+	$container[0].scrollTop = $container[0].scrollHeight;
+	$container.animate({
+		scrollTop : $container[0].scrollHeight
+	}, "slow");
+}
+function sendMessage() {
+	$container = $('#chat-box');
+	$container[0].scrollTop = $container[0].scrollHeight;
+	var message = $("#messageText").val();
+
+	stompClient.send("/app/newMessage", {}, JSON.stringify({
+		'text' : message,
+		'author' : author
+	}));
+
+	$("#messageText").val("")
+	$container.animate({
+		scrollTop : $container[0].scrollHeight
+	}, "slow");
+
+}

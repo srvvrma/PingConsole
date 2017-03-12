@@ -55,6 +55,16 @@
 <!-- Select2 js -->
 <script src="${contextPath}/resources/plugins/select2/select2.min.js"></script>
 
+<!-- For Chat -->
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.0/jquery.timeago.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.0/sockjs.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!-- end -->
+
+
 <script
 	src="${contextPath}/resources/js/controllers/roles.controller.js?d=dasdadasdasd"></script>
 
