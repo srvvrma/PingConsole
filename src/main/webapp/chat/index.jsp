@@ -127,7 +127,6 @@
 <script>
 	console.debug('chat page loaded.');
 	$(document).ready(function() {
-		connect();
 		$.get("/messages", function(messages) {
 			refreshMessages(messages)
 		});

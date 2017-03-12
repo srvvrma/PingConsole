@@ -50,6 +50,12 @@ public class EnvironmentController {
 		model.addAttribute("environment", environementDTO);
 		return "environment/detail";
 	}
+	
+	@RequestMapping("/getById/{id}")
+	@ResponseBody public EnvironmentDTO getEnvironmentDetailById(Model model, @PathVariable("id") long id) {
+		EnvironmentDTO environementDTO = environmentService.getEnvironmentById(id);
+		return environementDTO;
+	}
 
 	@RequestMapping("/getStatus")
 	@ResponseBody public HashMap<Long, Boolean> getEnvironmentStatus(Model model) {

@@ -170,7 +170,7 @@
           <div class="form-group">
             <label class="control-sidebar-subheading">
               Turn off notifications
-              <input type="checkbox" class="pull-right">
+              <input id="notificationTurnOff" type="checkbox" class="pull-right">
             </label>
           </div>
           <!-- /.form-group -->

@@ -307,7 +307,7 @@
 															<button type="button" class="btn btn-default btn-sm" onclick="showEnvironmentDetails('${environment.id}');">
 																<i class="fa fa-binoculars"></i>
 															</button>
-															<button type="button" class="btn btn-default btn-sm">
+															<button type="button" class="btn btn-default btn-sm" onclick="share('${environment.id}')">
 																<i class="fa fa-share-alt"></i>
 															</button>
 															<button type="button" class="btn btn-default btn-sm" onclick="window.open('${environment.envUrl }')">

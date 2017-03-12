@@ -359,6 +359,48 @@ function showEnvironmentDetails(id) {
 		}
 	});
 }
+function share(id){
+	$.ajax({
+		  url: "/environment/getById/"+id,
+		  cache: false,
+		  success: function(data){
+			  console.log(data);
+		    createMail(data);
+		  }
+		});
+}
+
+function createMail(data){
+	var subject = data.envName + ' War is Up with rev #  ' + data.revisionNumber ;
+    var linker = "mailto:?subject="+ subject + "&body=";
+    linker += getBody(data);
+    //console.log(linker);
+    window.location = linker;
+}
+
+function getBody(data){
+	var body = 'The '+ data.envName + ' Application is up and running with Revision #  ' + data.revisionNumber +'.\n\n' ;
+	body += 'Environment Details::::: \n';
+	body += 'Environment Name 	: ' + data.envName + '\n';
+	body += 'Environment Location 	: ' + data.envUrl + '\n';
+	body += 'Revision Number 		: ' + data.revisionNumber + '\n\n\n\n';
+	body += 'Logs Details:::::::::::: \n';
+	body += 'Log Host 				: ' + data.envLogUrl + '\n';
+	body += 'Log User Name 		: ' + data.envLogUser + '\n';
+	body += 'Log Password 		: ' + data.envLogPass + '\n';
+	body += 'Application Log Path 	: ' + data.envLog + '\n';
+	body += 'WAR Location 		: ' + data.envWar + '\n';
+	body += 'Server Logs 			: ' + data.envServerLog + '\n\n\n\n';
+	body += 'DataBase Details:::::::: \n';
+	body += 'DataBase Server 		: ' + data.dbUrl + '\n';
+	body += 'DataBase User Name 	: ' + data.dbUser + '\n';
+	body += 'DataBase Password 	: ' + data.dbPass + '\n';
+	body += 'Schema Name 		: ' + data.dbSchema + '\n\n\n';
+	//body += 'Find UpDated Details : ${baseUrl}/environmentDetails/' + data.key + '\n';
+	//body += 'Find All Environment Details : ${baseUrl}/showAll';
+	return encodeURI(body);
+	
+}
 
 function loadJSONFormatter() {
 	$.ajax({
@@ -556,7 +598,58 @@ function refreshMessages(messages) {
 								+ " hours ago");
 						console.log("xxx has updated " + minutes_diff
 								+ " minutes ago");
+						$container = $('#chat-box');
+						if(typeof $container[0] == 'undefined' && $('input[id="notificationTurnOff"]:checked').length == 0){
+							iziToast.info({
+							    title: 'Hey',
+							    icon: 'icon-drafts',
+							    message: 'You\'ve new message from ' + message.author,
+							    position: 'bottomCenter',
+							    image: '/resources/dist/img/user3-128x128.jpg',
+							    balloon: true,
+							    buttons: [
+							      ['<button>Photo</button>',
+							        function(instance, toast) {
 
+							          // instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+
+							          iziToast.show({
+							            color: 'dark',
+							            icon: 'icon-photo',
+							            title: 'OK',
+							            message: 'Callback Photo!',
+							            position: 'bottomCenter',
+							            // iconText: 'star',
+							          });
+
+							        }
+							      ],
+							      ['<button>Message</button>',
+							        function(instance, toast) {
+
+							          // instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+
+							          iziToast.show({
+							            color: 'dark',
+							            icon: 'icon-ondemand_video',
+							            message: message.text,
+							            position: 'bottomCenter',
+							            // iconText: 'star',
+							          });
+
+							        }
+							      ],
+							      ['<button>Goto Chat</button>',
+							        function(instance, toast) {
+							    	  
+							          instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+							          chat();
+							        }
+							      ],
+							    ]
+							  });
+							return;
+						}
 						$("#chat-box")
 								.append(
 										'<div class="item">'
@@ -596,3 +689,4 @@ function sendMessage() {
 	}, "slow");
 
 }
+connect();

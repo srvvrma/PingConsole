@@ -19,26 +19,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pingconsole.auth.service.UserService;
 import com.pingconsole.chat.domain.ChatMessage;
 import com.pingconsole.chat.domain.ChatMessageModel;
 import com.pingconsole.chat.repository.ChatMessageRepository;
+import com.pingconsole.users.dto.UserDTO;
 
 @Controller
 public class ChatMessageController {
 
 	@Autowired
 	private ChatMessageRepository chatMessageRepository;
+	
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private SessionRegistry sessionRegistry;
 
 	@RequestMapping("/getLoggedInUsers")
-	@ResponseBody public String getOnlineUsers() {
+	@ResponseBody public List<UserDTO> getOnlineUsers() {
 		List<String> retValue = new ArrayList<String>();
 		List<Object> onlineUsers = sessionRegistry.getAllPrincipals();
+		List<UserDTO> users = new ArrayList<>();
 		for (Object usr : onlineUsers) {
 			retValue.add(((User) usr).getUsername());
+			users.add(UserDTO.getUserDto(userService.findByUsername(((User) usr).getUsername())));
 		}
-		return retValue.toString();
+		return users;
 	}
 
 	@RequestMapping("/chat")

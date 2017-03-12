@@ -57,7 +57,7 @@
 												<i class="fa fa-gear"></i>
 											</button>
 											<button type="button" class="btn btn-default btn-sm"
-												onclick="shareEnvironmentDetails('${environment.id}')">
+												onclick="share('${environment.id}')">
 												<i class="fa  fa-share-alt"></i>
 											</button>
 											<button type="button" class="btn btn-default btn-sm" onclick="deleteEnvironment('${environment.id}')">
