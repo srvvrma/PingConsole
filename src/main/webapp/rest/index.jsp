@@ -76,7 +76,7 @@
 								<!-- /.col -->
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>Groups</label> <select class="form-control select2"
+										<label>Labels</label> <select class="form-control select2"
 											multiple="multiple" data-placeholder="Select a State"
 											style="width: 100%;">
 											<option>Alabama</option>
@@ -218,57 +218,126 @@
 															</tr>
 															<tr>
 																<td><input value="" type="checkbox"></td>
-																<td width="48%"><select
-																	class="form-control select2" style="width: 100%;">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
-																</select></td>
-																<td width="48%"><select
-																	class="form-control select2" style="width: 100%;">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
-																</select></td>
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Header Key" type="text" list="exampleHeaders"></td>
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Header Value" type="text" list="exampleHeadersValue"></td>
 																<td><a href="#" class="text-muted text-center"
 																	style="text-align: center;"><i
 																		class="fa fa-trash-o"></i></a></td>
 															</tr>
 															<tr>
 																<td><input value="" type="checkbox"></td>
-																<td><select class="form-control select2"
-																	style="width: 100%;">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
-																</select></td>
-																<td><select class="form-control select2"
-																	style="width: 100%;">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
-																</select></td>
-																<td><a href="#" class="text-muted"
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Header Key" type="text" list="exampleHeaders"></td>
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Header Value" type="text" list="exampleHeadersValue"></td>
+																<td><a href="#" class="text-muted text-center"
+																	style="text-align: center;"><i
+																		class="fa fa-trash-o"></i></a></td>
+															</tr>
+															<datalist id="exampleHeaders">
+																<option value="Accept">
+																<option value="Accept-Charset">
+																<option value="Accept-Encoding">
+																<option value="Accept-Language">
+																<option value="Accept-Datetime">
+																<option value="Authorization">
+																<option value="Cache-Control">
+																<option value="Connection">
+																<option value="Cookie">
+																<option value="Content-Length">
+																<option value="Content-MD5">
+																<option value="Content-Type">
+																<option value="Date">
+																<option value="Expect">
+																<option value="Forwarded">
+																<option value="From">
+																<option value="Host">
+																<option value="If-Match">
+																<option value="If-Modified-Since">
+																<option value="If-None-Match">
+																<option value="If-Range">
+																<option value="If-Unmodified-Since">
+																<option value="Max-Forwards">
+																<option value="Origin">
+																<option value="Pragma">
+																<option value="Proxy-Authorization">
+																<option value="Range">
+																<option value="TE">
+																<option value="User-Agent">
+																<option value="Upgrade">
+																<option value="Via">
+																<option value="Warning">
+																<option value="X-Requested-With">
+																<option value="DNT">
+																<option value="X-Forwarded-For">
+																<option value="X-Forwarded-Host">
+																<option value="X-Forwarded-Proto">
+																<option value="Front-End-Https">
+																<option value="X-Http-Method-Override">
+																<option value="X-ATT-DeviceId">
+																<option value="X-Wap-Profile">
+																<option value="Proxy-Connection">
+																<option value="X-UIDH">
+																<option value="X-Csrf-Token">
+																<option value="X-Request-ID">
+															</datalist>
+															<datalist id="exampleHeadersValue">
+																<option value="text/plain">
+																<option value="utf-8">
+																<option value="deflate">
+																<option value="gzip">
+																<option value="en-US">
+																<option value="no-cache">
+																<option value="keep-alive">
+																<option value="Upgrade">
+																<option value="application/x-www-form-urlencoded">
+																<option value="no-cache">
+															</datalist>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!-- /.tab-pane -->
+											<div class="tab-pane" id="body">
+												<div class="box-body no-padding">
+													<div class="form-group">
+														<label> <input id="requestParameter1"
+															name="requestParameter" required="required" value="form-data"
+															checked="checked" type="radio"> form-data
+														</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<label> <input id="requestParameter2"
+															name="requestParameter" required="required" value="urlencoded"
+															type="radio"> x-www-form-urlencoded
+														</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<label> <input id="requestParameter3"
+															name="requestParameter" required="required"
+															value="INTEGRATION" type="radio"> raw
+														</label>
+													</div>
+													<table class="table">
+														<tbody>
+															<tr>
+																<th style="width: 10px">#</th>
+																<th>Key</th>
+																<th>Value</th>
+																<th style="width: 40px"><a href="#"
+																	class="text-muted"><i class="fa fa-plus"></i></a></th>
+															</tr>
+															<tr>
+																<td><input value="" type="checkbox"></td>
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Key" type="text"></td>
+																<td width="48%"><input class="form-control"
+																	aria-label="Text input with dropdown button"
+																	placeholder="Value" type="text"></td>
+																<td><a href="#" class="text-muted text-center"
 																	style="text-align: center;"><i
 																		class="fa fa-trash-o"></i></a></td>
 															</tr>
@@ -276,8 +345,6 @@
 													</table>
 												</div>
 											</div>
-											<!-- /.tab-pane -->
-											<div class="tab-pane" id="body">body.</div>
 											<!-- /.tab-pane -->
 											<div class="tab-pane" id="script">script.</div>
 											<!-- /.tab-pane -->
@@ -295,40 +362,22 @@
 															<tr>
 																<td><input value="" type="checkbox"></td>
 																<td width="48%"><select
-																	class="form-control select2" style="width: 100%;">
+																	class="form-control select2" style="width: 100%">
 																		<option selected="selected" value="NO_AUTH">No
 																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
+																		<option value="TEST_1">Has Response Header</option>
+																		<option value="TEST_2">Response JSON has</option>
+																		<option value="TEST_3">Response Time less
+																			than</option>
+																		<option value="TEST_4">Response Time greater
+																			than</option>
+																		<option value="TEST_5">Response Code is</option>
+																		<option value="TEST_6">Response JSON has like</option>
 																</select></td>
-																<td><input class="form-control"
+																<td width="48%"><input class="form-control"
 																	aria-label="Text input with dropdown button"
 																	placeholder="" type="text"></td>
 																<td><a href="#" class="text-muted text-center"
-																	style="text-align: center;"><i
-																		class="fa fa-trash-o"></i></a></td>
-															</tr>
-															<tr>
-																<td><input value="" type="checkbox"></td>
-																<td width="48%"><select
-																	class="form-control select2" style="width: 100%;">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="BASIC_AUTH">Basic Auth</option>
-																		<option value="DIGEST_AUTH">Digest Auth</option>
-																		<option value="OAUTH_1_0">OAuth 1.0</option>
-																		<option value="OAUTH_2_0">OAuth 2.0</option>
-																		<option value="HAWK_AUTH">Hawk Auth</option>
-																		<option value="AWS_SIGN">AWS Signature</option>
-																</select></td>
-																<td><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="" type="text"></td>
-																<td><a href="#" class="text-muted"
 																	style="text-align: center;"><i
 																		class="fa fa-trash-o"></i></a></td>
 															</tr>

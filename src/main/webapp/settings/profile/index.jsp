@@ -388,7 +388,7 @@
 											</div>
 											<form:select path="roles" multiple="true" style="width:100%;"
 												items="${rolesList}" itemLabel="code" itemValue="id"
-												id="roles" class="form-control select2 pull-righ" />
+												id="roles" class="form-control select2 pull-righ btn-skin" />
 										</div>
 										<form:errors class="help-block" path="roles"></form:errors>
 									</div>
@@ -403,7 +403,7 @@
 											</div>
 											<form:select path="groups" multiple="true" style="width:100%;"
 												items="${groupList}" itemLabel="code" itemValue="id"
-												id="groups" class="form-control select2 pull-righ" />
+												id="groups" class="form-control select2 pull-righ btn-skin" />
 										</div>
 										<form:errors class="help-block" path="groups"></form:errors>
 									</div>
