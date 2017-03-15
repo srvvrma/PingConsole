@@ -188,7 +188,7 @@
 															<label for="inputEmail3" class="col-md-2 control-label">TYPE</label>
 
 															<div class="col-md-10">
-																<select class="form-control select2">
+																<select class="form-control select2" style="width: 100%">
 																	<option selected="selected" value="NO_AUTH">No
 																		Auth</option>
 																	<option value="BASIC_AUTH">Basic Auth</option>
@@ -208,37 +208,13 @@
 											<div class="tab-pane" id="header">
 												<div class="box-body no-padding">
 													<table class="table">
-														<tbody>
+														<tbody id = "headerRow">
 															<tr>
 																<th style="width: 10px">#</th>
 																<th>Task</th>
 																<th>Progress</th>
 																<th style="width: 40px"><a href="#"
-																	class="text-muted"><i class="fa fa-plus"></i></a></th>
-															</tr>
-															<tr>
-																<td><input value="" type="checkbox"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Header Key" type="text" list="exampleHeaders"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Header Value" type="text" list="exampleHeadersValue"></td>
-																<td><a href="#" class="text-muted text-center"
-																	style="text-align: center;"><i
-																		class="fa fa-trash-o"></i></a></td>
-															</tr>
-															<tr>
-																<td><input value="" type="checkbox"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Header Key" type="text" list="exampleHeaders"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Header Value" type="text" list="exampleHeadersValue"></td>
-																<td><a href="#" class="text-muted text-center"
-																	style="text-align: center;"><i
-																		class="fa fa-trash-o"></i></a></td>
+																	class="text-muted"><i class="fa fa-plus" onclick="addNewHeaderRow()"></i></a></th>
 															</tr>
 															<datalist id="exampleHeaders">
 																<option value="Accept">
@@ -321,25 +297,13 @@
 														</label>
 													</div>
 													<table class="table">
-														<tbody>
+														<tbody id="bodyRow">
 															<tr>
 																<th style="width: 10px">#</th>
 																<th>Key</th>
 																<th>Value</th>
 																<th style="width: 40px"><a href="#"
-																	class="text-muted"><i class="fa fa-plus"></i></a></th>
-															</tr>
-															<tr>
-																<td><input value="" type="checkbox"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Key" type="text"></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="Value" type="text"></td>
-																<td><a href="#" class="text-muted text-center"
-																	style="text-align: center;"><i
-																		class="fa fa-trash-o"></i></a></td>
+																	class="text-muted"><i class="fa fa-plus" onclick="addNewBodyRow();"></i></a></th>
 															</tr>
 														</tbody>
 													</table>
@@ -351,35 +315,13 @@
 											<div class="tab-pane" id="test">
 												<div class="box-body no-padding">
 													<table class="table">
-														<tbody>
+														<tbody id = "testRow">
 															<tr>
 																<th style="width: 10px">#</th>
 																<th>Task</th>
 																<th>Progress</th>
-																<th style="width: 40px"><a href="#"
-																	class="text-muted"><i class="fa fa-plus"></i></a></th>
-															</tr>
-															<tr>
-																<td><input value="" type="checkbox"></td>
-																<td width="48%"><select
-																	class="form-control select2" style="width: 100%">
-																		<option selected="selected" value="NO_AUTH">No
-																			Auth</option>
-																		<option value="TEST_1">Has Response Header</option>
-																		<option value="TEST_2">Response JSON has</option>
-																		<option value="TEST_3">Response Time less
-																			than</option>
-																		<option value="TEST_4">Response Time greater
-																			than</option>
-																		<option value="TEST_5">Response Code is</option>
-																		<option value="TEST_6">Response JSON has like</option>
-																</select></td>
-																<td width="48%"><input class="form-control"
-																	aria-label="Text input with dropdown button"
-																	placeholder="" type="text"></td>
-																<td><a href="#" class="text-muted text-center"
-																	style="text-align: center;"><i
-																		class="fa fa-trash-o"></i></a></td>
+																<th style="width: 40px"><a href=""
+																	class="text-muted"><i class="fa fa-plus" onclick="addNewTestRow(event);"></i></a></th>
 															</tr>
 														</tbody>
 													</table>
@@ -486,4 +428,64 @@
 	$(document).ready(function() {
 		$('.select2').select2();
 	});
+	
+	var headerRowIndex = 0;
+	var bodyRowIndex= 0;
+	var testRowIndex = 0;
+	function addNewHeaderRow(){
+		var recHeaderRow =  '<tr id="headerRow_'+headerRowIndex+'">'
+							+'<td><input value="" type="checkbox"></td>'
+							+'<td width="48%"><input class="form-control" id="header_key_'+headerRowIndex+'" path="" aria-label="Text input with dropdown button" placeholder="Header Key" type="text" list="exampleHeaders"></td>'
+							+'<td width="48%"><input class="form-control" id="header_value_'+headerRowIndex+'" aria-label="Text input with dropdown button" placeholder="Header Value" type="text" list="exampleHeadersValue"></td>'
+							+'<td><a href="" class="text-muted text-center" onClick="deleteHeaderRow('+headerRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
+							+'</tr>';
+		$('#headerRow').append(recHeaderRow);
+		headerRowIndex++;
+	}
+	function deleteHeaderRow(removeHeaderRowIndex,event){
+		event.preventDefault();
+		$('#headerRow_'+removeHeaderRowIndex).remove();
+	}
+	function addNewBodyRow(){
+		var recBodyRow =  '<tr id="bodyRow_'+bodyRowIndex+'">'
+							+'<td><input value="" type="checkbox"></td>'
+							+'<td width="48%"><input class="form-control" id="body_key_'+bodyRowIndex+'" path="" aria-label="Text input with dropdown button" placeholder="Key" type="text"></td>'
+							+'<td width="48%"><input class="form-control" id="body_value_'+bodyRowIndex+'" aria-label="Text input with dropdown button" placeholder="Value" type="text"></td>'
+							+'<td><a href="" class="text-muted text-center" onClick="deleteBodyRow('+bodyRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
+							+'</tr>';
+		$('#bodyRow').append(recBodyRow);
+		bodyRowIndex++;
+	}
+	function deleteBodyRow(removeBodyRowIndex,event){
+		event.preventDefault();
+		$('#bodyRow_'+removeBodyRowIndex).remove();
+	}
+	
+	function addNewTestRow(e){
+		e.preventDefault();
+		var recTestRow = '<tr id="testRow_'+testRowIndex+'">'
+						 +'<td><input value="" type="checkbox"></td>'
+						 +'<td width="48%"> <select class="form-control select2" style="width: 100%">'
+							+'<option value="TEST_0">Has String</option>'
+							+'<option value="TEST_1">Has Response Header</option>'
+							+'<option value="TEST_2">Response JSON has</option>'
+							+'<option value="TEST_3">Response Time less than</option>'
+							+'<option value="TEST_4">Response Time greater than</option>'
+							+'<option value="TEST_5">Response Code is</option>'
+							+'<option value="TEST_6">Response JSON has like</option>'
+							+'</select>'
+						+'</td>'
+						+'<td width="48%"><input class="form-control" aria-label="Text input with dropdown button" placeholder="" type="text"></td>'
+						+'<td><a href="" class="text-muted text-center" style="text-align: center;" onClick="deleteTestRow('+testRowIndex+',event)"><i class="fa fa-trash-o"></i></a></td>'
+						+'</tr>';
+						
+		$('#testRow').append(recTestRow);
+		$('.select2').select2();
+		testRowIndex++;
+	}
+	function deleteTestRow(removeTestRowIndex,event){
+		event.preventDefault();
+		$('#testRow_'+removeTestRowIndex).remove();
+	}
+	
 </script>
