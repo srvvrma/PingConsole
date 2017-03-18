@@ -56,37 +56,48 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<form role="form">
+				<form:form id="restAPITestForm" method="POST"
+					action="${contextPath}/rest/save"
+					modelAttribute="restAPITest" class="form-signin">
 						<div class="box-body">
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
-										<label>Minimal</label> <select class="form-control select2"
-											style="width: 100%;">
-											<option selected="selected">Environment</option>
-											<option>Alaska</option>
-											<option>California</option>
-											<option>Delaware</option>
-											<option>Tennessee</option>
-											<option>Texas</option>
-											<option>Washington</option>
-										</select>
-									</div>
+									<spring:bind path="environments">
+										<div
+											class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+											<label for="environments"><spring:message code="label.menu.environment" /></label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-user"></i>
+												</div>
+												<form:select path="environments" multiple="true" items="${INT_ENV}"
+													itemLabel="envName" itemValue="id" id="intergrationEnvironmentDTOs"
+													class="form-control select2 pull-righ" />
+											</div>
+											<form:errors class="help-block" path="environments"></form:errors>
+										</div>
+									</spring:bind>
 								</div>
 								<!-- /.col -->
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>Labels</label> <select class="form-control select2"
-											multiple="multiple" data-placeholder="Select a State"
-											style="width: 100%;">
-											<option>Alabama</option>
-											<option>Alaska</option>
-											<option>California</option>
-											<option>Delaware</option>
-											<option>Tennessee</option>
-											<option>Texas</option>
-											<option>Washington</option>
-										</select>
+										<label>Labels</label>
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-user"></i>
+											</div> 
+											<select class="form-control select2"
+												multiple="multiple" data-placeholder="Select a State"
+												style="width: 100%;">
+												<option>Alabama</option>
+												<option>Alaska</option>
+												<option>California</option>
+												<option>Delaware</option>
+												<option>Tennessee</option>
+												<option>Texas</option>
+												<option>Washington</option>
+											</select>
+										</div>
 									</div>
 									<!-- /.form-group -->
 								</div>
@@ -94,33 +105,36 @@
 							</div>
 							<div class="row">
 								<div class="col-md-2">
-									<div class="form-group" style="width: 100%;">
-										<div class="input-group" style="width: 100%;">
-											<select class="form-control select2">
-												<option selected="selected" value="GET">GET</option>
-												<option value="POST">POST</option>
-												<option value="PUT">PUT</option>
-												<option value="PATCH">PATCH</option>
-												<option value="DELETE">DELETE</option>
-												<option value="COPY">COPY</option>
-												<option value="HEAD">HEAD</option>
-												<option value="OPTIONS">OPTIONS</option>
-												<option value="LINK">LINK</option>
-												<option value="UPLINK">UPLINK</option>
-												<option value="PURGE">PURGE</option>
-												<option value="UNLOCK">UNLOCK</option>
-											</select>
+									<spring:bind path="method">
+										<div
+											class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+												<form:select path="method" id="method"
+													class="form-control select2 pull-righ" >
+													<option selected="selected" value="GET">GET</option>
+													<option value="POST">POST</option>
+													<option value="PUT">PUT</option>
+													<option value="PATCH">PATCH</option>
+													<option value="DELETE">DELETE</option>
+													<option value="COPY">COPY</option>
+													<option value="HEAD">HEAD</option>
+													<option value="OPTIONS">OPTIONS</option>
+													<option value="LINK">LINK</option>
+													<option value="UPLINK">UPLINK</option>
+													<option value="PURGE">PURGE</option>
+													<option value="UNLOCK">UNLOCK</option>
+												</form:select>
+											<form:errors class="help-block" path="method"></form:errors>
 										</div>
-									</div>
+									</spring:bind>
 								</div>
 								<div class="col-md-8"
 									style="padding-right: 0px; padding-left: 0px">
 									<div class="input-group" style="width: 100%;">
-										<input type="text" class="form-control"
+										<form:input type="text" class="form-control"
 											aria-label="Text input with dropdown button"
-											placeholder="Put Rest Url (http://rest.api/)">
+											placeholder="Put Rest Url (http://rest.api/)" path="restAPIUrl" ></form:input>
 										<div class="input-group-btn">
-											<button type="button" class="btn btn-skin">
+											<button type="button" class="btn btn-skin" id="runTest">
 												Run Test &nbsp;&nbsp;<i class="fa fa-play"></i>
 											</button>
 										</div>
@@ -188,16 +202,27 @@
 															<label for="inputEmail3" class="col-md-2 control-label">TYPE</label>
 
 															<div class="col-md-10">
-																<select class="form-control select2" style="width: 100%">
-																	<option selected="selected" value="NO_AUTH">No
-																		Auth</option>
-																	<option value="BASIC_AUTH">Basic Auth</option>
-																	<option value="DIGEST_AUTH">Digest Auth</option>
-																	<option value="OAUTH_1_0">OAuth 1.0</option>
-																	<option value="OAUTH_2_0">OAuth 2.0</option>
-																	<option value="HAWK_AUTH">Hawk Authentication</option>
-																	<option value="AWS_SIGN">AWS Signature</option>
-																</select>
+																<spring:bind path="authorization.authType">
+																	<div
+																		class="form-group has-feedback ${status.error ? 'has-error' : ''}">
+																		<div class="input-group">
+																			<div class="input-group-addon">
+																				<i class="fa fa-user"></i>
+																			</div>
+																			<form:select path="authorization.authType" id="authType"
+																				class="form-control select2 pull-righ" style="width: 100%">
+																				<option selected="selected" value="NO_AUTH">No Auth</option>
+																				<option value="BASIC_AUTH">Basic Auth</option>
+																				<option value="DIGEST_AUTH">Digest Auth</option>
+																				<option value="OAUTH_1_0">OAuth 1.0</option>
+																				<option value="OAUTH_2_0">OAuth 2.0</option>
+																				<option value="HAWK_AUTH">Hawk Authentication</option>
+																				<option value="AWS_SIGN">AWS Signature</option>
+																			</form:select>
+																		</div>
+																		<form:errors class="help-block" path="authorization.authType"></form:errors>
+																	</div>
+																</spring:bind>
 															</div>
 														</div>
 														<hr class="half-rule" />
@@ -284,15 +309,15 @@
 												<div class="box-body no-padding">
 													<div class="form-group">
 														<label> <input id="requestParameter1"
-															name="requestParameter" required="required" value="form-data"
+															name="requestParameter" required="required" path="formDataType" value="form-data"
 															checked="checked" type="radio"> form-data
 														</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														<label> <input id="requestParameter2"
-															name="requestParameter" required="required" value="urlencoded"
+															name="requestParameter" required="required" path="formDataType" value="urlencoded"
 															type="radio"> x-www-form-urlencoded
 														</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														<label> <input id="requestParameter3"
-															name="requestParameter" required="required"
+															name="requestParameter" required="required" path="formDataType"
 															value="INTEGRATION" type="radio"> raw
 														</label>
 													</div>
@@ -418,7 +443,7 @@
 							</div>
 
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>
@@ -435,8 +460,8 @@
 	function addNewHeaderRow(){
 		var recHeaderRow =  '<tr id="headerRow_'+headerRowIndex+'">'
 							+'<td><input value="" type="checkbox"></td>'
-							+'<td width="48%"><input class="form-control" id="header_key_'+headerRowIndex+'" path="" aria-label="Text input with dropdown button" placeholder="Header Key" type="text" list="exampleHeaders"></td>'
-							+'<td width="48%"><input class="form-control" id="header_value_'+headerRowIndex+'" aria-label="Text input with dropdown button" placeholder="Header Value" type="text" list="exampleHeadersValue"></td>'
+							+'<td width="48%"><input class="form-control" id="header_key_'+headerRowIndex+'" name="headers.key['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Header Key" type="text" list="exampleHeaders"></td>'
+							+'<td width="48%"><input class="form-control" id="header_value_'+headerRowIndex+'" name="headers.value['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Header Value" type="text" list="exampleHeadersValue"></td>'
 							+'<td><a href="" class="text-muted text-center" onClick="deleteHeaderRow('+headerRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
 							+'</tr>';
 		$('#headerRow').append(recHeaderRow);
@@ -449,8 +474,8 @@
 	function addNewBodyRow(){
 		var recBodyRow =  '<tr id="bodyRow_'+bodyRowIndex+'">'
 							+'<td><input value="" type="checkbox"></td>'
-							+'<td width="48%"><input class="form-control" id="body_key_'+bodyRowIndex+'" path="" aria-label="Text input with dropdown button" placeholder="Key" type="text"></td>'
-							+'<td width="48%"><input class="form-control" id="body_value_'+bodyRowIndex+'" aria-label="Text input with dropdown button" placeholder="Value" type="text"></td>'
+							+'<td width="48%"><input class="form-control" id="body_key_'+bodyRowIndex+'" name="body.key['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Key" type="text"></td>'
+							+'<td width="48%"><input class="form-control" id="body_value_'+bodyRowIndex+'" name="body.value['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Value" type="text"></td>'
 							+'<td><a href="" class="text-muted text-center" onClick="deleteBodyRow('+bodyRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
 							+'</tr>';
 		$('#bodyRow').append(recBodyRow);

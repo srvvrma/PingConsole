@@ -273,7 +273,7 @@
 						<spring:bind path="intergrationEnvironmentDTOs">
 							<div
 								class="form-group has-feedback ${status.error ? 'has-error' : ''}">
-								<label for="roles"><spring:message code="label.users.edit.form.role" /></label>
+								<label for="roles"><spring:message code="label.menu.environment" /></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
