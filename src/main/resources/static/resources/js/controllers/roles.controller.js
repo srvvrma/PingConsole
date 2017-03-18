@@ -690,3 +690,29 @@ function sendMessage() {
 
 }
 connect();
+
+/*
+ *  js for patch manager
+ */ 
+
+function createOrUpdatePatchManager(id){
+	$.ajax({
+		url : '/patchManager/createUpdate?id=' + id,
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function submitPatchManagerForm(){
+	
+}
+
+
+/*
+ *  end js for patch manager
+ */
+

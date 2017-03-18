@@ -70,6 +70,21 @@
 						class="fa fa-group"></i> <span><spring:message
 								code="label.menu.groups" /></span>
 				</a></li>
+					<!-- Showing Role Controller for creating and edit roles -->
+				<li class="treeview"><a href="#"> <i
+						class="fa fa-user-plus"></i> <span><spring:message
+								code="label.menu.patchManager" /></span> <span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu" style="display: none;">
+						<li class=""><a href="#" onclick="createOrUpdatePatchManager('');"><i
+								class="fa fa-circle-o"></i> <spring:message
+									code="label.menu.patchManager.add" /></a></li>
+						<li><a href="#" onclick="loadAllPatchManager();"><i
+								class="fa fa-circle-o"></i> <spring:message
+									code="label.menu.patchManager.all" /></a></li>
+					</ul></li>
 			</sec:authorize>
 			<!-- Showing Environment, Create a new or edit old one -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
