@@ -2,6 +2,8 @@ package com.pingconsole.test.rest.domain;
 
 import java.util.List;
 
+import com.pingconsole.environment.domain.Environment;
+
 
 public class RestAPITest {
 	
@@ -12,7 +14,7 @@ public class RestAPITest {
 	private List<Header> headers;
 	private List<Body> body;
 	private String formDataType;
-	private List<Long> environments;
+	private List<Environment> environments;
 	
 	public String getMethod() {
 		return method;
@@ -47,10 +49,10 @@ public class RestAPITest {
 	public Long getId() {
 		return id;
 	}
-	public List<Long> getEnvironments() {
+	public List<Environment> getEnvironments() {
 		return environments;
 	}
-	public void setEnvironments(List<Long> environments) {
+	public void setEnvironments(List<Environment> environments) {
 		this.environments = environments;
 	}
 	public String getFormDataType() {

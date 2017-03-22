@@ -59,6 +59,8 @@
 				<form:form id="restAPITestForm" method="POST"
 					action="${contextPath}/rest/save"
 					modelAttribute="restAPITest" class="form-signin">
+					<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 						<div class="box-body">
 							<div class="row">
 								<div class="col-md-6">
@@ -134,7 +136,7 @@
 											aria-label="Text input with dropdown button"
 											placeholder="Put Rest Url (http://rest.api/)" path="restAPIUrl" ></form:input>
 										<div class="input-group-btn">
-											<button type="button" class="btn btn-skin" id="runTest">
+											<button type="submit" class="btn btn-skin" id="runTest">
 												Run Test &nbsp;&nbsp;<i class="fa fa-play"></i>
 											</button>
 										</div>
@@ -454,14 +456,20 @@
 		$('.select2').select2();
 	});
 	
+	$('#restAPITestForm').submit(function(e) {
+		// this code prevents form from actually being submitted
+		e.preventDefault();
+		startRestAPITest();
+	});
+	
 	var headerRowIndex = 0;
 	var bodyRowIndex= 0;
 	var testRowIndex = 0;
 	function addNewHeaderRow(){
 		var recHeaderRow =  '<tr id="headerRow_'+headerRowIndex+'">'
 							+'<td><input value="" type="checkbox"></td>'
-							+'<td width="48%"><input class="form-control" id="header_key_'+headerRowIndex+'" name="headers.key['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Header Key" type="text" list="exampleHeaders"></td>'
-							+'<td width="48%"><input class="form-control" id="header_value_'+headerRowIndex+'" name="headers.value['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Header Value" type="text" list="exampleHeadersValue"></td>'
+							+'<td width="48%"><input class="form-control" id="header_key_'+headerRowIndex+'" name="headers['+headerRowIndex+'].key" aria-label="Text input with dropdown button" placeholder="Header Key" type="text" list="exampleHeaders"></td>'
+							+'<td width="48%"><input class="form-control" id="header_value_'+headerRowIndex+'" name="headers['+headerRowIndex+'].value" aria-label="Text input with dropdown button" placeholder="Header Value" type="text" list="exampleHeadersValue"></td>'
 							+'<td><a href="" class="text-muted text-center" onClick="deleteHeaderRow('+headerRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
 							+'</tr>';
 		$('#headerRow').append(recHeaderRow);
@@ -474,8 +482,8 @@
 	function addNewBodyRow(){
 		var recBodyRow =  '<tr id="bodyRow_'+bodyRowIndex+'">'
 							+'<td><input value="" type="checkbox"></td>'
-							+'<td width="48%"><input class="form-control" id="body_key_'+bodyRowIndex+'" name="body.key['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Key" type="text"></td>'
-							+'<td width="48%"><input class="form-control" id="body_value_'+bodyRowIndex+'" name="body.value['+headerRowIndex+']" aria-label="Text input with dropdown button" placeholder="Value" type="text"></td>'
+							+'<td width="48%"><input class="form-control" id="body_key_'+bodyRowIndex+'" name="body['+bodyRowIndex+'].key" aria-label="Text input with dropdown button" placeholder="Key" type="text"></td>'
+							+'<td width="48%"><input class="form-control" id="body_value_'+bodyRowIndex+'" name="body['+bodyRowIndex+'].value" aria-label="Text input with dropdown button" placeholder="Value" type="text"></td>'
 							+'<td><a href="" class="text-muted text-center" onClick="deleteBodyRow('+bodyRowIndex+',event)" style="text-align: center;"><i class="fa fa-trash-o"></i></a></td>';
 							+'</tr>';
 		$('#bodyRow').append(recBodyRow);

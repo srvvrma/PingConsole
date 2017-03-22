@@ -716,3 +716,36 @@ function submitPatchManagerForm(){
  *  end js for patch manager
  */
 
+/*
+ * JS for Rest API Testing
+ */ 
+
+
+function startRestAPITest() {
+	$.ajax({
+		url : '/rest/test',
+		type : "post",
+		data : $("#restAPITestForm").serialize(),
+		success : function(result) {
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadRoles();
+				iziToast.success({
+					title : 'OK',
+					message : 'Role Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+
+
+/*
+ * End JS For Rest API Testing
+ */

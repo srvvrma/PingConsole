@@ -20,7 +20,4 @@ public class Body {
 	public Long getId() {
 		return id;
 	}
-	
-	
-
 }
