@@ -34,6 +34,7 @@ public class Test {
 
 			InputStream out = null;
 			String fileName = null;
+			@SuppressWarnings("rawtypes")
 			Vector filelist = sftpChannel.ls(remotePath);
             for(int i=0; i<filelist.size();i++){
                 //System.out.println(filelist.toString());
