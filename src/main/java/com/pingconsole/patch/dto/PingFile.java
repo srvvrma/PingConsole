@@ -19,16 +19,24 @@ public class PingFile {
 	private String name;
 	private String type;
 	private String location;
+	private String patchWarCode;
 	/*@ElementCollection
 	@CollectionTable(name="PATCH_PATH")
 	@JoinColumn(name="file_id")
 	private List<String> patchPath;*/
 	
 	private String patchPath;
-	
 	public PingFile() {
 		super();
+	}
+	
+	public PingFile(String name, String type, String location, String patchWarCode) {
+		super();
+		this.setName(name);
+		this.setType(type);
+		this.setLocation(location);
 		this.setPatchPath(new String());
+		this.setPatchWarCode(patchWarCode);
 	}
 	
 	public PingFile(String name,String type,String location) {
@@ -91,6 +99,14 @@ public class PingFile {
 
 	public void setIndent(int indent) {
 		this.indent = indent;
+	}
+
+	public String getPatchWarCode() {
+		return patchWarCode;
+	}
+
+	public void setPatchWarCode(String patchWarCode) {
+		this.patchWarCode = patchWarCode;
 	}
 
 	

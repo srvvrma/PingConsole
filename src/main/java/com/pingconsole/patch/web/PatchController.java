@@ -55,7 +55,7 @@ public class PatchController {
   @RequestMapping(value = "/generate", method = RequestMethod.GET)
   @ResponseBody public long createMapForPAtch(ModelMap map) throws IOException {
 
-      return fileDirectoryService.Start();
+      return fileDirectoryService.Start("");
   }
   
   
@@ -148,7 +148,7 @@ public class PatchController {
       return patchData;
 
   }
-  @SuppressWarnings({ "rawtypes" })
+  @SuppressWarnings({ "rawtypes", "deprecation" })
   private Collection getLogEntriesByRevNumber(int revNumber)
           throws SVNException {
 
@@ -162,7 +162,7 @@ public class PatchController {
       return logEntries;
   }
 
-  @SuppressWarnings({ "rawtypes" })
+  @SuppressWarnings({ "rawtypes", "deprecation" })
   private Collection getLogEntriesbetweenRevNumber(int revNumberFrom,
           int revNumberTo) throws SVNException {
 

@@ -13,6 +13,8 @@ public interface EnvironmentService {
 
   public EnvironmentDTO getEnvironmentById(Long id);
 
-public List<Environment> getAllIntergration();
+  public List<Environment> getAllIntergration();
+
+  public Environment getById(Long environmentId);
 
 }

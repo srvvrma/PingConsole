@@ -41,7 +41,6 @@ public class PingResultDAOService implements PingResultDAO{
         return criteria.list();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<PingResultDTO> getAllResults() {
         return pingResultDTORepository.findAll();

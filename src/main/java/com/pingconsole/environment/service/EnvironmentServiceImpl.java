@@ -67,4 +67,9 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 		return environments;
 	}
 
+  @Override
+  public Environment getById(Long environmentId) {
+    return environmentRepository.findById(environmentId);
+  }
+
 }

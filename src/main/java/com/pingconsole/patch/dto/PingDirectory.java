@@ -29,6 +29,7 @@ public class PingDirectory {
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "directory_file_fk")
 	private List<PingFile> files;
+	private String patchWarCode;
 
 	public PingDirectory() {
 		super();
@@ -43,6 +44,16 @@ public class PingDirectory {
 		this.setIndent(0);
 		setDirectories(new ArrayList<PingDirectory>());
 		setFiles(new ArrayList<PingFile>());
+	}
+
+	public PingDirectory(String name2, String patchWarCode) {
+		super();
+		this.setName(name);
+		this.setPatchWarCode(patchWarCode);
+		this.setIndent(0);
+		setDirectories(new ArrayList<PingDirectory>());
+		setFiles(new ArrayList<PingFile>());
+		
 	}
 
 	public int getId() {
@@ -100,6 +111,14 @@ public class PingDirectory {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getPatchWarCode() {
+		return patchWarCode;
+	}
+
+	public void setPatchWarCode(String patchWarCode) {
+		this.patchWarCode = patchWarCode;
 	}
 
 }

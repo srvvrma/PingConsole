@@ -708,9 +708,39 @@ function createOrUpdatePatchManager(id){
 }
 
 function submitPatchManagerForm(){
-	
+	$.ajax({
+		url : '/patchManager/createUpdate',
+		type : "post",
+		data : $("#patchManagerForm").serialize(),
+		success : function(result) {
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadPatchManager();
+				iziToast.success({
+					title : 'OK',
+					message : 'Record Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
 }
 
+function loadPatchManager(){
+	$.ajax({
+		url : '/patchManager/showAll',
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
 
 /*
  *  end js for patch manager

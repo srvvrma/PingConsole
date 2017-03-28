@@ -28,7 +28,7 @@
 					<form:input type="hidden" path="id"></form:input>
 					<div class="box-body">
 						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" /> <input type="hidden" path="id"
+							value="${_csrf.token}" /> <input type="hidden" name="id"
 							value="${roleDTO.id}" />
 						<spring:bind path="name">
 							<div

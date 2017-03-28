@@ -125,7 +125,7 @@
 	$(document).ready(function() {
 		  $(".select2").select2();
 		});
-	$('#roleForm').submit(function(e) {
+	$('#patchManagerForm').submit(function(e) {
 		// this code prevents form from actually being submitted
 		e.preventDefault();
 		submitPatchManagerForm();

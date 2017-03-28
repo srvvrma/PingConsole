@@ -8,14 +8,21 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 import com.pingconsole.patch.dto.PingDirectory;
 import com.pingconsole.patch.dto.PingFile;
 import com.pingconsole.patch.util.QueryGeneratorUtils;
@@ -30,7 +37,7 @@ public class FileDirectoryService {
 
 	@Value("${warPath}")
 	private String warPath;
-	
+
 	String rootPath;
 
 	static String JSP = "jsp";
@@ -57,63 +64,55 @@ public class FileDirectoryService {
 	// NeoFileService neoFileService;
 
 	@SuppressWarnings("resource")
-	public void setJarFile(String path, PingDirectory jarDir, PrintWriter out)
-			throws IOException {
+	public void setJarFile(String path, PingDirectory jarDir, PrintWriter out) throws IOException {
 		JarFile file = new JarFile(path);
 		Enumeration<JarEntry> entries = file.entries();
 		while (entries.hasMoreElements()) {
 			JarEntry entry = entries.nextElement();
 			if (!entry.isDirectory()) {
-				PingFile pingFile = new PingFile(entry.getName(), "",
-						entry.toString());
+				PingFile pingFile = new PingFile(entry.getName(), "", entry.toString());
 				pingFile.setPatchPath(jarDir.getName() + "#" + entry.toString());
 				jarDir.addNewFile(pingFile);
 				pingFile.setIndent(jarDir.getIndent() + 1);
 				// neoFileService.saveNeoFile(neoFile);
 				// out.append("++++++file:" + entry.getName()
-				// + "  " + entry + " \n");
+				// + " " + entry + " \n");
 			}
 		}
 	}
 
-	public void displayDirectoryContents(File dir, PrintWriter out,
-			PingDirectory parentDir) {
+	public void displayDirectoryContents(File dir, PrintWriter out, PingDirectory parentDir, String patchWarCode) {
 		try {
 			File[] files = dir.listFiles();
 			for (File file : files) {
 				if (file.isDirectory()) {
 					// out.append("directory:" + file.getCanonicalPath() +
 					// "\n");
-				  PingDirectory childDir = new PingDirectory(file.getName());
+					PingDirectory childDir = new PingDirectory(file.getName(), patchWarCode);
 					childDir.setIndent(parentDir.getIndent() + 1);
 					// System.out.println(file.getCanonicalPath().substring(rootPath.length())
-					// +"   "+rootPath);
-					childDir.setPath(file.getCanonicalPath().substring(
-							rootPath.length() - 1).replace(
-									'\\', '/'));
+					// +" "+rootPath);
+					childDir.setPath(file.getCanonicalPath().substring(rootPath.length() - 1).replace('\\', '/'));
 					parentDir.addNewDirectory(childDir);
-					displayDirectoryContents(file, out, childDir);
+					displayDirectoryContents(file, out, childDir, patchWarCode);
 					pingDirectoryService.savePingDirectory(childDir);
 				} else {
 					if (file.getName().contains(".jar")) {
 						// out.append("-----jar:" + file.getCanonicalPath() +
 						// "\n");
-					  PingDirectory childDir = new PingDirectory(file.getName());
+						PingDirectory childDir = new PingDirectory(file.getName());
 						childDir.setIndent(parentDir.getIndent() + 1);
-						childDir.setPath(file.getCanonicalPath().substring(
-								rootPath.length() - 1));
+						childDir.setPath(file.getCanonicalPath().substring(rootPath.length() - 1));
 						setJarFile(file.getCanonicalPath(), childDir, out);
 						pingDirectoryService.savePingDirectory(childDir);
 					} else {
 						// out.append("++++++file:" + file.getCanonicalPath()
-						// + "  " + file.getName() + " \n");
+						// + " " + file.getName() + " \n");
 
-						PingFile pingFile = new PingFile(file.getName(), "", file
-								.getCanonicalPath()
-								.substring(rootPath.length() - 1)
-								.replace('\\', '/'));
-						pingFile.setPatchPath(pingFile.getLocation().replace(
-								'\\', '/').substring(1));
+						PingFile pingFile = new PingFile(file.getName(), "",
+								file.getCanonicalPath().substring(rootPath.length() - 1).replace('\\', '/'),
+								patchWarCode);
+						pingFile.setPatchPath(pingFile.getLocation().replace('\\', '/').substring(1));
 						pingFile.setIndent(parentDir.getIndent() + 1);
 						parentDir.addNewFile(pingFile);
 						// neoFileService.saveNeoFile(neoFile);
@@ -125,18 +124,20 @@ public class FileDirectoryService {
 		}
 	}
 
-	public long Start() throws IOException {
-		File currentDir = new File(warPath); // current directory
+	public long Start(String patchWarCode) throws IOException {
+		File currentDir = new File(warPath); // current
+																	// directory
 		long startTime = System.currentTimeMillis();
 		long stopTime;
 		long elapsedTime = 0;
 		pingDirectoryService.cleanAllData();
-		PingDirectory rootDir = new PingDirectory("Root");
+		pingDirectoryService.cleanAllFile();
+		PingDirectory rootDir = new PingDirectory("Root", patchWarCode);
 		rootPath = "^" + currentDir.getCanonicalPath().toString();
 		rootDir.setPath(currentDir.getCanonicalPath());
 		try (PrintWriter out = new PrintWriter("testdata1.txt")) {
 
-			displayDirectoryContents(currentDir, out, rootDir);
+			displayDirectoryContents(currentDir, out, rootDir, patchWarCode);
 			pingDirectoryService.savePingDirectory(rootDir);
 			stopTime = System.currentTimeMillis();
 			elapsedTime = stopTime - startTime;
@@ -147,7 +148,7 @@ public class FileDirectoryService {
 			e.printStackTrace();
 		}
 		pingDirectoryService.savePingDirectory(rootDir);
-		return elapsedTime/60000;
+		return elapsedTime / 60000;
 	}
 
 	private static int getFileType(String type) {
@@ -177,41 +178,33 @@ public class FileDirectoryService {
 		int lastIndexOfDot = 0, typeCode;
 		for (String path : paths) {
 			lastIndexOfDot = path.lastIndexOf(".");
-			typeCode = getFileType(path.substring(lastIndexOfDot + 1)
-					.replaceAll("\\s", ""));
+			typeCode = getFileType(path.substring(lastIndexOfDot + 1).replaceAll("\\s", ""));
 			switch (typeCode) {
 			case 1:
-				tempPath.add(path.substring(path.lastIndexOf("/webapp/") + "/webapp/".length())
-						.replaceAll("\\s", ""));
+				tempPath.add(path.substring(path.lastIndexOf("/webapp/") + "/webapp/".length()).replaceAll("\\s", ""));
 				break;
 
 			case 2:
-				criterionList.add(queryGeneratorUtils
-						.searchAllClassPatchPath(path));
+				criterionList.add(queryGeneratorUtils.searchAllClassPatchPath(path));
 				break;
 			case 3:
-				criterionList.add(queryGeneratorUtils
-						.searchAllOdtPatchPath(path));			
+				criterionList.add(queryGeneratorUtils.searchAllOdtPatchPath(path));
 				break;
 
 			case 4:
-				criterionList.add(queryGeneratorUtils
-						.searchAllJsPatchPath(path));
+				criterionList.add(queryGeneratorUtils.searchAllJsPatchPath(path));
 				break;
 
 			case 5:
-				criterionList.add(queryGeneratorUtils
-						.searchAllXmlPatchPath(path));
+				criterionList.add(queryGeneratorUtils.searchAllXmlPatchPath(path));
 				break;
 
 			case 6:
-				criterionList.add(queryGeneratorUtils
-						.searchAllXlsPatchPath(path));
+				criterionList.add(queryGeneratorUtils.searchAllXlsPatchPath(path));
 				break;
 
 			case 7:
-				criterionList.add(queryGeneratorUtils
-						.searchAllProperPatchPath(path));
+				criterionList.add(queryGeneratorUtils.searchAllProperPatchPath(path));
 				break;
 
 			default:
@@ -220,14 +213,125 @@ public class FileDirectoryService {
 
 		}
 
-		if(!criterionList.isEmpty()){
-			for (Iterator iterator = queryGeneratorUtils
-					.executeSearch(criterionList).iterator(); iterator
-					.hasNext();) {
+		if (!criterionList.isEmpty()) {
+			for (Iterator iterator = queryGeneratorUtils.executeSearch(criterionList).iterator(); iterator.hasNext();) {
 				tempPath.add(((PingFile) iterator.next()).getPatchPath());
 			}
 		}
 		return tempPath;
+	}
+
+	public long CopyWarFromSVN(String host, int port, String user, String password, String remotePath,String patchCode) {
+		long startTime = System.currentTimeMillis();
+		long elapsedTime = 0;
+
+		JSch jsch = new JSch();
+		Session session;
+		String destPath = "D:\\WAR";
+		try {
+			session = jsch.getSession(user, host, port);
+			session.setPassword(password);
+			session.setConfig("StrictHostKeyChecking", "no");
+			System.out.println("Establishing Connection...");
+			session.connect();
+			System.out.println("Connection established.");
+			System.out.println("Crating SFTP Channel.");
+			ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
+			sftpChannel.connect();
+			System.out.println("SFTP Channel created.");
+			FileUtils.cleanDirectory(new File(destPath));
+			downloadDir(sftpChannel, remotePath, destPath);
+			sftpChannel.disconnect();
+			long stopTime = System.currentTimeMillis();
+			elapsedTime = stopTime - startTime;
+			System.out.println("Total time taken : " + elapsedTime);
+			return elapsedTime;
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return elapsedTime;
+	}
+
+	public void downloadDir(ChannelSftp sftpChannel, String sourcePath, String destPath) throws SftpException { // With
+		// subfolders
+		// and all
+		// files.
+		// Create local folders if absent.
+		try {
+			new File(destPath).mkdirs();
+		} catch (Exception e) {
+			System.out.println("Error at : " + destPath);
+		}
+		sftpChannel.lcd(destPath);
+
+		// Copy remote folders one by one.
+		lsFolderCopy(sftpChannel, sourcePath, destPath); // Separated because
+															// loops itself
+															// inside for
+															// subfolders.
+
+	}
+
+	private void lsFolderCopy(ChannelSftp sftpChannel, String sourcePath, String destPath) throws SftpException {
+		System.out.println(sourcePath);
+		try {
+			@SuppressWarnings("unchecked")
+			Vector<ChannelSftp.LsEntry> list = sftpChannel.ls(sourcePath); // List
+																			// source
+																			// directory
+																			// structure.
+			for (ChannelSftp.LsEntry oListItem : list) { // Iterate objects in
+															// the list to get
+															// file/folder
+															// names.
+				if (!oListItem.getAttrs().isDir()) { // If it is a file (not a
+														// directory).
+					if (!(new File(destPath + "/" + oListItem.getFilename())).exists() || (oListItem.getAttrs()
+							.getMTime() > Long.valueOf(
+									new File(destPath + "/" + oListItem.getFilename()).lastModified() / (long) 1000)
+									.intValue())) { // Download only if changed
+													// later.
+						new File(destPath + "/" + oListItem.getFilename());
+						sftpChannel.get(sourcePath + "/" + oListItem.getFilename(),
+								destPath + "/" + oListItem.getFilename()); // Grab
+						// file
+						// from
+						// source
+						// ([source
+						// filename],
+						// [destination
+						// filename]).
+					}
+				} else if (!(".".equals(oListItem.getFilename()) || "..".equals(oListItem.getFilename()))) {
+					new File(destPath + "/" + oListItem.getFilename()).mkdirs(); // Empty
+																					// folder
+																					// copy.
+					lsFolderCopy(sftpChannel, sourcePath + "/" + oListItem.getFilename(),
+							destPath + "/" + oListItem.getFilename()); // Enter
+																		// found
+																		// folder
+																		// on
+																		// server
+																		// to
+																		// read
+																		// its
+																		// contents
+																		// and
+					// create locally.
+				}
+			}
+		} catch (SftpException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			System.out.println("error while access : " + sourcePath);
+		}
 	}
 
 }

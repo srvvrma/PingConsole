@@ -81,7 +81,7 @@
 						<li class=""><a href="#" onclick="createOrUpdatePatchManager('');"><i
 								class="fa fa-circle-o"></i> <spring:message
 									code="label.menu.patchManager.add" /></a></li>
-						<li><a href="#" onclick="loadAllPatchManager();"><i
+						<li><a href="#" onclick="loadPatchManager();"><i
 								class="fa fa-circle-o"></i> <spring:message
 									code="label.menu.patchManager.all" /></a></li>
 					</ul></li>
