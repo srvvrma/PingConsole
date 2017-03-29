@@ -14,6 +14,8 @@ import java.util.jar.JarFile;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,8 @@ public class FileDirectoryService {
 
 	@Value("${warPath}")
 	private String warPath;
+	@Value("${destPath}")
+	private String destPath;
 
 	String rootPath;
 
@@ -130,8 +134,8 @@ public class FileDirectoryService {
 		long startTime = System.currentTimeMillis();
 		long stopTime;
 		long elapsedTime = 0;
-		pingDirectoryService.cleanAllData();
-		pingDirectoryService.cleanAllFile();
+		pingDirectoryService.cleanAllFileForCode(patchWarCode);
+		pingDirectoryService.cleanAllDataForCode(patchWarCode);
 		PingDirectory rootDir = new PingDirectory("Root", patchWarCode);
 		rootPath = "^" + currentDir.getCanonicalPath().toString();
 		rootDir.setPath(currentDir.getCanonicalPath());
@@ -171,7 +175,7 @@ public class FileDirectoryService {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List<String> generatePatchPath(String patchPath) {
+	public List<String> generatePatchPath(String patchPath,String warCode) {
 		String[] paths = patchPath.split("\n");
 		List<String> tempPath = new ArrayList<>();
 		List<Criterion> criterionList = new ArrayList<>();
@@ -185,26 +189,26 @@ public class FileDirectoryService {
 				break;
 
 			case 2:
-				criterionList.add(queryGeneratorUtils.searchAllClassPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllClassPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 			case 3:
-				criterionList.add(queryGeneratorUtils.searchAllOdtPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllOdtPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 
 			case 4:
-				criterionList.add(queryGeneratorUtils.searchAllJsPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllJsPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 
 			case 5:
-				criterionList.add(queryGeneratorUtils.searchAllXmlPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllXmlPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 
 			case 6:
-				criterionList.add(queryGeneratorUtils.searchAllXlsPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllXlsPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 
 			case 7:
-				criterionList.add(queryGeneratorUtils.searchAllProperPatchPath(path));
+				criterionList.add(Restrictions.conjunction().add(queryGeneratorUtils.searchAllProperPatchPath(path)).add(Restrictions.ilike("patchWarCode", warCode)));
 				break;
 
 			default:
@@ -226,8 +230,7 @@ public class FileDirectoryService {
 		long elapsedTime = 0;
 
 		JSch jsch = new JSch();
-		Session session;
-		String destPath = "D:\\WAR";
+		Session session = null;
 		try {
 			session = jsch.getSession(user, host, port);
 			session.setPassword(password);
@@ -255,6 +258,8 @@ public class FileDirectoryService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			session.disconnect();
 		}
 		return elapsedTime;
 	}

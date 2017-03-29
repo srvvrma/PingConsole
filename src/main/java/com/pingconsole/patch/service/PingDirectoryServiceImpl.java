@@ -47,4 +47,16 @@ public class PingDirectoryServiceImpl implements PingDirectoryService {
 
 	}
 
+	@Override
+	public void cleanAllDataForCode(String patchWarCode) {
+		pingDirectoryRepository.deleteByPatchWarCode(patchWarCode);
+		
+	}
+
+	@Override
+	public void cleanAllFileForCode(String patchWarCode) {
+		pingFileRepository.deleteByPatchWarCode(patchWarCode);
+		
+	}
+
 }

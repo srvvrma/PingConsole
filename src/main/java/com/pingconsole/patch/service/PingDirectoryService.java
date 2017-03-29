@@ -8,4 +8,6 @@ public interface PingDirectoryService {
 	public int updateNeoDirectory(PingDirectory pingDirectory);
 	public void cleanAllData();
 	public void cleanAllFile();
+	public void cleanAllDataForCode(String patchWarCode);
+	public void cleanAllFileForCode(String patchWarCode);
 }

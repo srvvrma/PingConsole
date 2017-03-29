@@ -28,152 +28,144 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.pingconsole.patch.dto.PatchData;
 import com.pingconsole.patch.service.FileDirectoryService;
+import com.pingconsole.patchManager.domain.PatchManagerDTO;
+import com.pingconsole.patchManager.service.PatchManagerService;
 
 @Controller
 @RequestMapping(value = "/patch")
 public class PatchController {
-  @Value("${svn.url}")
-  private String url;
+	@Value("${svn.url}")
+	private String url;
 
-  @Value("${svn.username}")
-  private String name;
+	@Value("${svn.username}")
+	private String name;
 
-  @Value("${svn.password}")
-  private String password;
-  
-  private static final String CREATE_PATCH_PAGE = "patch/index";
-  
-  @Autowired
-  private FileDirectoryService fileDirectoryService;
+	@Value("${svn.password}")
+	private String password;
 
-  @RequestMapping(value = "/create", method = RequestMethod.GET)
-  public String createNewPatch(ModelMap map) {
+	private static final String CREATE_PATCH_PAGE = "patch/index";
 
-      return CREATE_PATCH_PAGE;
-  }
-  
-  @RequestMapping(value = "/generate", method = RequestMethod.GET)
-  @ResponseBody public long createMapForPAtch(ModelMap map) throws IOException {
+	@Autowired
+	private FileDirectoryService fileDirectoryService;
 
-      return fileDirectoryService.Start("");
-  }
-  
-  
-  @RequestMapping(value = "/generatePatch", method = RequestMethod.POST)
-  public void export(HttpServletResponse response,
-          @RequestParam String revisionNumber, @RequestParam String jiraId,
-          @RequestParam String patchPath) throws IOException {
-      response.setContentType("text/plain");
-      response.setHeader("Content-Disposition", "attachment;filename="
-              + jiraId + "_rev_" + revisionNumber + ".txt");
-      ServletOutputStream out = response.getOutputStream();
-      for (String s : fileDirectoryService.generatePatchPath(patchPath)) {
-          out.println(s);
-      }
-      out.print(';');
-      out.flush();
-      out.close();
-  }
-  
-  @SuppressWarnings("rawtypes")
-  @RequestMapping(value = "/getDataByRevNo", method = RequestMethod.GET)
-  @ResponseBody
-  public PatchData getDataByRevNo(ModelMap map,
-          @RequestParam String revNumbers) throws SVNException {
+	@Autowired
+	private PatchManagerService patchManagerService;
 
-      PatchData patchData = new PatchData();
-      if (revNumbers.contains("-")) {
-          String[] revNo = revNumbers.split("-");
-          ArrayList<String> path = new ArrayList<>();
-          patchData.setPath(path);
-          long temp = 0;
-          Collection logEntries = getLogEntriesbetweenRevNumber(Integer.parseInt(revNo[0]), Integer.parseInt(revNo[1]));
-          for (Iterator entries = logEntries.iterator(); entries.hasNext();) {
-              SVNLogEntry logEntry = (SVNLogEntry) entries.next();
-              if (logEntry.getRevision() > temp) {
-                  patchData.setRevNumber((int) logEntry.getRevision());
-                  patchData.setAuthor(logEntry.getAuthor());
-                  patchData.setDate(logEntry.getDate().toString());
-                  patchData.setJiraId(logEntry.getMessage());
-                  temp = logEntry.getRevision();
-              }
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String createNewPatch(ModelMap model) {
+		model.addAttribute("patchManagerDTOs", patchManagerService.findAllDTOs());
+		return CREATE_PATCH_PAGE;
+	}
 
-              if (logEntry.getChangedPaths().size() > 0) {
-                  Set changedPathsSet = logEntry.getChangedPaths().keySet();
+	@RequestMapping(value = "/generate", method = RequestMethod.GET)
+	@ResponseBody
+	public long createMapForPAtch(ModelMap map) throws IOException {
 
-                  for (Iterator changedPaths = changedPathsSet.iterator(); changedPaths
-                          .hasNext();) {
-                      SVNLogEntryPath entryPath = (SVNLogEntryPath) logEntry
-                              .getChangedPaths().get(changedPaths.next());
-                      path.add(entryPath.getPath());
-                  }
-              }
-          }
+		return fileDirectoryService.Start("");
+	}
 
-      } else {
-          String[] revNo = revNumbers.split(",");
-          ArrayList<String> path = new ArrayList<>();
-          patchData.setPath(path);
-          long temp = 0;
-          for (String s : revNo) {
-              Collection logEntries = getLogEntriesByRevNumber(Integer
-                      .parseInt(s));
-              for (Iterator entries = logEntries.iterator(); entries
-                      .hasNext();) {
-                  SVNLogEntry logEntry = (SVNLogEntry) entries.next();
-                  if (logEntry.getRevision() > temp) {
-                      patchData.setRevNumber((int) logEntry.getRevision());
-                      patchData.setAuthor(logEntry.getAuthor());
-                      patchData.setDate(logEntry.getDate().toString());
-                      patchData.setJiraId(logEntry.getMessage());
-                      temp = logEntry.getRevision();
-                  }
+	@RequestMapping(value = "/generatePatch", method = RequestMethod.POST)
+	public void export(HttpServletResponse response, @RequestParam String revisionNumber, @RequestParam String jiraId,
+			@RequestParam String patchPath, @RequestParam Long patchManagerId) throws IOException {
+		response.setContentType("text/plain");
+		response.setHeader("Content-Disposition", "attachment;filename=" + jiraId + "_rev_" + revisionNumber + ".txt");
+		ServletOutputStream out = response.getOutputStream();
+		PatchManagerDTO patchManagerDTO = patchManagerService.getPatchManagerDTOById(patchManagerId);
+		for (String s : fileDirectoryService.generatePatchPath(patchPath, patchManagerDTO.getCode())) {
+			out.println(s);
+		}
+		out.print(';');
+		out.flush();
+		out.close();
+	}
 
-                  if (logEntry.getChangedPaths().size() > 0) {
-                      Set changedPathsSet = logEntry.getChangedPaths()
-                              .keySet();
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/getDataByRevNo", method = RequestMethod.GET)
+	@ResponseBody
+	public PatchData getDataByRevNo(ModelMap map, @RequestParam String revNumbers) throws SVNException {
 
-                      for (Iterator changedPaths = changedPathsSet.iterator(); changedPaths
-                              .hasNext();) {
-                          SVNLogEntryPath entryPath = (SVNLogEntryPath) logEntry
-                                  .getChangedPaths().get(changedPaths.next());
-                          path.add(entryPath.getPath());
-                      }
-                  }
-              }
-          }
+		PatchData patchData = new PatchData();
+		if (revNumbers.contains("-")) {
+			String[] revNo = revNumbers.split("-");
+			ArrayList<String> path = new ArrayList<>();
+			patchData.setPath(path);
+			long temp = 0;
+			Collection logEntries = getLogEntriesbetweenRevNumber(Integer.parseInt(revNo[0]),
+					Integer.parseInt(revNo[1]));
+			for (Iterator entries = logEntries.iterator(); entries.hasNext();) {
+				SVNLogEntry logEntry = (SVNLogEntry) entries.next();
+				if (logEntry.getRevision() > temp) {
+					patchData.setRevNumber((int) logEntry.getRevision());
+					patchData.setAuthor(logEntry.getAuthor());
+					patchData.setDate(logEntry.getDate().toString());
+					patchData.setJiraId(logEntry.getMessage());
+					temp = logEntry.getRevision();
+				}
 
-      }
+				if (logEntry.getChangedPaths().size() > 0) {
+					Set changedPathsSet = logEntry.getChangedPaths().keySet();
 
-      return patchData;
+					for (Iterator changedPaths = changedPathsSet.iterator(); changedPaths.hasNext();) {
+						SVNLogEntryPath entryPath = (SVNLogEntryPath) logEntry.getChangedPaths()
+								.get(changedPaths.next());
+						path.add(entryPath.getPath());
+					}
+				}
+			}
 
-  }
-  @SuppressWarnings({ "rawtypes", "deprecation" })
-  private Collection getLogEntriesByRevNumber(int revNumber)
-          throws SVNException {
+		} else {
+			String[] revNo = revNumbers.split(",");
+			ArrayList<String> path = new ArrayList<>();
+			patchData.setPath(path);
+			long temp = 0;
+			for (String s : revNo) {
+				Collection logEntries = getLogEntriesByRevNumber(Integer.parseInt(s));
+				for (Iterator entries = logEntries.iterator(); entries.hasNext();) {
+					SVNLogEntry logEntry = (SVNLogEntry) entries.next();
+					if (logEntry.getRevision() > temp) {
+						patchData.setRevNumber((int) logEntry.getRevision());
+						patchData.setAuthor(logEntry.getAuthor());
+						patchData.setDate(logEntry.getDate().toString());
+						patchData.setJiraId(logEntry.getMessage());
+						temp = logEntry.getRevision();
+					}
 
-      SVNRepository repository = SVNRepositoryFactory.create(SVNURL
-              .parseURIDecoded(url));
-      ISVNAuthenticationManager authManager = SVNWCUtil
-              .createDefaultAuthenticationManager(name, password);
-      repository.setAuthenticationManager(authManager);
-      Collection logEntries = repository.log(new String[] { "" }, null,
-              revNumber, revNumber, true, true);
-      return logEntries;
-  }
+					if (logEntry.getChangedPaths().size() > 0) {
+						Set changedPathsSet = logEntry.getChangedPaths().keySet();
 
-  @SuppressWarnings({ "rawtypes", "deprecation" })
-  private Collection getLogEntriesbetweenRevNumber(int revNumberFrom,
-          int revNumberTo) throws SVNException {
+						for (Iterator changedPaths = changedPathsSet.iterator(); changedPaths.hasNext();) {
+							SVNLogEntryPath entryPath = (SVNLogEntryPath) logEntry.getChangedPaths()
+									.get(changedPaths.next());
+							path.add(entryPath.getPath());
+						}
+					}
+				}
+			}
 
-      SVNRepository repository = SVNRepositoryFactory.create(SVNURL
-              .parseURIDecoded(url));
-      ISVNAuthenticationManager authManager = SVNWCUtil
-              .createDefaultAuthenticationManager(name, password);
-      repository.setAuthenticationManager(authManager);
-      Collection logEntries = repository.log(new String[] { "" }, null,
-              revNumberFrom, revNumberTo, true, true);
-      return logEntries;
-  }
+		}
+
+		return patchData;
+
+	}
+
+	@SuppressWarnings({ "rawtypes", "deprecation" })
+	private Collection getLogEntriesByRevNumber(int revNumber) throws SVNException {
+
+		SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(url));
+		ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(name, password);
+		repository.setAuthenticationManager(authManager);
+		Collection logEntries = repository.log(new String[] { "" }, null, revNumber, revNumber, true, true);
+		return logEntries;
+	}
+
+	@SuppressWarnings({ "rawtypes", "deprecation" })
+	private Collection getLogEntriesbetweenRevNumber(int revNumberFrom, int revNumberTo) throws SVNException {
+
+		SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(url));
+		ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(name, password);
+		repository.setAuthenticationManager(authManager);
+		Collection logEntries = repository.log(new String[] { "" }, null, revNumberFrom, revNumberTo, true, true);
+		return logEntries;
+	}
 
 }
