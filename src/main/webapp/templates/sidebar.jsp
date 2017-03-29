@@ -44,48 +44,65 @@
 						class="fa fa-group"></i> <span><spring:message
 								code="label.menu.users" /></span>
 				</a></li>
-				<!-- Showing Role Controller for creating and edit roles -->
-				<li class="treeview"><a href="#"> <i
-						class="fa fa-user-plus"></i> <span><spring:message
-								code="label.menu.role" /></span> <span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-					<ul class="treeview-menu" style="display: none;">
-						<li class=""><a href="#" onclick="createOrUpdate('');"><i
-								class="fa fa-circle-o"></i> <spring:message
-									code="label.menu.roles.add" /></a></li>
-						<li><a href="#" onclick="loadRoles();"><i
-								class="fa fa-circle-o"></i> <spring:message
-									code="label.menu.roles.all" /></a></li>
-					</ul></li>
-
-				<!-- Showing Authorities Controller for creating and edit roles -->
-				<li class="treeview"><a href="#" onclick="loadPrivileges();">
-						<i class="fa fa-user-secret"></i> <span><spring:message
-								code="label.menu.privileges" /></span>
-				</a></li>
-				<!-- Showing Groups Details-->
-				<li class="treeview"><a href="#" onclick="loadGroups();"> <i
-						class="fa fa-group"></i> <span><spring:message
-								code="label.menu.groups" /></span>
-				</a></li>
-					<!-- Showing Role Controller for creating and edit roles -->
-				<li class="treeview"><a href="#"> <i
-						class="fa fa-user-plus"></i> <span><spring:message
-								code="label.menu.patchManager" /></span> <span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-					<ul class="treeview-menu" style="display: none;">
-						<li class=""><a href="#" onclick="createOrUpdatePatchManager('');"><i
-								class="fa fa-circle-o"></i> <spring:message
-									code="label.menu.patchManager.add" /></a></li>
-						<li><a href="#" onclick="loadPatchManager();"><i
-								class="fa fa-circle-o"></i> <spring:message
-									code="label.menu.patchManager.all" /></a></li>
-					</ul></li>
 			</sec:authorize>
+			<!-- Showing Role Controller for creating and edit roles -->
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span><spring:message code="label.menu.role" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#" onclick="createOrUpdate('');"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.roles.add" /></a></li>
+					<li><a href="#" onclick="loadRoles();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.roles.all" /></a></li>
+				</ul></li>
+
+			<!-- Showing Authorities Controller for creating and edit roles -->
+			<li class="treeview"><a href="#" onclick="loadPrivileges();">
+					<i class="fa fa-user-secret"></i> <span><spring:message
+							code="label.menu.privileges" /></span>
+			</a></li>
+			<!-- Showing Groups Details-->
+			<li class="treeview"><a href="#" onclick="loadGroups();"> <i
+					class="fa fa-group"></i> <span><spring:message
+							code="label.menu.groups" /></span>
+			</a></li>
+			<!-- Manage Patch generate environment -->
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span><spring:message code="label.menu.patchManager" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#"
+						onclick="createOrUpdatePatchManager('');"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.patchManager.add" /></a></li>
+					<li><a href="#" onclick="loadPatchManager();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.patchManager.all" /></a></li>
+				</ul></li>
+			<!-- Manage Patch generate environment -->
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span><spring:message code="label.menu.patchRecord" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#"
+						onclick="createOrUpdatePatchRecord('');"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.patchRecord.add" /></a></li>
+					<li><a href="#" onclick="loadPatchRecord();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.patchRecord.all" /></a></li>
+				</ul></li>
 			<!-- Showing Environment, Create a new or edit old one -->
 			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
 					<span><spring:message code="label.menu.environment" /></span> <span
@@ -162,8 +179,8 @@
 			</a>
 				<ul class="treeview-menu" style="display: none;">
 					<li><a href="#" onclick="loadUserProfile();"><i
-							class="fa fa-circle-o"></i>
-						<spring:message code="label.menu.setting.profile" /></a></li>
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.setting.profile" /></a></li>
 				</ul></li>
 
 

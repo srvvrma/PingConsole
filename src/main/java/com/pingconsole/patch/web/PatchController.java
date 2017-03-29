@@ -54,6 +54,7 @@ public class PatchController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createNewPatch(ModelMap model) {
 		model.addAttribute("patchManagerDTOs", patchManagerService.findAllDTOs());
+		model.addAttribute("patchManagerId","");
 		return CREATE_PATCH_PAGE;
 	}
 

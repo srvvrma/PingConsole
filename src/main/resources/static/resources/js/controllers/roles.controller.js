@@ -779,3 +779,25 @@ function startRestAPITest() {
 /*
  * End JS For Rest API Testing
  */
+
+
+/*
+* JS for Patch Records
+*/
+function createOrUpdatePatchRecord(id){
+	$.ajax({
+		url : '/patchRecord/createUpdate?id=' + id,
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+
+
+/*
+* End JS for Patch Records
+*/

@@ -39,8 +39,6 @@ public class FileDirectoryService {
 
 	@Value("${warPath}")
 	private String warPath;
-	@Value("${destPath}")
-	private String destPath;
 
 	String rootPath;
 
@@ -242,8 +240,8 @@ public class FileDirectoryService {
 			ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
 			sftpChannel.connect();
 			System.out.println("SFTP Channel created.");
-			FileUtils.cleanDirectory(new File(destPath));
-			downloadDir(sftpChannel, remotePath, destPath);
+			FileUtils.cleanDirectory(new File(warPath));
+			downloadDir(sftpChannel, remotePath, warPath);
 			sftpChannel.disconnect();
 			long stopTime = System.currentTimeMillis();
 			elapsedTime = stopTime - startTime;

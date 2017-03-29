@@ -48,11 +48,11 @@
 							<div class="col-sm-4">
 								<input type="text" value="" class="form-control"
 									placeholder="Revision Number Eg:1234,1235,... or 1223-3212"
-									name="revisionNumber" id="revisionNumber">
+									name="revisionNumber" id="revisionNumber" required="required">
 							</div>
 							<div class="col-sm-4">
 								<input type="text" value="" class="form-control"
-									placeholder="JIRA issue ID" name="jiraId" id="jiraId">
+									placeholder="JIRA issue ID" name="jiraId" id="jiraId" required="required">
 							</div>
 							<div class="col-sm-4">
 								<button onclick="fetchDataFromSVN();" id="fetchData"
@@ -65,7 +65,7 @@
 							<div class="col-sm-12">
 								<textarea class="form-control"
 									style="min-width: 100%; min-height: 400px;" id="patchPath"
-									name="patchPath" placeholder="Enter Path................"></textarea>
+									name="patchPath" placeholder="Enter Path................" required="required"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
