@@ -20,6 +20,8 @@ public class PatchRecord {
 
   @Id
   private Long id;
+  
+  private String name;
 
   @ManyToOne
   private Environment environment;
@@ -88,5 +90,13 @@ public class PatchRecord {
   public Long getId() {
     return id;
   }
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
 
 }

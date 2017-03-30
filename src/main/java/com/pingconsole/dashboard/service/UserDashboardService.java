@@ -12,6 +12,8 @@ public interface UserDashboardService {
 	public List<UserDTO> parseUserList(List<User> users);
 
 	public UserDTO getUserDTOByUserId(Long id);
+	
+	public User getUserByUserId(Long id);
 
 	public void saveUserDtoInUser(UserDTO userDTO);
 

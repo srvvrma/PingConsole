@@ -75,4 +75,10 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 		return userRepository.findByUsername(username);
 	}
 
+	@Override
+	public User getUserByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id);
+	}
+
 }
