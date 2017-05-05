@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pingconsole.environmentUser.domain.EnvironmentUser;
 import com.pingconsole.group.domain.PingGroup;
 
 @Entity
@@ -82,6 +83,10 @@ public class Environment {
 	@JsonProperty("syncUrl")
 	@Column
 	private String syncUrl;
+	
+	@Column
+    @ManyToMany(mappedBy = "environments")
+    private List<EnvironmentUser> environmentUsers;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="ENVIRONMENT_FK")

@@ -14,7 +14,6 @@ import java.util.jar.JarFile;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,7 +65,7 @@ public class FileDirectoryService {
 	// NeoFileService neoFileService;
 
 	@SuppressWarnings("resource")
-	public void setJarFile(String path, PingDirectory jarDir, PrintWriter out) throws IOException {
+	public void setJarFile(String path, PingDirectory jarDir, PrintWriter out,String patchWarCode) throws IOException {
 		JarFile file = new JarFile(path);
 		Enumeration<JarEntry> entries = file.entries();
 		while (entries.hasMoreElements()) {
@@ -76,6 +75,7 @@ public class FileDirectoryService {
 				pingFile.setPatchPath(jarDir.getName() + "#" + entry.toString());
 				jarDir.addNewFile(pingFile);
 				pingFile.setIndent(jarDir.getIndent() + 1);
+				pingFile.setPatchWarCode(patchWarCode);
 				// neoFileService.saveNeoFile(neoFile);
 				// out.append("++++++file:" + entry.getName()
 				// + " " + entry + " \n");
@@ -96,6 +96,7 @@ public class FileDirectoryService {
 					// +" "+rootPath);
 					childDir.setPath(file.getCanonicalPath().substring(rootPath.length() - 1).replace('\\', '/'));
 					parentDir.addNewDirectory(childDir);
+					parentDir.setPatchWarCode(patchWarCode);
 					displayDirectoryContents(file, out, childDir, patchWarCode);
 					pingDirectoryService.savePingDirectory(childDir);
 				} else {
@@ -104,8 +105,9 @@ public class FileDirectoryService {
 						// "\n");
 						PingDirectory childDir = new PingDirectory(file.getName());
 						childDir.setIndent(parentDir.getIndent() + 1);
+						childDir.setPatchWarCode(patchWarCode);
 						childDir.setPath(file.getCanonicalPath().substring(rootPath.length() - 1));
-						setJarFile(file.getCanonicalPath(), childDir, out);
+						setJarFile(file.getCanonicalPath(), childDir, out,patchWarCode);
 						pingDirectoryService.savePingDirectory(childDir);
 					} else {
 						// out.append("++++++file:" + file.getCanonicalPath()
@@ -116,6 +118,7 @@ public class FileDirectoryService {
 								patchWarCode);
 						pingFile.setPatchPath(pingFile.getLocation().replace('\\', '/').substring(1));
 						pingFile.setIndent(parentDir.getIndent() + 1);
+						pingFile.setPatchWarCode(patchWarCode);
 						parentDir.addNewFile(pingFile);
 						// neoFileService.saveNeoFile(neoFile);
 					}

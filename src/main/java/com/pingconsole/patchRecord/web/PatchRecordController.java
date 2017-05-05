@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,39 +27,56 @@ import com.pingconsole.patchRecord.service.PatchRecordService;
 @RequestMapping("/patchRecord")
 public class PatchRecordController {
 
-	@Autowired
-	private EnvironmentService environmentService;
+  @Value("${jiraUrl}")
+  private static String jiraUrl;
 
-	@Autowired
-	private UserDashboardService userDashboardService;
+  @Autowired
+  private EnvironmentService environmentService;
 
-	@Autowired
-	private PatchRecordService patchRecordService;
+  @Autowired
+  private UserDashboardService userDashboardService;
 
-	@RequestMapping("/createUpdate")
-	public String loadCreateUpdatePatchRecord(Model model, @RequestParam Long id) {
-		PatchRecordDTO patchRecordDTO = null;
-		if (id == null) {
-			patchRecordDTO = new PatchRecordDTO();
-		} else {
+  @Autowired
+  private PatchRecordService patchRecordService;
 
-		}
-		List<EnvironmentDTO> environementDTOs = environmentService.getAllEnvironment();
-		model.addAttribute("allUsers", userDashboardService.getAllUserList());
-		model.addAttribute("environments", environementDTOs);
-		model.addAttribute("patchRecordDTO", patchRecordDTO);
-		return "patchRecord/createUpdate";
-	}
+  @RequestMapping("/showAll")
+  public String showAllPatchManager(Model model) {
+    model.addAttribute("patchRecordDTOs", patchRecordService.findAllDTOs());
+    model.addAttribute("jiraUrl",jiraUrl + "/browse/");
+    return "patchRecord/index";
+  }
 
-	@RequestMapping(value = "/createUpdate", method = RequestMethod.POST)
-	public String createUpdatePatchManager(Model model, @ModelAttribute PatchRecordDTO patchRecordDTO) {
-		patchRecordService.savePatchRecord(patchRecordDTO);
-		return "blank";
-	}
+  @RequestMapping("/createUpdate")
+  public String loadCreateUpdatePatchRecord(Model model, @RequestParam Long id) {
+    PatchRecordDTO patchRecordDTO = null;
+    if (id == null) {
+      patchRecordDTO = new PatchRecordDTO();
+    } else {
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-	}
+    }
+    List<EnvironmentDTO> environementDTOs = environmentService.getAllEnvironment();
+    model.addAttribute("allUsers", userDashboardService.getAllUserList());
+    model.addAttribute("environments", environementDTOs);
+    model.addAttribute("patchRecordDTO", patchRecordDTO);
+    return "patchRecord/createUpdate";
+  }
+
+  @RequestMapping(value = "/createUpdate", method = RequestMethod.POST)
+  public String createUpdatePatchManager(Model model,
+      @ModelAttribute PatchRecordDTO patchRecordDTO) {
+    patchRecordService.savePatchRecord(patchRecordDTO);
+    return "blank";
+  }
+
+  @RequestMapping(value = "/remove", method = RequestMethod.GET)
+  public String createUpdatePatchManager(Model model, @RequestParam Long id) {
+    patchRecordService.removePatchRecord(id);
+    return "blank";
+  }
+
+  @InitBinder
+  protected void initBinder(WebDataBinder binder) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+  }
 }

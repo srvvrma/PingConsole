@@ -784,9 +784,9 @@ function startRestAPITest() {
 /*
 * JS for Patch Records
 */
-function createOrUpdatePatchRecord(id){
+function loadPatchRecord(){
 	$.ajax({
-		url : '/patchRecord/createUpdate?id=' + id,
+		url : '/patchRecord/showAll',
 		success : function(result) {
 			$('#mainContentId').html(result);
 		},
@@ -795,6 +795,65 @@ function createOrUpdatePatchRecord(id){
 		}
 	});
 }
+
+function createOrUpdatePatchRecord(id){
+	$.ajax({
+		url : '/patchRecord/createUpdate?id=' + id,
+		success : function(result) {
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadRoles();
+				iziToast.success({
+					title : 'OK',
+					message : 'Role Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+			e.preventDefault();
+		}
+	});
+}
+
+/*
+ *  Js for Environment Users Menu
+ */
+
+function createOrEditEnvironmentUsers(id) {
+	$.ajax({
+		url : '/environmentUser/create?id=' + id,
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+function loadAllEnvironmentUsers(id) {
+	$.ajax({
+		url : '/environmentUser/showDetails/' + id,
+		type : "get",
+		success : function(result) {
+			$('#mainContentId').html(result);
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
+
+
+
+
+/*
+ *  end of js for environment users
+ */
 
 
 

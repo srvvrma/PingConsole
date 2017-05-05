@@ -118,6 +118,21 @@
 							class="fa fa-circle-o"></i> <spring:message
 								code="label.menu.environment.all" /></a></li>
 				</ul></li>
+			<!-- Showing Environment Users, Create a new or edit old one -->
+			<li class="treeview"><a href="#"> <i class="fa fa-user-plus"></i>
+					<span><spring:message code="label.menu.environmetUsers" /></span> <span
+					class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu" style="display: none;">
+					<li class=""><a href="#" onclick="createOrEditEnvironmentUsers('')"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.environmetUsers.new" /></a></li>
+					<li><a href="#" onclick="loadAllEnvironmentUsers();"><i
+							class="fa fa-circle-o"></i> <spring:message
+								code="label.menu.environmetUsers.showAll" /></a></li>
+				</ul></li>
 			<!-- Showing Authorities Controller for creating and edit roles -->
 			<li class="treeview"><a href="#" onclick="chat();"> <i
 					class="fa fa-user-secret"></i> <span><spring:message
