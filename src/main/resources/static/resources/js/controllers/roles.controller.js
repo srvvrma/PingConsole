@@ -359,27 +359,30 @@ function showEnvironmentDetails(id) {
 		}
 	});
 }
-function share(id){
+function share(id) {
 	$.ajax({
-		  url: "/environment/getById/"+id,
-		  cache: false,
-		  success: function(data){
-			  console.log(data);
-		    createMail(data);
-		  }
-		});
+		url : "/environment/getById/" + id,
+		cache : false,
+		success : function(data) {
+			console.log(data);
+			createMail(data);
+		}
+	});
 }
 
-function createMail(data){
-	var subject = data.envName + ' War is Up with rev #  ' + data.revisionNumber ;
-    var linker = "mailto:?subject="+ subject + "&body=";
-    linker += getBody(data);
-    //console.log(linker);
-    window.location = linker;
+function createMail(data) {
+	var subject = data.envName + ' War is Up with rev #  '
+			+ data.revisionNumber;
+	var linker = "mailto:?subject=" + subject + "&body=";
+	linker += getBody(data);
+	// console.log(linker);
+	window.location = linker;
 }
 
-function getBody(data){
-	var body = 'The '+ data.envName + ' Application is up and running with Revision #  ' + data.revisionNumber +'.\n\n' ;
+function getBody(data) {
+	var body = 'The ' + data.envName
+			+ ' Application is up and running with Revision #  '
+			+ data.revisionNumber + '.\n\n';
 	body += 'Environment Details::::: \n';
 	body += 'Environment Name 	: ' + data.envName + '\n';
 	body += 'Environment Location 	: ' + data.envUrl + '\n';
@@ -396,10 +399,11 @@ function getBody(data){
 	body += 'DataBase User Name 	: ' + data.dbUser + '\n';
 	body += 'DataBase Password 	: ' + data.dbPass + '\n';
 	body += 'Schema Name 		: ' + data.dbSchema + '\n\n\n';
-	//body += 'Find UpDated Details : ${baseUrl}/environmentDetails/' + data.key + '\n';
-	//body += 'Find All Environment Details : ${baseUrl}/showAll';
+	// body += 'Find UpDated Details : ${baseUrl}/environmentDetails/' +
+	// data.key + '\n';
+	// body += 'Find All Environment Details : ${baseUrl}/showAll';
 	return encodeURI(body);
-	
+
 }
 
 function loadJSONFormatter() {
@@ -530,14 +534,19 @@ function FetchData() {
 		type : "get",
 		cache : false,
 		success : function(result) {
-			$.each(result, function(k, v) {
-			    // key and value pair
-				if(v == true){
-					$('[id="environment_status_'+ k +'"]').html("Running").removeAttr('class').addClass("label label-success");
-				}else{
-					$('[id="environment_status_'+ k +'"]').html("Down").removeAttr('class').addClass("label label-danger");
-				}
-			});
+			$.each(result,
+					function(k, v) {
+						// key and value pair
+						if (v == true) {
+							$('[id="environment_status_' + k + '"]').html(
+									"Running").removeAttr('class').addClass(
+									"label label-success");
+						} else {
+							$('[id="environment_status_' + k + '"]').html(
+									"Down").removeAttr('class').addClass(
+									"label label-danger");
+						}
+					});
 		},
 		error : function(xhr, status, error) {
 		}
@@ -555,7 +564,7 @@ function loadRestTestView() {
 		}
 	});
 }
-//chat js
+// chat js
 var stompClient = null;
 
 function connect() {
@@ -584,10 +593,9 @@ function refreshMessages(messages) {
 
 						var hours_diff = Math.abs(msg_date.getHours()
 								- curr_date.getHours());
-						var minutes_diff = Math.abs(msg_date.getHours()
-								* 60 + msg_date.getMinutes()
-								- curr_date.getHours() * 60
-								- curr_date.getMinutes());
+						var minutes_diff = Math.abs(msg_date.getHours() * 60
+								+ msg_date.getMinutes() - curr_date.getHours()
+								* 60 - curr_date.getMinutes());
 						var time_string
 						if (hours_diff > 0) {
 							time_string = hours_diff + " hours ago";
@@ -599,55 +607,75 @@ function refreshMessages(messages) {
 						console.log("xxx has updated " + minutes_diff
 								+ " minutes ago");
 						$container = $('#chat-box');
-						if(typeof $container[0] == 'undefined' && $('input[id="notificationTurnOff"]:checked').length == 0){
-							iziToast.info({
-							    title: 'Hey',
-							    icon: 'icon-drafts',
-							    message: 'You\'ve new message from ' + message.author,
-							    position: 'bottomCenter',
-							    image: '/resources/dist/img/user3-128x128.jpg',
-							    balloon: true,
-							    buttons: [
-							      ['<button>Photo</button>',
-							        function(instance, toast) {
+						if (typeof $container[0] == 'undefined'
+								&& $('input[id="notificationTurnOff"]:checked').length == 0) {
+							iziToast
+									.info({
+										title : 'Hey',
+										icon : 'icon-drafts',
+										message : 'You\'ve new message from '
+												+ message.author,
+										position : 'bottomCenter',
+										image : '/resources/dist/img/user3-128x128.jpg',
+										balloon : true,
+										buttons : [
+												[
+														'<button>Photo</button>',
+														function(instance,
+																toast) {
 
-							          // instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+															// instance.hide({
+															// transitionOut:
+															// 'fadeOutUp' },
+															// toast);
 
-							          iziToast.show({
-							            color: 'dark',
-							            icon: 'icon-photo',
-							            title: 'OK',
-							            message: 'Callback Photo!',
-							            position: 'bottomCenter',
-							            // iconText: 'star',
-							          });
+															iziToast
+																	.show({
+																		color : 'dark',
+																		icon : 'icon-photo',
+																		title : 'OK',
+																		message : 'Callback Photo!',
+																		position : 'bottomCenter',
+																	// iconText:
+																	// 'star',
+																	});
 
-							        }
-							      ],
-							      ['<button>Message</button>',
-							        function(instance, toast) {
+														} ],
+												[
+														'<button>Message</button>',
+														function(instance,
+																toast) {
 
-							          // instance.hide({ transitionOut: 'fadeOutUp' }, toast);
+															// instance.hide({
+															// transitionOut:
+															// 'fadeOutUp' },
+															// toast);
 
-							          iziToast.show({
-							            color: 'dark',
-							            icon: 'icon-ondemand_video',
-							            message: message.text,
-							            position: 'bottomCenter',
-							            // iconText: 'star',
-							          });
+															iziToast
+																	.show({
+																		color : 'dark',
+																		icon : 'icon-ondemand_video',
+																		message : message.text,
+																		position : 'bottomCenter',
+																	// iconText:
+																	// 'star',
+																	});
 
-							        }
-							      ],
-							      ['<button>Goto Chat</button>',
-							        function(instance, toast) {
-							    	  
-							          instance.hide({ transitionOut: 'fadeOutUp' }, toast);
-							          chat();
-							        }
-							      ],
-							    ]
-							  });
+														} ],
+												[
+														'<button>Goto Chat</button>',
+														function(instance,
+																toast) {
+
+															instance
+																	.hide(
+																			{
+																				transitionOut : 'fadeOutUp'
+																			},
+																			toast);
+															chat();
+														} ], ]
+									});
 							return;
 						}
 						$("#chat-box")
@@ -655,7 +683,7 @@ function refreshMessages(messages) {
 										'<div class="item">'
 												+ '<img src="'
 												+ contextPath
-												+'/resources/dist/img/user3-128x128.jpg" alt="user image" class="offline">'
+												+ '/resources/dist/img/user3-128x128.jpg" alt="user image" class="offline">'
 												+ '<p class="message">'
 												+ '<a href="#" class="name">'
 												+ '<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '
@@ -664,8 +692,13 @@ function refreshMessages(messages) {
 												+ message.text + '</p>'
 												+ '</div>');
 
-						/* $(".media-list").append('<li class="media"><div class="media-body"><div class="media"><div class="media-body">'
-						+ message.text + '<br/><small class="text-muted">' + message.author + ' | ' + new Date(message.createDate) + '</small><hr/></div></div></div></li>'); */
+						/*
+						 * $(".media-list").append('<li class="media"><div
+						 * class="media-body"><div class="media"><div
+						 * class="media-body">' + message.text + '<br/><small
+						 * class="text-muted">' + message.author + ' | ' + new
+						 * Date(message.createDate) + '</small><hr/></div></div></div></li>');
+						 */
 					});
 	$container = $('#chat-box');
 	$container[0].scrollTop = $container[0].scrollHeight;
@@ -692,10 +725,10 @@ function sendMessage() {
 connect();
 
 /*
- *  js for patch manager
- */ 
+ * js for patch manager
+ */
 
-function createOrUpdatePatchManager(id){
+function createOrUpdatePatchManager(id) {
 	$.ajax({
 		url : '/patchManager/createUpdate?id=' + id,
 		success : function(result) {
@@ -707,7 +740,7 @@ function createOrUpdatePatchManager(id){
 	});
 }
 
-function submitPatchManagerForm(){
+function submitPatchManagerForm() {
 	$.ajax({
 		url : '/patchManager/createUpdate',
 		type : "post",
@@ -730,7 +763,7 @@ function submitPatchManagerForm(){
 	});
 }
 
-function loadPatchManager(){
+function loadPatchManager() {
 	$.ajax({
 		url : '/patchManager/showAll',
 		success : function(result) {
@@ -743,13 +776,12 @@ function loadPatchManager(){
 }
 
 /*
- *  end js for patch manager
+ * end js for patch manager
  */
 
 /*
  * JS for Rest API Testing
- */ 
-
+ */
 
 function startRestAPITest() {
 	$.ajax({
@@ -774,17 +806,14 @@ function startRestAPITest() {
 	});
 }
 
-
-
 /*
  * End JS For Rest API Testing
  */
 
-
 /*
-* JS for Patch Records
-*/
-function loadPatchRecord(){
+ * JS for Patch Records
+ */
+function loadPatchRecord() {
 	$.ajax({
 		url : '/patchRecord/showAll',
 		success : function(result) {
@@ -796,7 +825,7 @@ function loadPatchRecord(){
 	});
 }
 
-function createOrUpdatePatchRecord(id){
+function createOrUpdatePatchRecord(id) {
 	$.ajax({
 		url : '/patchRecord/createUpdate?id=' + id,
 		success : function(result) {
@@ -819,7 +848,7 @@ function createOrUpdatePatchRecord(id){
 }
 
 /*
- *  Js for Environment Users Menu
+ * Js for Environment Users Menu
  */
 
 function createOrEditEnvironmentUsers(id) {
@@ -835,9 +864,9 @@ function createOrEditEnvironmentUsers(id) {
 	});
 }
 
-function loadAllEnvironmentUsers(id) {
+function loadAllEnvironmentUsers() {
 	$.ajax({
-		url : '/environmentUser/showDetails/' + id,
+		url : '/environmentUser/showAll',
 		type : "get",
 		success : function(result) {
 			$('#mainContentId').html(result);
@@ -848,15 +877,34 @@ function loadAllEnvironmentUsers(id) {
 	});
 }
 
-
-
+function submitEnvironmentUserForm() {
+	$.ajax({
+		url : '/environmentUser/save',
+		type : "post",
+		data : $("#environmentUserForm").serialize(),
+		success : function(result) {
+			console.log('result ' + result);
+			if (result != '') {
+				$('#mainContentId').html(result);
+			} else {
+				loadAllEnvironmentUsers();
+				iziToast.success({
+					title : 'OK',
+					message : 'New Environment User Successfully Added !',
+				});
+			}
+			e.preventDefault();
+		},
+		error : function(xhr, status, error) {
+			$('#mainContentId').html(xhr.responseText);
+		}
+	});
+}
 
 /*
- *  end of js for environment users
+ * end of js for environment users
  */
 
-
-
 /*
-* End JS for Patch Records
-*/
+ * End JS for Patch Records
+ */
