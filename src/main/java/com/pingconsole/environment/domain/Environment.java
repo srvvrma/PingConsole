@@ -24,7 +24,6 @@ import com.pingconsole.group.domain.PingGroup;
 public class Environment {
 
 	@Id
-	@JsonProperty("key")
 	@Column(name = "environment_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -36,57 +35,50 @@ public class Environment {
 	@JoinTable(name = "environment_group", joinColumns = @JoinColumn(name = "environment_id", referencedColumnName = "environment_id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "group_id"))
 	private List<PingGroup> groupList;
 
-	@JsonProperty("environmentType")
 	@Column
 	private String environmentType;
-	@JsonProperty("envName")
 	@Column
 	private String envName;
-	@JsonProperty("envUrl")
 	@Column
 	private String envUrl;
-	@JsonProperty("revisionNumber")
 	@Column
 	private String revisionNumber;
 	@Column
 	private String pingUrl;
-	@JsonProperty("envLogUrl")
 	@Column
 	private String envLogUrl;
-	@JsonProperty("envLogUser")
 	@Column
 	private String envLogUser;
-	@JsonProperty("envLogPass")
 	@Column
 	private String envLogPass;
-	@JsonProperty("envLog")
 	@Column
 	private String envLog;
-	@JsonProperty("envWar")
 	@Column
 	private String envWar;
-	@JsonProperty("envServerLog")
 	@Column
 	private String envServerLog;
-	@JsonProperty("dbUrl")
 	@Column
 	private String dbUrl;
-	@JsonProperty("dbUser")
 	@Column
 	private String dbUser;
-	@JsonProperty("dbPass")
 	@Column
 	private String dbPass;
-	@JsonProperty("dbSchema")
 	@Column
 	private String dbSchema;
-	@JsonProperty("syncUrl")
 	@Column
 	private String syncUrl;
 	
 	@Column
     @ManyToMany(mappedBy = "environments")
     private List<EnvironmentUser> environmentUsers;
+
+	public List<EnvironmentUser> getEnvironmentUsers() {
+		return environmentUsers;
+	}
+
+	public void setEnvironmentUsers(List<EnvironmentUser> environmentUsers) {
+		this.environmentUsers = environmentUsers;
+	}
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="ENVIRONMENT_FK")

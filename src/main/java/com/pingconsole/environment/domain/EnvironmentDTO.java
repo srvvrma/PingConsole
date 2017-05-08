@@ -3,6 +3,11 @@ package com.pingconsole.environment.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.CollectionUtils;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pingconsole.environmentUser.domain.EnvironmentUser;
+import com.pingconsole.environmentUser.domain.EnvironmentUserDTO;
 import com.pingconsole.group.domain.PingGroup;
 
 public class EnvironmentDTO {
@@ -10,27 +15,45 @@ public class EnvironmentDTO {
 	public static final String INT = "INTEGRATION";
 	public static final String CAS = "CAS";
 	public static final String LMS = "LMS";
+	@JsonProperty("key")
 	private Long id;
 	private String keyId;
+	@JsonProperty("environmentType")
 	private String environmentType;
+	@JsonProperty("envName")
 	private String envName;
+	@JsonProperty("envUrl")
 	private String envUrl;
+	@JsonProperty("revisionNumber")
 	private String revisionNumber;
+	@JsonProperty("envLogUrl")
 	private String envLogUrl;
+	@JsonProperty("envLogUser")
 	private String envLogUser;
+	@JsonProperty("envLogPass")
 	private String envLogPass;
+	@JsonProperty("envLog")
 	private String envLog;
+	@JsonProperty("envWar")
 	private String envWar;
+	@JsonProperty("envServerLog")
 	private String envServerLog;
+	@JsonProperty("dbUrl")
 	private String dbUrl;
+	@JsonProperty("dbUser")
 	private String dbUser;
+	@JsonProperty("dbPass")
 	private String dbPass;
+	@JsonProperty("dbSchema")
 	private String dbSchema;
+	@JsonProperty("syncUrl")
 	private String syncUrl;
 	private String pingUrl;
 	private List<Long> groupId;
 	private List<Long> intergrationEnvironmentDTOs;
 	private List<EnvironmentDTO> integrationEnvironments;
+	@JsonProperty("loginDetails")
+	private List<EnvironmentUserDTO> environmentUserDTOs;
 
 	public Long getId() {
 		return id;
@@ -187,13 +210,19 @@ public class EnvironmentDTO {
 		environmentDTO.setDbPass(environement.getDbPass());
 		environmentDTO.setDbSchema(environement.getDbSchema());
 		environmentDTO.setPingUrl(environement.getPingUrl());
+		environmentDTO.setSyncUrl(environement.getSyncUrl());
 		List<Long> list = new ArrayList<>();
+		List<EnvironmentUserDTO> environmentUserDTOs = new ArrayList<>();
+		List<Long> integrationEnvironmentDTOs = new ArrayList<>();
+		List<EnvironmentDTO> integrationEnvironments = new ArrayList<>();
 		for (PingGroup group : environement.getGroupList()) {
 			list.add(group.getId());
 		}
-		environmentDTO.setGroupId(list);
-		List<Long> integrationEnvironmentDTOs = new ArrayList<>();
-		List<EnvironmentDTO> integrationEnvironments = new ArrayList<>();
+		if(!CollectionUtils.isEmpty(environement.getEnvironmentUsers())){
+			for (EnvironmentUser environmentUser : environement.getEnvironmentUsers()) {
+				environmentUserDTOs.add(environmentUser.getDTO());
+			}
+		}
 		if (environement.getIntergrationEnvironments() != null
 				&& environement.getIntergrationEnvironments().size() > 0) {
 			for (Environment intEnvironment : environement.getIntergrationEnvironments()) {
@@ -203,6 +232,8 @@ public class EnvironmentDTO {
 			environmentDTO.setIntegrationEnvironments(integrationEnvironments);
 			environmentDTO.setIntergrationEnvironmentDTOs(integrationEnvironmentDTOs);
 		}
+		environmentDTO.setGroupId(list);
+		environmentDTO.setEnvironmentUserDTOs(environmentUserDTOs);
 		return environmentDTO;
 	}
 
@@ -259,6 +290,14 @@ public class EnvironmentDTO {
 
 	public void setIntegrationEnvironments(List<EnvironmentDTO> integrationEnvironments) {
 		this.integrationEnvironments = integrationEnvironments;
+	}
+
+	public List<EnvironmentUserDTO> getEnvironmentUserDTOs() {
+		return environmentUserDTOs;
+	}
+
+	public void setEnvironmentUserDTOs(List<EnvironmentUserDTO> environmentUserDTOs) {
+		this.environmentUserDTOs = environmentUserDTOs;
 	}
 
 }

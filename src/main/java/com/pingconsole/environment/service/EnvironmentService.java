@@ -7,14 +7,16 @@ import com.pingconsole.environment.domain.EnvironmentDTO;
 
 public interface EnvironmentService {
 
-  public List<EnvironmentDTO> getAllEnvironment();
+	public List<EnvironmentDTO> getAllEnvironment();
 
-  public void createOrUpdate(EnvironmentDTO environmentDTO);
+	public void createOrUpdate(EnvironmentDTO environmentDTO);
 
-  public EnvironmentDTO getEnvironmentById(Long id);
+	public EnvironmentDTO getEnvironmentById(Long id);
 
-  public List<Environment> getAllIntergration();
+	public List<Environment> getAllIntergration();
 
-  public Environment getById(Long environmentId);
+	public Environment getById(Long environmentId);
+
+	public List<Environment> getAllEnvironments();
 
 }

@@ -5,13 +5,16 @@ import java.util.List;
 
 import org.springframework.util.CollectionUtils;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pingconsole.environment.domain.Environment;
 
 
 public class EnvironmentUserDTO {
 
   private Long id;
+  @JsonProperty("userName")
   private String userName;
+  @JsonProperty("password")
   private String password;
   private List<Long> environmentIds;
 

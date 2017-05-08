@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.pingconsole.environment.domain.Environment;
@@ -17,6 +18,12 @@ import com.pingconsole.group.repository.GroupRepository;
 @Service
 @Transactional
 public class EnvironmentServiceImpl implements EnvironmentService {
+	
+	@Value("${server.address}")
+    private String serverAddress;
+
+    @Value("${server.port}")
+    private String serverPort;
 
 	@Autowired
 	private EnvironmentRepository environmentRepository;
@@ -51,6 +58,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 			}
 			environment.setIntergrationEnvironments(environmentList);
 		}
+		environment.setSyncUrl(serverAddress+":"+serverPort+"/api/environment/getStatus/");
 		environmentRepository.save(environment);
 
 	}
@@ -71,5 +79,10 @@ public class EnvironmentServiceImpl implements EnvironmentService {
   public Environment getById(Long environmentId) {
     return environmentRepository.findById(environmentId);
   }
+
+@Override
+public List<Environment> getAllEnvironments() {
+	return environmentRepository.findAll();
+}
 
 }

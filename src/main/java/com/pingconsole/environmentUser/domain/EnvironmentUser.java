@@ -64,6 +64,13 @@ public class EnvironmentUser {
   public Long getId() {
     return id;
   }
+
+public EnvironmentUserDTO getDTO() {
+	EnvironmentUserDTO environmentUserDTO = new EnvironmentUserDTO();
+	environmentUserDTO.setUserName(this.getUserName());
+	environmentUserDTO.setPassword(this.getPassword());
+	return environmentUserDTO;
+}
   
   
 
