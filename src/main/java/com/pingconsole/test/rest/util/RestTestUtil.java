@@ -1,20 +1,10 @@
 package com.pingconsole.test.rest.util;
 
-import static io.restassured.RestAssured.*;
-import java.util.List;
 
-import org.springframework.util.CollectionUtils;
-
-import com.pingconsole.test.rest.domain.HeaderDTO;
-import com.pingconsole.test.rest.domain.RestAPITestDTO;
-import com.pingconsole.test.rest.domain.RestAPITestResultDTO;
-
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
 
 public class RestTestUtil {
 	
-	public static RestAPITestResultDTO testRestAPI(RestAPITestDTO restAPITestDTO){
+/*	public static RestAPITestResultDTO testRestAPI(RestAPITestDTO restAPITestDTO){
 		
 		RestAPITestResultDTO restAPITestResultDTO = new RestAPITestResultDTO();
 		RequestSpecification rs = given();
@@ -38,7 +28,7 @@ public class RestTestUtil {
 			rs.header(headerDTO.getKey(), headerDTO.getValue());
 		}
 	}
-	
+	*/
 	
 
 }
