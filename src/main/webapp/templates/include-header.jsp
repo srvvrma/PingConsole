@@ -22,6 +22,9 @@
 <!-- Date Picker -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/datepicker/datepicker3.css">
+
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/pretty-json/pretty-json.css">
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
@@ -36,10 +39,13 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/plugins/datatables/dataTables.bootstrap.css">
 <!-- iziToast Notification -->
-<link rel="stylesheet" href="${contextPath}/resources/plugins/iziToast/iziToast.min.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/iziToast/iziToast.min.css">
 <!--Select 2 for multiselect  -->
-<link rel="stylesheet" href="${contextPath}/resources/plugins/select2/select2.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link rel="stylesheet"
+	href="${contextPath}/resources/plugins/select2/select2.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <!-- Theme style -->
 <link rel="stylesheet"
@@ -51,7 +57,6 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <script>
-  var author = '${username}';
-  
-  </script>
+<script>
+	var author = '${username}';
+</script>

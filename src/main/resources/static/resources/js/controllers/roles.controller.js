@@ -790,15 +790,19 @@ function startRestAPITest() {
 		data : $("#restAPITestForm").serialize(),
 		success : function(result) {
 			if (result != '') {
-				$('#mainContentId').html(result);
+				console.log(result);
+				 var jsonob = $.parseJSON(result.response);
+				 var node = new PrettyJSON.view.Node({
+					  el:$('#resultPrint'),
+					  data:jsonob
+					});
 			} else {
 				loadRoles();
-				iziToast.success({
-					title : 'OK',
-					message : 'Role Successfully Added !',
+				iziToast.error({
+					title : 'Error',
+					message : 'Error in Rest Test!',
 				});
 			}
-			e.preventDefault();
 		},
 		error : function(xhr, status, error) {
 			$('#mainContentId').html(xhr.responseText);

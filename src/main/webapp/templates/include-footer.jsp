@@ -50,6 +50,10 @@
 <script src="${contextPath}/resources/plugins/fastclick/fastclick.js"></script>
 <!-- iziToast Notification -->
 <script src="${contextPath}/resources/plugins/iziToast/iziToast.min.js"></script>
+<!-- Pretty Json-->
+<script src="${contextPath}/resources/plugins/pretty-json/underscore-min.js"></script>
+<script src="${contextPath}/resources/plugins/pretty-json/backbone-min.js"></script>
+<script src="${contextPath}/resources/plugins/pretty-json/pretty-json-min.js"></script>
 <!-- AdminLTE App -->
 <script src="${contextPath}/resources/dist/js/app.min.js"></script>
 <!-- Select2 js -->
