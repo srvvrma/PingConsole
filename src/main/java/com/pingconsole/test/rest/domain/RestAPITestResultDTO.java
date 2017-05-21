@@ -5,7 +5,7 @@ public class RestAPITestResultDTO {
   private Long id;
   private long responseTime;
   private String response;
-  private String statusCode;
+  private Integer statusCode;
 
   public Long getId() {
     return id;
@@ -31,11 +31,11 @@ public class RestAPITestResultDTO {
     this.response = response;
   }
 
-  public String getStatusCode() {
+  public Integer getStatusCode() {
     return statusCode;
   }
 
-  public void setStatusCode(String statusCode) {
+  public void setStatusCode(Integer statusCode) {
     this.statusCode = statusCode;
   }
 
