@@ -1,7 +1,9 @@
 package com.pingconsole.patch.service;
 
-import java.util.List;
-
+import com.pingconsole.patch.dto.PingResult;
+import com.pingconsole.patch.dto.PingResultDTO;
+import com.pingconsole.patch.repository.PingResultDTORepository;
+import com.pingconsole.patch.repository.PingResultRepository;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -9,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pingconsole.patch.dto.PingResult;
-import com.pingconsole.patch.dto.PingResultDTO;
-import com.pingconsole.patch.repository.PingResultDTORepository;
-import com.pingconsole.patch.repository.PingResultRepository;
+import java.util.List;
 
 
 @Repository
@@ -21,7 +20,7 @@ public class PingResultDAOService implements PingResultDAO{
 
     @Autowired
     private SessionFactory sessionFactory;
-    
+
     @Autowired 
     private PingResultDTORepository pingResultDTORepository;
     
@@ -30,7 +29,7 @@ public class PingResultDAOService implements PingResultDAO{
     
     @Override
     public PingResultDTO getById(Long id) {
-        return pingResultDTORepository.findById(id);
+        return pingResultDTORepository.getOne(id);
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +59,7 @@ public class PingResultDAOService implements PingResultDAO{
 
     @Override
     public void deleteResult(Long id) {
-      pingResultDTORepository.delete(id);
+        pingResultDTORepository.deleteById(id);
     }
     
     @Override

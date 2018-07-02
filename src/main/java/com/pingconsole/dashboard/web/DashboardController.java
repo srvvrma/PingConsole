@@ -1,8 +1,11 @@
 package com.pingconsole.dashboard.web;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.pingconsole.auth.repository.UserRepository;
+import com.pingconsole.environment.domain.Environment;
+import com.pingconsole.environment.service.EnvironmentService;
+import com.pingconsole.group.domain.PingGroup;
+import com.pingconsole.group.domain.PingGroupVO;
+import com.pingconsole.group.service.GroupService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,12 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.pingconsole.auth.repository.UserRepository;
-import com.pingconsole.environment.domain.Environment;
-import com.pingconsole.environment.service.EnvironmentService;
-import com.pingconsole.group.domain.PingGroup;
-import com.pingconsole.group.domain.PingGroupVO;
-import com.pingconsole.group.service.GroupService;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -46,7 +45,7 @@ public class DashboardController {
 		List<PingGroupVO> groupList = new ArrayList<>();
 		PingGroup group = null;
 		for (PingGroup pingGroup : pingUser.getGroups()) {
-			group = groupService.findById(pingGroup.getId());
+            group = groupService.getOne(pingGroup.getId());
 			PingGroupVO groupVO =  pingGroup.getVO();
 			groupVO = group.getVO();
 			groupVO.setEnvironmentList(new ArrayList<>());

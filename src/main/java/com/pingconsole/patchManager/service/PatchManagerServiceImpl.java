@@ -1,19 +1,18 @@
 package com.pingconsole.patchManager.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.pingconsole.environment.domain.Environment;
 import com.pingconsole.environment.service.EnvironmentService;
 import com.pingconsole.patch.service.FileDirectoryService;
 import com.pingconsole.patchManager.domain.PatchManager;
 import com.pingconsole.patchManager.domain.PatchManagerDTO;
 import com.pingconsole.patchManager.repository.PatchManagerRepository;
+import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PatchManagerServiceImpl implements PatchManagerService {
@@ -35,7 +34,7 @@ public class PatchManagerServiceImpl implements PatchManagerService {
 
 	@Override
 	public PatchManagerDTO getPatchManagerDTOById(Long id) {
-		PatchManager patchManager = patchManagerRepository.findById(id);
+        PatchManager patchManager = patchManagerRepository.getOne(id);
 		return parseToPatchManager(patchManager);
 	}
 
@@ -45,7 +44,7 @@ public class PatchManagerServiceImpl implements PatchManagerService {
 		if (patchManagerDTO.getId() == null) {
 			patchManager = new PatchManager();
 		} else {
-			patchManager = patchManagerRepository.findById(patchManagerDTO.getId());
+            patchManager = patchManagerRepository.getOne(patchManagerDTO.getId());
 		}
 		patchManager.setName(patchManagerDTO.getName());
 		patchManager.setCode(patchManagerDTO.getCode());
@@ -84,7 +83,7 @@ public class PatchManagerServiceImpl implements PatchManagerService {
 
 	@Override
 	public Long executeIndexingTaskFor(Long id) {
-		PatchManager patchManager = patchManagerRepository.findById(id);
+        PatchManager patchManager = patchManagerRepository.getOne(id);
 		Hibernate.initialize(patchManager.getEnvironment());
 		Environment environment = patchManager.getEnvironment();
 		fileDirectoryService.CopyWarFromSVN(environment.getEnvLogUrl(),22,environment.getEnvLogUser(),environment.getEnvLogPass(),environment.getEnvWar(),patchManager.getCode());

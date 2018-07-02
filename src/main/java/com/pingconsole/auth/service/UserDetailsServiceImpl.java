@@ -5,7 +5,6 @@ import com.pingconsole.auth.model.Privilege;
 import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.model.User;
 import com.pingconsole.auth.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,8 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
+@Service("myUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
+
+
     @Autowired
     private UserRepository userRepository;
 

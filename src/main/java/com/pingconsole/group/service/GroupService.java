@@ -1,9 +1,9 @@
 package com.pingconsole.group.service;
 
-import java.util.List;
-
 import com.pingconsole.group.domain.PingGroup;
 import com.pingconsole.group.domain.PingGroupVO;
+
+import java.util.List;
 
 public interface GroupService {
 	
@@ -16,7 +16,7 @@ public interface GroupService {
   public void editGroup(PingGroupVO pingGroupVO);
 
   public void removeGroup(Long id);
-  
-  public PingGroup findById(Long id);
+
+    public PingGroup getOne(Long id);
 
 }

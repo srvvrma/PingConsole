@@ -1,19 +1,17 @@
 package com.pingconsole.environmentUser.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
 import com.pingconsole.environment.domain.Environment;
 import com.pingconsole.environment.service.EnvironmentService;
 import com.pingconsole.environmentUser.domain.EnvironmentUser;
 import com.pingconsole.environmentUser.domain.EnvironmentUserDTO;
 import com.pingconsole.environmentUser.repository.EnvironmentUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -27,14 +25,14 @@ public class EnvironmentUserServiceImpl implements EnvironmentUserService {
 	@Override
 	public EnvironmentUserDTO getEnvironmentUserById(Long id) {
 		// TODO Auto-generated method stub
-		return EnvironmentUserDTO.parse(environmentUserRepository.findById(id));
+        return EnvironmentUserDTO.parse(environmentUserRepository.getOne(id));
 	}
 
 	@Override
 	public void saveOrUpdateEnvironmentUser(EnvironmentUserDTO environmentUserDTO) {
 		EnvironmentUser environmentUser = null;
 		if (environmentUserDTO.getId() != null) {
-			environmentUser = environmentUserRepository.findById(environmentUserDTO.getId());
+            environmentUser = environmentUserRepository.getOne(environmentUserDTO.getId());
 		} else {
 			environmentUser = new EnvironmentUser();
 		}

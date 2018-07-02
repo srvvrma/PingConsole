@@ -1,13 +1,5 @@
 package com.pingconsole.dashboard.service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.model.User;
 import com.pingconsole.auth.repository.RoleRepository;
@@ -15,6 +7,13 @@ import com.pingconsole.auth.repository.UserRepository;
 import com.pingconsole.group.domain.PingGroup;
 import com.pingconsole.group.repository.GroupRepository;
 import com.pingconsole.users.dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserDashboardServiceImpl implements UserDashboardService {
@@ -46,25 +45,25 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 
 	@Override
 	public UserDTO getUserDTOByUserId(Long id) {
-		User user = userRepository.findById(id);
+        User user = userRepository.getOne(id);
 		return UserDTO.getUserDto(user);
 	}
 
 	@Override
 	public void saveUserDtoInUser(UserDTO userDTO) {
-		User user = userRepository.findById(userDTO.getId());
+        User user = userRepository.getOne(userDTO.getId());
 		user.setUsername(userDTO.getUserId());
 		user.setFullName(userDTO.getUserName());
 		user.setEmail(userDTO.getEmail());
 		user.setDob(userDTO.getDob());
 		Set<Role> roles = new HashSet<>();
 		for (Long id : userDTO.getRoles()) {
-			roles.add(roleRepository.findById(id));
+            roles.add(roleRepository.getOne(id));
 		}
 		user.setRoles(roles);
 		Set<PingGroup> groups = new HashSet<>();
 		for (Long id : userDTO.getGroups()) {
-			groups.add(groupRepository.findById(id));
+            groups.add(groupRepository.getOne(id));
 		}
 		user.setGroups(groups);
 		userRepository.save(user);
@@ -78,7 +77,7 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 	@Override
 	public User getUserByUserId(Long id) {
 		// TODO Auto-generated method stub
-		return userRepository.findById(id);
+        return userRepository.getOne(id);
 	}
 
 }

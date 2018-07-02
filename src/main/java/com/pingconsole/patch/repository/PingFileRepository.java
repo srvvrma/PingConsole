@@ -1,11 +1,12 @@
 package com.pingconsole.patch.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.pingconsole.patch.dto.PingFile;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PingFileRepository  extends JpaRepository<PingFile, Long>{
-	
-	Long deleteByPatchWarCode(String patchWarCode);
+
+    Long deleteByPatchWarCode(String patchWarCode);
 
 }

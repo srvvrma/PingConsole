@@ -1,14 +1,13 @@
 package com.pingconsole.users.validator;
 
+import com.pingconsole.auth.model.User;
+import com.pingconsole.auth.service.UserService;
+import com.pingconsole.users.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
-import com.pingconsole.auth.model.User;
-import com.pingconsole.auth.service.UserService;
-import com.pingconsole.users.dto.UserDTO;
 
 @Component
 public class UserDtoValidator implements Validator {
@@ -31,7 +30,7 @@ public class UserDtoValidator implements Validator {
         if (userDto.getUserId().length() < 6 || userDto.getUserId().length() > 32) {
             errors.rejectValue("userName", "Size.userForm.username");
         }
-        if (!userDto.getUserId().equalsIgnoreCase(userService.findById(userDto.getId()).getUsername()) && userService.findByUsername(userDto.getUserId()) != null) {
+        if (!userDto.getUserId().equalsIgnoreCase(userService.getOne(userDto.getId()).getUsername()) && userService.findByUsername(userDto.getUserId()) != null) {
             errors.rejectValue("userName", "Duplicate.userForm.username");
         }
     }

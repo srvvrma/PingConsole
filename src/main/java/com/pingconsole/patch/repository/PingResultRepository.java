@@ -1,11 +1,12 @@
 package com.pingconsole.patch.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.pingconsole.patch.dto.PingResult;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PingResultRepository  extends JpaRepository<PingResult, Long>{
-  
-  public PingResult findByKeyId(Long keyId);
+
+    public PingResult findByKeyId(Long keyId);
 
 }

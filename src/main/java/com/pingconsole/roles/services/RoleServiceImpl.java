@@ -1,18 +1,17 @@
 package com.pingconsole.roles.services;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.pingconsole.auth.model.Privilege;
 import com.pingconsole.auth.model.Role;
 import com.pingconsole.auth.repository.PrivilageRepository;
 import com.pingconsole.auth.repository.RoleRepository;
 import com.pingconsole.roles.dto.RoleDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -42,16 +41,16 @@ public class RoleServiceImpl implements RoleService {
       role.setCode(roleDTO.getCode());
       Set<Privilege> privileges = new HashSet<>();
       for (Long privilegeId : roleDTO.getPrivileges()) {
-        privileges.add(privilageRepository.findById(privilegeId));
+          privileges.add(privilageRepository.getOne(privilegeId));
       }
       role.setPrivileges(privileges);
     } else {
-      role = roleRepository.findById(roleDTO.getId());
+        role = roleRepository.getOne(roleDTO.getId());
       role.setName(roleDTO.getName());
       role.setCode(roleDTO.getCode());
       Set<Privilege> privileges = new HashSet<>();
       for (Long privilegeId : roleDTO.getPrivileges()) {
-        privileges.add(privilageRepository.findById(privilegeId));
+          privileges.add(privilageRepository.getOne(privilegeId));
       }
       role.setPrivileges(privileges);
 
@@ -62,7 +61,7 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public RoleDTO findRoleById(Long id) {
-    RoleDTO roleDTO = roleRepository.findById(id).convertToDto();
+      RoleDTO roleDTO = roleRepository.getOne(id).convertToDto();
     return roleDTO;
   }
 

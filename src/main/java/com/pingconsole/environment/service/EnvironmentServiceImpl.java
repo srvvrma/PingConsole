@@ -1,19 +1,17 @@
 package com.pingconsole.environment.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.pingconsole.environment.domain.Environment;
 import com.pingconsole.environment.domain.EnvironmentDTO;
 import com.pingconsole.environment.repository.EnvironmentRepository;
 import com.pingconsole.group.domain.PingGroup;
 import com.pingconsole.group.repository.GroupRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,13 +46,13 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 		Environment environment = EnvironmentDTO.parse(environmentDTO);
 		List<PingGroup> groupList = new ArrayList<>();
 		for (Long id : environmentDTO.getGroupId()) {
-			groupList.add(groupRepository.findById(id));
+            groupList.add(groupRepository.getOne(id));
 		}
 		environment.setGroupList(groupList);
 		if (!environmentDTO.getEnvironmentType().equalsIgnoreCase(EnvironmentDTO.INT)) {
 			List<Environment> environmentList = new ArrayList<>();
 			for (Long id : environmentDTO.getIntergrationEnvironmentDTOs()) {
-				environmentList.add(environmentRepository.findById(id));
+                environmentList.add(environmentRepository.getOne(id));
 			}
 			environment.setIntergrationEnvironments(environmentList);
 		}
@@ -65,7 +63,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 
 	@Override
 	public EnvironmentDTO getEnvironmentById(Long id) {
-		EnvironmentDTO environmentDTO = EnvironmentDTO.parse(environmentRepository.findById(id));
+        EnvironmentDTO environmentDTO = EnvironmentDTO.parse(environmentRepository.getOne(id));
 		return environmentDTO;
 	}
 
@@ -77,7 +75,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 
   @Override
   public Environment getById(Long environmentId) {
-    return environmentRepository.findById(environmentId);
+      return environmentRepository.getOne(environmentId);
   }
 
 @Override

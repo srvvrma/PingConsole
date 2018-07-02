@@ -1,10 +1,11 @@
 package com.pingconsole.auth.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.pingconsole.auth.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoleRepository extends JpaRepository<Role, Long>{
 
-	public Role findById(Long id);
+    public Role getOne(Long id);
 }

@@ -1,18 +1,16 @@
 package com.pingconsole.patchRecord.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.pingconsole.auth.model.User;
 import com.pingconsole.dashboard.service.UserDashboardService;
 import com.pingconsole.environment.service.EnvironmentService;
 import com.pingconsole.patchRecord.domain.PatchRecord;
 import com.pingconsole.patchRecord.domain.PatchRecordDTO;
 import com.pingconsole.patchRecord.repository.PatchRecordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PatchRecordServiceImpl implements PatchRecordService {
@@ -53,7 +51,7 @@ public class PatchRecordServiceImpl implements PatchRecordService {
 
   @Override
   public void removePatchRecord(Long id) {
-    patchRecordRepository.delete(id);
+      patchRecordRepository.deleteById(id);
   }
 
   @Override

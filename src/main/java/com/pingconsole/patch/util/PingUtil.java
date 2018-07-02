@@ -1,16 +1,17 @@
 package com.pingconsole.patch.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
-
-import org.apache.log4j.Logger;
 public final class PingUtil {
-    
-	final static Logger logger = Logger.getLogger(PingUtil.class);
+
+    final static Logger logger = LogManager.getLogger(PingUtil.class);
     
     public static boolean checkUrl(String urlString) {
         URL url;
