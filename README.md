@@ -10,7 +10,7 @@
 
 ## pre-install
 
-1. install jdk8
+1. install jdk9
     - set `JAVA_HOME` environment variable
     
 ## build & run
